@@ -1,68 +1,159 @@
+/* ==========================================================================
+   1. Google Fonts Import
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Source+Sans+Pro:wght@400;600&display=swap');
+
+
+/* ==========================================================================
+   2. Root and Color Scheme Setup
+   ========================================================================== */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
+  /* This enables the browser to automatically select a theme based on user's system settings. */
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* ----------------------------------------- */
+  /* Typography Variables                      */
+  /* ----------------------------------------- */
+  --font-header: 'Poppins', sans-serif;
+  --font-body: 'Source Sans Pro', sans-serif;
+  --font-ui: 'Poppins', sans-serif; /* For UI elements like buttons */
+
+  /* ----------------------------------------- */
+  /* Light Mode Color Variables (Default)      */
+  /* Using Okhsl for perceptually uniform color */
+  /* ----------------------------------------- */
+  --BG-PC-1: okhsl(0.98 0.01 270); /* Background Primary Color - Almost White */
+  --BG-SC-1: okhsl(0.95 0.02 70);  /* Background Secondary Color - Light Cream */
+  --TX-PC-1: okhsl(0.20 0.08 270); /* Text Primary Color - Dark Gray/Blue */
+  --TX-SC-1: okhsl(0.35 0.06 270); /* Text Secondary Color - Lighter Gray */
+  --AC-PC-1: okhsl(0.75 0.8 50);   /* Accent Primary Color - Bright Orange */
+  --AC-SC-1: okhsl(0.8 0.8 80);    /* Accent Secondary Color - Bright Yellow */
+  --AC-TC-1: okhsl(0.7 0.9 25);    /* Accent Tertiary Color - Bright Red */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+
+/* ==========================================================================
+   3. Dark Mode Color Scheme
+   ========================================================================== */
+
+/*
+ * This media query respects the user's OS-level theme preference.
+ * The data-attribute selector allows you to override it with a toggle button.
+ * Your toggle logic in React would set `document.documentElement.dataset.theme = 'dark'`.
+*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --BG-PC-1: okhsl(0.20 0.02 260); /* Background Primary Color - Very Dark Purple/Blue */
+    --BG-SC-1: okhsl(0.25 0.05 260); /* Background Secondary Color - Darker Purple */
+    --TX-PC-1: okhsl(0.98 0.02 270); /* Text Primary Color - Off-White */
+    --TX-SC-1: okhsl(0.85 0.01 270); /* Text Secondary Color - Light Gray */
+    --AC-PC-1: okhsl(0.75 0.9 280);  /* Accent Primary Color - Neon Purple */
+    --AC-SC-1: okhsl(0.8 0.9 240);   /* Accent Secondary Color - Neon Blue */
+    --AC-TC-1: okhsl(0.8 1 265);     /* Accent Tertiary Color - Lighter Neon Purple */
+  }
 }
-a:hover {
-  color: #535bf2;
+
+/* This allows a toggle button to override the system theme preference */
+[data-theme='dark'] {
+    --BG-PC-1: okhsl(0.20 0.02 260);
+    --BG-SC-1: okhsl(0.25 0.05 260);
+    --TX-PC-1: okhsl(0.98 0.02 270);
+    --TX-SC-1: okhsl(0.85 0.01 270);
+    --AC-PC-1: okhsl(0.75 0.9 280);
+    --AC-SC-1: okhsl(0.8 0.9 240);
+    --AC-TC-1: okhsl(0.8 1 265);
+}
+
+
+/* ==========================================================================
+   4. Global Styles & Resets
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: var(--font-body);
+  background-color: var(--BG-PC-1);
+  color: var(--TX-PC-1);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* ==========================================================================
+   5. Typography
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-header);
+  color: var(--TX-PC-1);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
 }
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--AC-PC-1);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+  color: var(--AC-SC-1);
+}
+
+ul, ol {
+  list-style-position: inside;
+  margin-bottom: 1rem;
+}
+
+li {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+
+/* ==========================================================================
+   6. Buttons
+   ========================================================================== */
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border: 2px solid var(--AC-PC-1);
+  border-radius: 8px;
+  padding: 0.75em 1.5em;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.1s ease;
+
+  /* "Flipped" color scheme for pop */
+  background-color: var(--AC-PC-1);
+  color: var(--BG-PC-1);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover, button:focus {
+  background-color: var(--AC-SC-1);
+  border-color: var(--AC-SC-1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px okhsla(from var(--AC-PC-1) h s l / 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
 }

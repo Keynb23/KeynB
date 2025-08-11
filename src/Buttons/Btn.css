@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Theme Toggle Button Styles
+   ========================================================================== */
+
+.theme-toggle-btn {
+  /* Resetting default button styles for a custom look */
+  background-color: transparent;
+  border: 2px solid var(--TX-SC-1);
+  color: var(--TX-PC-1);
+  
+  /* Sizing and Shape */
+  width: 48px;
+  height: 48px;
+  border-radius: 50%; /* Makes it a perfect circle */
+  
+  /* Flexbox for centering the icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Other properties */
+  cursor: pointer;
+  padding: 0; /* Remove default padding */
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover,
+.theme-toggle-btn:focus {
+  /* Use accent colors on hover for better feedback */
+  background-color: var(--BG-SC-1);
+  border-color: var(--AC-PC-1);
+  color: var(--AC-PC-1);
+  
+  /* A slight scaling effect on hover */
+  transform: scale(1.1) rotate(15deg);
+}
+
+.theme-toggle-btn:focus {
+  /* Ensures visibility for keyboard navigation */
+  outline: 2px solid var(--AC-SC-1);
+  outline-offset: 2px;
+}
+
+.theme-toggle-btn svg {
+  /* Ensures the SVG icon scales properly */
+  width: 24px;
+  height: 24px;
+}

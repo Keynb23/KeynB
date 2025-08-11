@@ -1,0 +1,59 @@
+/* Home Styles */
+
+.Home-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  min-height: calc(100vh - 120px); /* Adjust based on your navbar height */
+}
+
+.Home-Content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.title h1 {
+  font-size: clamp(2.5rem, 10vw, 4.5rem); /* Responsive font size */
+  color: var(--AC-PC-1);
+  margin-bottom: 0.5rem;
+}
+
+.sub-title h3 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-family: var(--font-ui);
+  color: var(--TX-SC-1);
+  margin-bottom: 2.5rem;
+}
+
+.aboutMe-wrapper {
+  text-align: left;
+  background-color: var(--BG-SC-1);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px okhsla(from var(--TX-PC-1) h s l / 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.pro-sum h4 {
+  font-size: 1.5rem;
+  color: var(--AC-PC-1);
+  border-bottom: 2px solid var(--AC-SC-1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.Pro-Sum-P {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.home-nav-button {
+  margin-top: 2.5rem;
+}
+
+/* Add a specific class for this button in Btn.css or use a generic one */
+.to-btn {
+  font-size: 1.1rem;
+  padding: 0.8em 2em;
+}

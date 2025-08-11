@@ -5,69 +5,48 @@
 
 
 /* ==========================================================================
-   2. Root and Color Scheme Setup
+   2. Root Variables and Color Scheme Setup
    ========================================================================== */
 
 :root {
-  /* This enables the browser to automatically select a theme based on user's system settings. */
-  color-scheme: light dark;
+  /* This sets LIGHT MODE as the default theme */
+  color-scheme: light;
 
-  /* ----------------------------------------- */
-  /* Typography Variables                      */
-  /* ----------------------------------------- */
+  /* Typography */
   --font-header: 'Poppins', sans-serif;
   --font-body: 'Source Sans Pro', sans-serif;
-  --font-ui: 'Poppins', sans-serif; /* For UI elements like buttons */
+  --font-ui: 'Poppins', sans-serif;
 
-  /* ----------------------------------------- */
-  /* Light Mode Color Variables (Default)      */
-  /* Using Okhsl for perceptually uniform color */
-  /* ----------------------------------------- */
-  --BG-PC-1: okhsl(0.98 0.01 270); /* Background Primary Color - Almost White */
-  --BG-SC-1: okhsl(0.95 0.02 70);  /* Background Secondary Color - Light Cream */
-  --TX-PC-1: okhsl(0.20 0.08 270); /* Text Primary Color - Dark Gray/Blue */
-  --TX-SC-1: okhsl(0.35 0.06 270); /* Text Secondary Color - Lighter Gray */
-  --AC-PC-1: okhsl(0.75 0.8 50);   /* Accent Primary Color - Bright Orange */
-  --AC-SC-1: okhsl(0.8 0.8 80);    /* Accent Secondary Color - Bright Yellow */
-  --AC-TC-1: okhsl(0.7 0.9 25);    /* Accent Tertiary Color - Bright Red */
+  /* Light Mode Colors */
+  --BG-PC-1: okhsl(0.98 0.01 270); /* Almost White */
+  --BG-SC-1: okhsl(0.95 0.02 70);  /* Light Cream */
+  --TX-PC-1: okhsl(0.20 0.08 270); /* Dark Gray/Blue */
+  --TX-SC-1: okhsl(0.35 0.06 270); /* Lighter Gray */
+  --AC-PC-1: okhsl(0.75 0.8 50);   /* Bright Orange */
+  --AC-SC-1: okhsl(0.8 0.8 80);    /* Bright Yellow */
+  --AC-TC-1: okhsl(0.7 0.9 25);    /* Bright Red */
 }
 
-
-/* ==========================================================================
-   3. Dark Mode Color Scheme
-   ========================================================================== */
-
-/*
- * This media query respects the user's OS-level theme preference.
- * The data-attribute selector allows you to override it with a toggle button.
- * Your toggle logic in React would set `document.documentElement.dataset.theme = 'dark'`.
+/* * This is the crucial part that was likely missing or incorrect.
+ * When the <html> element has the `data-theme="dark"` attribute,
+ * it overrides the default variables defined in :root.
 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --BG-PC-1: okhsl(0.20 0.02 260); /* Background Primary Color - Very Dark Purple/Blue */
-    --BG-SC-1: okhsl(0.25 0.05 260); /* Background Secondary Color - Darker Purple */
-    --TX-PC-1: okhsl(0.98 0.02 270); /* Text Primary Color - Off-White */
-    --TX-SC-1: okhsl(0.85 0.01 270); /* Text Secondary Color - Light Gray */
-    --AC-PC-1: okhsl(0.75 0.9 280);  /* Accent Primary Color - Neon Purple */
-    --AC-SC-1: okhsl(0.8 0.9 240);   /* Accent Secondary Color - Neon Blue */
-    --AC-TC-1: okhsl(0.8 1 265);     /* Accent Tertiary Color - Lighter Neon Purple */
-  }
-}
-
-/* This allows a toggle button to override the system theme preference */
 [data-theme='dark'] {
-    --BG-PC-1: okhsl(0.20 0.02 260);
-    --BG-SC-1: okhsl(0.25 0.05 260);
-    --TX-PC-1: okhsl(0.98 0.02 270);
-    --TX-SC-1: okhsl(0.85 0.01 270);
-    --AC-PC-1: okhsl(0.75 0.9 280);
-    --AC-SC-1: okhsl(0.8 0.9 240);
-    --AC-TC-1: okhsl(0.8 1 265);
+  color-scheme: dark;
+
+  /* Dark Mode Colors */
+  --BG-PC-1: okhsl(0.20 0.02 260); /* Very Dark Purple/Blue */
+  --BG-SC-1: okhsl(0.25 0.05 260); /* Darker Purple */
+  --TX-PC-1: okhsl(0.98 0.02 270); /* Off-White */
+  --TX-SC-1: okhsl(0.85 0.01 270); /* Light Gray */
+  --AC-PC-1: okhsl(0.75 0.9 280);  /* Neon Purple */
+  --AC-SC-1: okhsl(0.8 0.9 240);   /* Neon Blue */
+  --AC-TC-1: okhsl(0.8 1 265);     /* Lighter Neon Purple */
 }
 
 
 /* ==========================================================================
-   4. Global Styles & Resets
+   3. Global Styles & Resets
    ========================================================================== */
 
 *,

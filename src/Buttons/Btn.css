@@ -3,46 +3,70 @@
    ========================================================================== */
 
 .theme-toggle-btn {
-  /* Resetting default button styles for a custom look */
   background-color: transparent;
   border: 2px solid var(--TX-SC-1);
   color: var(--TX-PC-1);
-  
-  /* Sizing and Shape */
   width: 48px;
   height: 48px;
-  border-radius: 50%; /* Makes it a perfect circle */
-  
-  /* Flexbox for centering the icon */
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  /* Other properties */
   cursor: pointer;
-  padding: 0; /* Remove default padding */
+  padding: 0;
   transition: all 0.3s ease;
 }
 
 .theme-toggle-btn:hover,
 .theme-toggle-btn:focus {
-  /* Use accent colors on hover for better feedback */
   background-color: var(--BG-SC-1);
   border-color: var(--AC-PC-1);
   color: var(--AC-PC-1);
-  
-  /* A slight scaling effect on hover */
   transform: scale(1.1) rotate(15deg);
 }
 
 .theme-toggle-btn:focus {
-  /* Ensures visibility for keyboard navigation */
   outline: 2px solid var(--AC-SC-1);
   outline-offset: 2px;
 }
 
 .theme-toggle-btn svg {
-  /* Ensures the SVG icon scales properly */
   width: 24px;
   height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ==========================================================================
+   Universal Redirect Button (ToBtn) Styles
+   ========================================================================== */
+
+.to-btn {
+  /* This button inherits the base styles from your global button tag in index.css */
+  /* We'll override some properties here to create an "outline" look */
+  
+  background-color: transparent;
+  color: var(--AC-PC-1);
+  border: 2px solid var(--AC-PC-1);
+
+  /* Larger font size and padding for emphasis */
+  font-size: 1.1rem;
+  padding: 0.8em 2em;
+}
+
+.to-btn:hover,
+.to-btn:focus {
+  /* On hover, it fills in, reversing the colors */
+  background-color: var(--AC-PC-1);
+  color: var(--BG-PC-1); /* Text color becomes the main background color */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px okhsla(from var(--AC-PC-1) h s l / 0.3);
+}
+
+.to-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }

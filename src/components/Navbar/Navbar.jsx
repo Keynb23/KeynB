@@ -1,11 +1,13 @@
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useButtons } from '../../Btns-Context'; // Adjust path if needed
-import ThemeBtn from '../../Buttons/ThemeBtn';   // Adjust path if needed
+// Corrected paths to navigate up two directories from 'components/Navbar' to 'src', then into 'Buttons'
+import { useButtons } from '../../Buttons/Btns-Context.jsx'; 
+import ThemeBtn from '../../Buttons/ThemeBtn.jsx';   
 import './Nav.css';
 
 const Navbar = () => {
   // The useButtons hook gives us access to the shared state and functions
-  const { activeButton, setActiveButton } = useButtons();
+  const { ActiveButton, setActiveButton } = useButtons();
 
   return (
     <header className="navbar-header">

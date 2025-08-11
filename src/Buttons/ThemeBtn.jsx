@@ -1,14 +1,16 @@
-  import { useTheme } from '../ThemeContext';
+import React from 'react';
+// Corrected: Imports the hook from your actual context file with the new .jsx extension
+import { useButtons } from './Btns-Context.jsx'; 
 import './Btn.css';
 
-// SVG Icon for the Moon (Dark Mode) - No inline styles
+// SVG Icon for the Moon (Dark Mode)
 const MoonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
   </svg>
 );
 
-// SVG Icon for the Sun (Light Mode) - No inline styles
+// SVG Icon for the Sun (Light Mode)
 const SunIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="5"></circle>
@@ -24,7 +26,8 @@ const SunIcon = () => (
 );
 
 const ThemeBtn = () => {
-  const { theme, toggleTheme } = useTheme();
+  // Corrected: Uses the hook from your context to get the theme state and toggle function
+  const { theme, toggleTheme } = useButtons();
 
   return (
     <button

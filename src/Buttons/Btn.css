@@ -45,23 +45,17 @@
    ========================================================================== */
 
 .to-btn {
-  /* This button inherits the base styles from your global button tag in index.css */
-  /* We'll override some properties here to create an "outline" look */
-  
   background-color: transparent;
   color: var(--AC-PC-1);
   border: 2px solid var(--AC-PC-1);
-
-  /* Larger font size and padding for emphasis */
   font-size: 1.1rem;
   padding: 0.8em 2em;
 }
 
 .to-btn:hover,
 .to-btn:focus {
-  /* On hover, it fills in, reversing the colors */
   background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1); /* Text color becomes the main background color */
+  color: var(--BG-PC-1);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px okhsla(from var(--AC-PC-1) h s l / 0.3);
 }
@@ -69,4 +63,66 @@
 .to-btn:active {
   transform: translateY(0);
   box-shadow: none;
+}
+
+/* ==========================================================================
+   Modal Button Styles (Close, Next, Previous)
+   ========================================================================== */
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--BG-PC-1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  color: var(--TX-PC-1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 2010; /* Ensure it's above other modal content */
+}
+
+.modal-close-btn:hover {
+  background-color: var(--AC-TC-1);
+  color: var(--BG-PC-1);
+  transform: rotate(90deg);
+}
+
+.modal-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: okhsla(from var(--TX-PC-1) h s l / 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.15);
+  color: var(--TX-PC-1);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+  font-size: 1.5rem;
+}
+
+.modal-nav-btn:hover {
+  background-color: var(--AC-PC-1);
+  color: var(--BG-PC-1);
+}
+
+.prev-btn {
+  left: 1rem;
+}
+
+.next-btn {
+  right: 1rem;
 }

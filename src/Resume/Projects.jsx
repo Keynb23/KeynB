@@ -1,65 +1,72 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './Projects.css';
 import { projectsData, skillTags } from '../data/projectsData.js';
-import { CloseBtn, NextBtn, PrevBtn } from '../Buttons/Modal-Btns.jsx';
+import { CloseBtn } from '../Buttons/Modal-Btns.jsx';
+// I'm importing the ToBtn to use for the new "Hire Me" button
+import ToBtn from '../Buttons/ToBtn.jsx';
 
-// Look into remove the next and previous buttons and replacing them with a "I'm sold, I'll hire you" button that has more pop to it.
-
-const ProjectModal = ({ project, onClose, onNextProject, onPreviousProject, hasNextProject, hasPreviousProject }) => {
+const ProjectModal = ({ project, onClose }) => {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+  // New state to control the autoplay timer
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Effect to handle the autoplaying slideshow
-  useEffect(() => {
+  // --- Slideshow Navigation Logic ---
+
+  const handleNextMedia = useCallback(() => {
     if (!project) return;
-    // Reset to the first slide when the project changes
-    setCurrentMediaIndex(0);
+    // Resumes the autoplay when the user manually clicks next
+    setIsPaused(false);
+    setCurrentMediaIndex((prevIndex) => (prevIndex + 1) % project.media.length);
   }, [project]);
 
+  const handlePreviousMedia = useCallback(() => {
+    if (!project) return;
+    // Pauses the autoplay when the user manually goes back
+    setIsPaused(true);
+    setCurrentMediaIndex((prevIndex) => (prevIndex - 1 + project.media.length) % project.media.length);
+  }, [project]);
+
+
+  // --- useEffect Hooks for managing slideshow behavior ---
+
+  // Reset slideshow when a new project is opened
   useEffect(() => {
     if (!project) return;
-    
-    const currentMedia = project.media[currentMediaIndex];
-    let timer;
+    setCurrentMediaIndex(0);
+    setIsPaused(false); // Ensure it's not paused when a new modal opens
+  }, [project]);
 
-    // If the current item is an image, set a timer to advance to the next slide
-    if (currentMedia.type === 'image') {
-      timer = setTimeout(() => {
-        handleNextMedia();
-      }, 4000); // 4-second delay for images
+  // Autoplay timer for images
+  useEffect(() => {
+    if (!project || isPaused || project.media[currentMediaIndex].type !== 'image') {
+      return; // Do nothing if there's no project, it's paused, or it's a video
     }
+    
+    const timer = setTimeout(() => {
+      handleNextMedia();
+    }, 3000); // 3-second delay for images
 
-    // Cleanup function to clear the timer if the component unmounts or changes
     return () => clearTimeout(timer);
-  }, [currentMediaIndex, project]);
+  }, [currentMediaIndex, project, handleNextMedia, isPaused]);
 
 
-  // Effect to handle all keyboard navigation
+  // Keyboard navigation for Escape and slideshow controls
   useEffect(() => {
     if (!project) return;
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') onClose();
-      // Use arrow keys to navigate the media slideshow
       if (event.key === 'ArrowRight') handleNextMedia();
       if (event.key === 'ArrowLeft') handlePreviousMedia();
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [project, currentMediaIndex]); // Re-bind when index changes
+  }, [project, onClose, handleNextMedia, handlePreviousMedia]);
 
   if (!project) return null;
 
-  const handleNextMedia = () => {
-    setCurrentMediaIndex((prevIndex) => (prevIndex + 1) % project.media.length);
-  };
-
-  const handlePreviousMedia = () => {
-    setCurrentMediaIndex((prevIndex) => (prevIndex - 1 + project.media.length) % project.media.length);
-  };
-
   const currentMedia = project.media[currentMediaIndex];
-
   const handleContentClick = (e) => e.stopPropagation();
 
   return (
@@ -69,31 +76,36 @@ const ProjectModal = ({ project, onClose, onNextProject, onPreviousProject, hasN
         <div className="Pro-Model-Left">
           {currentMedia.type === 'video' ? (
             <video
-              key={currentMedia.src} // Key is important for React to re-render the video element
+              key={currentMedia.src}
               src={currentMedia.src}
               controls
               autoPlay
               muted
-              onEnded={handleNextMedia} // Go to next slide when video finishes
+              onPlay={() => setIsPaused(true)} // Pause slideshow while video plays
+              onEnded={() => {
+                setIsPaused(false); // Resume slideshow after video
+                handleNextMedia();
+              }}
               className="modal-media"
             />
           ) : (
             <img key={currentMedia.src} src={currentMedia.src} alt={project.title} className="modal-media" />
           )}
-          {/* The slideshow buttons could go here if you wanted them */}
+          <div className="slideshow-navigation-wrapper">
+            <button className="slideshow-nav-btn prev" onClick={handlePreviousMedia}>&#8249;</button>
+            <button className="slideshow-nav-btn next" onClick={handleNextMedia}>&#8250;</button>
+          </div>
         </div>
         <div className="Pro-Model-Right">
-          <div> {/* Added wrapper for top content */}
+          <div>
             <h2>{project.title}</h2>
             <p>{project.summary}</p>
             <div className="modal-tags">
               {project.tags.map(tag => <span key={tag} className="modal-tag">{tag}</span>)}
             </div>
           </div>
-          {/* New wrapper for the PROJECT navigation buttons */}
-          <div className="project-navigation-wrapper">
-            {hasPreviousProject ? <PrevBtn onClick={onPreviousProject} /> : <div/>}
-            {hasNextProject ? <NextBtn onClick={onNextProject} /> : <div/>}
+          <div className="hire-me-wrapper">
+            <ToBtn to="/contact">I'm sold, let's talk!</ToBtn>
           </div>
         </div>
       </div>
@@ -109,25 +121,6 @@ const Projects = () => {
   const filteredProjects = activeFilter === 'All'
     ? projectsData
     : projectsData.filter(project => project.tags.includes(activeFilter));
-
-  const currentProjectIndex = selectedProject
-    ? filteredProjects.findIndex(p => p.id === selectedProject.id)
-    : -1;
-
-  const hasNextProject = currentProjectIndex !== -1 && currentProjectIndex < filteredProjects.length - 1;
-  const hasPreviousProject = currentProjectIndex > 0;
-
-  const handleNextProject = () => {
-    if (hasNextProject) {
-      setSelectedProject(filteredProjects[currentProjectIndex + 1]);
-    }
-  };
-
-  const handlePreviousProject = () => {
-    if (hasPreviousProject) {
-      setSelectedProject(filteredProjects[currentProjectIndex - 1]);
-    }
-  };
 
   return (
     <>
@@ -189,10 +182,6 @@ const Projects = () => {
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
-        onNextProject={handleNextProject}
-        onPreviousProject={handlePreviousProject}
-        hasNextProject={hasNextProject}
-        hasPreviousProject={hasPreviousProject}
       />
     </>
   );

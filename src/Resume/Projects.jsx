@@ -2,55 +2,75 @@ import { useState, useEffect, useCallback } from 'react';
 import './Projects.css';
 import { projectsData, skillTags } from '../data/projectsData.js';
 import { CloseBtn } from '../Buttons/Modal-Btns.jsx';
-// I'm importing the ToBtn to use for the new "Hire Me" button
 import ToBtn from '../Buttons/ToBtn.jsx';
+
+// This is a new, self-contained component for a single project card.
+// It manages its own hover state, which is a more robust pattern.
+const ProjectCard = ({ project, onCardClick }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const videoUrl = project.media?.find(m => m.type === 'video')?.src;
+
+  return (
+    <div
+      className="Project-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onCardClick(project)}
+    >
+      {isHovered && videoUrl ? (
+        <video
+          src={videoUrl}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="project-video"
+        />
+      ) : (
+        <img
+          src={project.coverImage}
+          alt={`${project.title} screenshot`}
+          className="project-image"
+        />
+      )}
+    </div>
+  );
+};
 
 const ProjectModal = ({ project, onClose }) => {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
-  // New state to control the autoplay timer
   const [isPaused, setIsPaused] = useState(false);
-
-  // --- Slideshow Navigation Logic ---
 
   const handleNextMedia = useCallback(() => {
     if (!project) return;
-    // Resumes the autoplay when the user manually clicks next
     setIsPaused(false);
     setCurrentMediaIndex((prevIndex) => (prevIndex + 1) % project.media.length);
   }, [project]);
 
   const handlePreviousMedia = useCallback(() => {
     if (!project) return;
-    // Pauses the autoplay when the user manually goes back
     setIsPaused(true);
     setCurrentMediaIndex((prevIndex) => (prevIndex - 1 + project.media.length) % project.media.length);
   }, [project]);
 
-
-  // --- useEffect Hooks for managing slideshow behavior ---
-
-  // Reset slideshow when a new project is opened
   useEffect(() => {
     if (!project) return;
     setCurrentMediaIndex(0);
-    setIsPaused(false); // Ensure it's not paused when a new modal opens
+    setIsPaused(false);
   }, [project]);
 
-  // Autoplay timer for images
   useEffect(() => {
     if (!project || isPaused || project.media[currentMediaIndex].type !== 'image') {
-      return; // Do nothing if there's no project, it's paused, or it's a video
+      return;
     }
     
     const timer = setTimeout(() => {
       handleNextMedia();
-    }, 3000); // 3-second delay for images
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [currentMediaIndex, project, handleNextMedia, isPaused]);
 
-
-  // Keyboard navigation for Escape and slideshow controls
   useEffect(() => {
     if (!project) return;
 
@@ -81,9 +101,9 @@ const ProjectModal = ({ project, onClose }) => {
               controls
               autoPlay
               muted
-              onPlay={() => setIsPaused(true)} // Pause slideshow while video plays
+              onPlay={() => setIsPaused(true)}
               onEnded={() => {
-                setIsPaused(false); // Resume slideshow after video
+                setIsPaused(false);
                 handleNextMedia();
               }}
               className="modal-media"
@@ -91,9 +111,8 @@ const ProjectModal = ({ project, onClose }) => {
           ) : (
             <img key={currentMedia.src} src={currentMedia.src} alt={project.title} className="modal-media" />
           )}
-          <div className="slideshow-navigation-wrapper">
-            <button className="slideshow-nav-btn prev" onClick={handlePreviousMedia}>&#8249;</button>
-            <button className="slideshow-nav-btn next" onClick={handleNextMedia}>&#8250;</button>
+          <div className="slideshow-instructions">
+            <p>Use your left and right arrows to navigate</p>
           </div>
         </div>
         <div className="Pro-Model-Right">
@@ -102,6 +121,19 @@ const ProjectModal = ({ project, onClose }) => {
             <p>{project.summary}</p>
             <div className="modal-tags">
               {project.tags.map(tag => <span key={tag} className="modal-tag">{tag}</span>)}
+            </div>
+            {/* This new wrapper renders the project links */}
+            <div className="modal-links-wrapper">
+              {project.links && (
+                <a href={project.links} target="_blank" rel="noopener noreferrer" className="modal-link-btn live-site">
+                  Live Site
+                </a>
+              )}
+              {project.source && (
+                <a href={project.source} target="_blank" rel="noopener noreferrer" className="modal-link-btn source-code">
+                  Source Code
+                </a>
+              )}
             </div>
           </div>
           <div className="hire-me-wrapper">
@@ -115,7 +147,7 @@ const ProjectModal = ({ project, onClose }) => {
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
-  const [hoveredProjectId, setHoveredProjectId] = useState(null);
+  // The hoveredProjectId state is no longer needed, as each card manages itself.
   const [selectedProject, setSelectedProject] = useState(null);
 
   const filteredProjects = activeFilter === 'All'
@@ -144,36 +176,14 @@ const Projects = () => {
 
           <div className="Project-Main-Content">
             <div className="Pro-Card-Rows">
-              {filteredProjects.map(project => {
-                const videoUrl = project.media?.find(m => m.type === 'video')?.src;
-
-                return (
-                  <div
-                    key={project.id}
-                    className="Project-card"
-                    onMouseEnter={() => setHoveredProjectId(project.id)}
-                    onMouseLeave={() => setHoveredProjectId(null)}
-                    onClick={() => setSelectedProject(project)}
-                  >
-                    {hoveredProjectId === project.id && videoUrl ? (
-                      <video
-                        src={videoUrl}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="project-video"
-                      />
-                    ) : (
-                      <img
-                        src={project.coverImage}
-                        alt={`${project.title} screenshot`}
-                        className="project-image"
-                      />
-                    )}
-                  </div>
-                );
-              })}
+              {/* The mapping logic is now much simpler. */}
+              {filteredProjects.map(project => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onCardClick={setSelectedProject}
+                />
+              ))}
             </div>
           </div>
         </div>

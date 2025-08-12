@@ -125,8 +125,6 @@
   background-color: var(--BG-SC-1);
   border-radius: 16px;
   padding: 2rem;
-  max-width: 90vw;
-  max-height: 90vh;
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -134,6 +132,7 @@
   position: relative;
   box-shadow: 0 10px 30px okhsla(from var(--TX-PC-1) h s l / 0.2);
 }
+
 
 .Pro-Model-Left {
   width: 100%;
@@ -150,6 +149,12 @@
   object-fit: contain;
 }
 
+.Pro-Model-Right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .Pro-Model-Right h2 {
   font-size: 2rem;
   color: var(--AC-PC-1);
@@ -161,23 +166,6 @@
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
-
-/* This makes the right panel a flex container, allowing us to push the buttons to the bottom */
-.Pro-Model-Right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Puts space between the top content and the bottom buttons */
-}
-
-/* This is the new wrapper for the project navigation buttons */
-.project-navigation-wrapper {
-  padding-top: 1.5rem;
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
-}
-
 
 .modal-tags {
   display: flex;
@@ -194,64 +182,84 @@
   font-weight: 600;
 }
 
+/* Add these new styles to your existing Projects.css file */
+
+.modal-links-wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modal-link-btn {
+  flex: 1; /* Make buttons share space equally */
+  text-align: center;
+  padding: 0.75em 1em;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+/* Style for primary link (Live Site) */
+.modal-link-btn.live-site {
+    background-color: var(--AC-PC-1);
+    color: var(--BG-PC-1);
+    border-color: var(--AC-PC-1);
+}
+
+/* Style for secondary link (Source Code) */
+.modal-link-btn.source-code {
+    background-color: transparent;
+    color: var(--AC-PC-1);
+    border-color: var(--AC-PC-1);
+}
+
+.modal-link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px okhsla(from var(--AC-PC-1) h s l / 0.3);
+}
+
+
+.hire-me-wrapper {
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+}
+
+.hire-me-wrapper .to-btn {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 1em;
+}
+
 /* ==========================================================================
-   Modal Button Styles
+   Slideshow Instructional Text Styles
    ========================================================================== */
 
-.modal-close-btn {
+.slideshow-instructions {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: var(--BG-PC-1);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  color: var(--TX-PC-1);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  z-index: 2010;
-}
-
-.modal-close-btn:hover {
-  background-color: var(--AC-TC-1);
-  color: var(--BG-PC-1);
-  transform: rotate(90deg);
-}
-
-.modal-nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: okhsla(from var(--TX-PC-1) h s l / 0.1);
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: okhsla(from var(--BG-PC-1) h s l / 0.5);
   backdrop-filter: blur(4px);
-  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.15);
   color: var(--TX-PC-1);
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease;
-  z-index: 10;
-  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-family: var(--font-ui);
+  pointer-events: none; /* So it doesn't interfere with clicks */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease;
 }
 
-.modal-nav-btn:hover {
-  background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
+/* Show the instructional text when hovering over the media panel */
+.Pro-Model-Left:hover .slideshow-instructions {
+  opacity: 1;
 }
 
-.prev-btn {
-  left: 1rem;
-}
-
-.next-btn {
-  right: 1rem;
+.slideshow-instructions p {
+    margin: 0; /* Remove default paragraph margin */
 }

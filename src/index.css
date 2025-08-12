@@ -17,31 +17,30 @@
   --font-body: 'Source Sans Pro', sans-serif;
   --font-ui: 'Poppins', sans-serif;
 
-  /* Light Mode Colors */
-  --BG-PC-1: okhsl(0.98 0.01 270); /* Almost White */
-  --BG-SC-1: okhsl(0.95 0.02 70);  /* Light Cream */
-  --TX-PC-1: okhsl(0.20 0.08 270); /* Dark Gray/Blue */
-  --TX-SC-1: okhsl(0.35 0.06 270); /* Lighter Gray */
-  --AC-PC-1: okhsl(0.75 0.8 50);   /* Bright Orange */
-  --AC-SC-1: okhsl(0.8 0.8 80);    /* Bright Yellow */
-  --AC-TC-1: okhsl(0.7 0.9 25);    /* Bright Red */
+/* Light Mode Colors in RGBA */
+  --BG-PC-1: rgba(248, 241, 206, 0.866);   /* Almost White */
+  --BG-SC-1: rgba(244, 238, 245, 0.701);   /* Light Cream */
+  --TX-PC-1: rgba(35, 29, 54, 1);      /* Dark Gray/Blue */
+  --TX-SC-1: rgb(70, 33, 10);      /* Lighter Gray */
+  --AC-PC-1: rgb(227, 22, 22);     /* Bright Orange */
+  --AC-SC-1: rgb(254, 202, 15);     /* Bright Yellow */
+  --AC-TC-1: rgba(145, 1, 1, 0.875);       /* Bright Red */
 }
 
-/* * This is the crucial part that was likely missing or incorrect.
- * When the <html> element has the `data-theme="dark"` attribute,
+/* When the <html> element has the `data-theme="dark"` attribute,
  * it overrides the default variables defined in :root.
 */
 [data-theme='dark'] {
   color-scheme: dark;
 
-  /* Dark Mode Colors */
-  --BG-PC-1: okhsl(0.20 0.02 260); /* Very Dark Purple/Blue */
-  --BG-SC-1: okhsl(0.25 0.05 260); /* Darker Purple */
-  --TX-PC-1: okhsl(0.98 0.02 270); /* Off-White */
-  --TX-SC-1: okhsl(0.85 0.01 270); /* Light Gray */
-  --AC-PC-1: okhsl(0.75 0.9 280);  /* Neon Purple */
-  --AC-SC-1: okhsl(0.8 0.9 240);   /* Neon Blue */
-  --AC-TC-1: okhsl(0.8 1 265);     /* Lighter Neon Purple */
+  /* Dark Mode Colors in RGBA */
+  --BG-PC-1: rgb(27, 23, 34);      /* Very Dark Purple/Blue */
+  --BG-SC-1: rgb(17, 2, 39);      /* Darker Purple */
+  --TX-PC-1: rgba(249, 248, 250, 1);   /* Off-White */
+  --TX-SC-1: rgb(250, 246, 252);   /* Light Gray */
+  --AC-PC-1: rgb(227, 246, 58);   /* Neon Purple */
+  --AC-SC-1: rgb(27, 16, 26);     /* Neon Blue */
+  --AC-TC-1: rgb(52, 30, 130);   /* Lighter Neon Purple */
 }
 
 

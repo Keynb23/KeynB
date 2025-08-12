@@ -14,6 +14,8 @@ export const BetterState = {
   id: 8, // A unique ID
   title: 'Better State Mo LLC ',
   summary: 'Independently redesigned and developed the public-facing website for a pool cleaning business in Missouri, transforming a previously confusing site into a clean, modern, and accessible interface for all age groups.',
+  links: 'https://www.betterstatemo.com/',
+  source: 'https://github.com/Keynb23/BetterStateMo',
   coverImage: BetterState1, // The main image for the card
   tags: ['React', 'JSX', 'CSS'],
   // All the media for the detailed view/modal

@@ -45,7 +45,7 @@
    ========================================================================== */
 
 .to-btn {
-  background-color: transparent;
+  background-color: var(--AC-SC-1);
   color: var(--AC-PC-1);
   border: 2px solid var(--AC-PC-1);
   font-size: 1.1rem;
@@ -55,7 +55,7 @@
 .to-btn:hover,
 .to-btn:focus {
   background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
+  color: var(--AC-SC-1);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px okhsla(from var(--AC-PC-1) h s l / 0.3);
 }

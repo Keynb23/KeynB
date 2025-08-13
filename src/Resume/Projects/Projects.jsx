@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import './Projects.css';
-import { projectsData, skillTags } from '../data/projectsData.js';
-import { CloseBtn } from '../Buttons/Modal-Btns.jsx';
-import ToBtn from '../Buttons/ToBtn.jsx';
+import { projectsData, skillTags } from '../../data/projectsData.js';
+import { CloseBtn } from '../../Buttons/Modal-Btns.jsx';
+import ToBtn from '../../Buttons/ToBtn.jsx';
 
 // This is a new, self-contained component for a single project card.
 // It manages its own hover state, which is a more robust pattern.

@@ -93,7 +93,6 @@
   display: flex;
   align-items: center;
   z-index: 99;
-  border: 1px solid var(--AC-PC-1);
 }
 
 /* ==========================================================================

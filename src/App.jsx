@@ -3,8 +3,8 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home  from './Pages/Home';
 import Edu from './Resume/Edu';
-import Exp from './Resume/Exp';
-import Projects from './Resume/Projects';
+import Exp from './Resume/XP/Exp';
+import Projects from './Resume/Projects/Projects';
 
 function App() {
   return (

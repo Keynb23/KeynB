@@ -17,14 +17,16 @@
   --font-body: 'Source Sans Pro', sans-serif;
   --font-ui: 'Poppins', sans-serif;
 
-/* Light Mode Colors in RGBA */
-  --BG-PC-1: rgba(248, 241, 206, 0.866);   /* Almost White */
-  --BG-SC-1: rgba(244, 238, 245, 0.701);   /* Light Cream */
-  --TX-PC-1: rgba(35, 29, 54, 1);      /* Dark Gray/Blue */
-  --TX-SC-1: rgb(70, 33, 10);      /* Lighter Gray */
-  --AC-PC-1: rgb(227, 22, 22);     /* Bright Orange */
-  --AC-SC-1: rgb(254, 202, 15);     /* Bright Yellow */
-  --AC-TC-1: rgba(145, 1, 1, 0.875);       /* Bright Red */
+  color-scheme: light;
+
+  /* Light Mode Colors in RGBA - Adjusted for better contrast and a smoother feel */
+  --BG-PC-1: rgba(245, 247, 250, 1);      /* Soft Off-White */
+  --BG-SC-1: rgba(255, 255, 255, 1);      /* Pure White */
+  --TX-PC-1: rgba(28, 37, 54, 1);       /* Dark Navy Blue */
+  --TX-SC-1: rgba(100, 116, 139, 1);     /* Slate Gray */
+  --AC-PC-1: rgba(251, 191, 36, 1);      /* Amber Yellow */
+  --AC-SC-1: rgba(245, 158, 11, 1);      /* Darker Amber */
+  --AC-TC-1: rgba(220, 38, 38, 1);       /* Red for alerts/emphasis */
 }
 
 /* When the <html> element has the `data-theme="dark"` attribute,
@@ -33,14 +35,14 @@
 [data-theme='dark'] {
   color-scheme: dark;
 
-  /* Dark Mode Colors in RGBA */
-  --BG-PC-1: rgb(27, 23, 34);      /* Very Dark Purple/Blue */
-  --BG-SC-1: rgb(17, 2, 39);      /* Darker Purple */
-  --TX-PC-1: rgba(249, 248, 250, 1);   /* Off-White */
-  --TX-SC-1: rgb(250, 246, 252);   /* Light Gray */
-  --AC-PC-1: rgb(227, 246, 58);   /* Neon Purple */
-  --AC-SC-1: rgb(27, 16, 26);     /* Neon Blue */
-  --AC-TC-1: rgb(52, 30, 130);   /* Lighter Neon Purple */
+  /* Dark Mode Colors in RGBA - Adjusted for better contrast and a smoother feel */
+  --BG-PC-1: rgba(17, 24, 39, 1);       /* Very Dark Blue */
+  --BG-SC-1: rgba(31, 41, 55, 1);       /* Dark Slate */
+  --TX-PC-1: rgba(229, 231, 235, 1);     /* Light Gray */
+  --TX-SC-1: rgba(156, 163, 175, 1);     /* Medium Gray */
+  --AC-PC-1: rgba(251, 191, 36, 1);      /* Amber Yellow */
+  --AC-SC-1: rgba(252, 211, 77, 1);      /* Lighter Amber */
+  --AC-TC-1: rgb(51, 8, 70);     /* Soft Violet */
 }
 
 

@@ -91,7 +91,6 @@
 .modal-close-btn:hover {
   background-color: var(--AC-TC-1);
   color: var(--BG-PC-1);
-  transform: rotate(90deg);
 }
 
 .modal-nav-btn {

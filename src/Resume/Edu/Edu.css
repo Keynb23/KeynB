@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Education Page Styles
+   ========================================================================== */
+
+.education-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.education-title {
+  font-family: var(--font-header);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--TX-PC-1);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Education Card Layout
+   ========================================================================== */
+
+.education-card {
+  display: flex;
+  gap: 2rem;
+  background-color: var(--BG-SC-1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  text-align: left;
+  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  box-shadow: 0 8px 20px okhsla(from var(--TX-PC-1) h s l / 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.education-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px okhsla(from var(--AC-PC-1) h s l / 0.1);
+}
+
+.card-icon {
+  color: var(--AC-PC-1);
+  margin-top: 5px;
+}
+
+.card-content {
+  flex: 1;
+}
+
+/* ==========================================================================
+   Card Typography & Content
+   ========================================================================== */
+
+.degree-title {
+  font-family: var(--font-header);
+  font-size: 1.6rem;
+  color: var(--TX-PC-1);
+  margin-bottom: 0.25rem;
+}
+
+.school-info {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--TX-SC-1);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.card-description {
+  font-family: var(--font-body);
+  color: var(--TX-PC-1);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.skills-heading {
+  font-family: var(--font-header);
+  font-size: 1.1rem;
+  color: var(--TX-PC-1);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Skills Pills / Tags
+   ========================================================================== */
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skills-list li {
+  font-family: var(--font-ui);
+  background-color: okhsla(from var(--AC-PC-1) h s l / 0.15);
+  color: var(--AC-PC-1);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid okhsla(from var(--AC-PC-1) h s l / 0.3);
+}
+
+/* Update this class */
+.Icon-Bowl {
+  position: relative; /* Crucial for containing the absolute-positioned icons */
+  width: 100%;
+  max-width: 600px; /* Or whatever size you prefer */
+  height: 350px;
+  margin: 3rem auto 0;
+  border: 2px solid var(--AC-PC-1);
+  border-radius: 20px;
+  overflow: hidden; /* Keeps the icons from flying out */
+}
+
+/* Add this new class */
+.icon-instance {
+  position: absolute;
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  transition: transform 0.2s ease-out; /* Smooths the movement */
+  will-change: transform; /* Performance hint for the browser */
+}

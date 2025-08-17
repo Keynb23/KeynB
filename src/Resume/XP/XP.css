@@ -1,219 +1,187 @@
-/* Add these new styles to your existing XP.css file */
-
-/* This is required for the overlay to be positioned correctly */
-.game-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 /* ==========================================================================
-   Unlock Overlay Styles
+   General Page & Game Wrapper Styles
    ========================================================================== */
 
-.unlock-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* Dark, semi-transparent background with a blur effect */
-    background-color: rgba(17, 24, 39, 0.7); /* Using a dark theme color */
-    backdrop-filter: blur(8px);
-    
-    border-radius: 10px; /* Match the game container's border radius */
-    z-index: 30; /* Ensure it's above the game-over screen */
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: var(--TX-PC-1); /* Text color will adapt to the theme */
-}
-
-.unlock-message h2 {
-    font-family: var(--font-header);
-    font-size: 3rem;
-    color: var(--AC-PC-1); /* Use accent color for the title */
-    margin-bottom: 1rem;
-}
-
-.unlock-message p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
-
-.unlock-message button {
-    background-color: var(--AC-PC-1);
-    color: var(--BG-PC-1);
-    border: none;
-    padding: 12px 30px;
-    font-size: 1.1rem;
-    font-family: var(--font-ui);
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.unlock-message button:hover {
-    background-color: var(--AC-SC-1);
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px okhsla(from var(--AC-PC-1) h s l / 0.4);
-}
-
-
-/* General container styles for the portfolio section */
 .xp-section {
-    font-family: var(--font-body);
-    background-color: var(--BG-SC-1);
-    padding: 40px 20px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px okhsla(from var(--TX-PC-1) h s l / 0.1);
-    text-align: center;
-    max-width: 900px;
-    margin: 40px auto;
-    border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
-    transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-body);
+  background-color: var(--BG-SC-1);
+  padding: 40px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px okhsla(from var(--TX-PC-1) h s l / 0.1);
+  text-align: center;
+  max-width: 900px;
+  margin: 40px auto;
+  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .xp-title {
-    font-family: var(--font-header);
-    font-size: 2.5rem;
-    color: var(--TX-PC-1);
-    margin-bottom: 10px;
+  font-family: var(--font-header);
+  font-size: 2.5rem;
+  color: var(--TX-PC-1);
+  margin-bottom: 10px;
 }
 
 .xp-instructions {
-    font-size: 1.1rem;
-    color: var(--TX-SC-1);
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-
-.xp-instructions strong {
-    color: var(--AC-PC-1);
+  font-size: 1.1rem;
+  color: var(--TX-SC-1);
+  margin-bottom: 30px;
+  line-height: 1.6;
 }
 
 .game-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Game Styles */
+/* ==========================================================================
+   Mini-Game Styles
+   ========================================================================== */
+
 .game-container {
-    border: 5px solid var(--TX-PC-1);
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-    height: 400px; /* Fixed height */
-    box-shadow: inset 0 0 15px okhsla(from var(--TX-PC-1) h s l / 0.3);
-    background-color: var(--BG-PC-1);
+  border: 5px solid var(--TX-PC-1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  height: 400px; /* Fixed height */
+  box-shadow: inset 0 0 15px okhsla(from var(--TX-PC-1) h s l / 0.3);
+  background-color: var(--BG-PC-1);
 }
 
-.score-display, .speed-display {
-    position: absolute;
-    top: 15px;
-    font-family: var(--font-header);
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--BG-PC-1); /* Use background color for contrast */
-    text-shadow: 2px 2px 4px okhsla(from var(--TX-PC-1) h s l / 0.5);
-    z-index: 10;
+.score-display,
+.high-score-display {
+  position: absolute;
+  top: 15px;
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--TX-PC-1);
+  text-shadow: 2px 2px 4px okhsla(from var(--BG-PC-1) h s l / 0.5);
+  z-index: 10;
 }
 
 .score-display {
-    left: 20px;
+  left: 20px;
 }
 
-.speed-display {
-    right: 20px;
+.high-score-display {
+  right: 20px;
 }
 
 .player-canvas-container {
-    position: absolute;
-    width: 100px;  /* Give it some width */
-    height: 100px; /* and height */
-    left: 20px;   /* Adjust horizontal position */
-    z-index: 5;
-    transition: top 0.05s linear;
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  left: 20px;
+  z-index: 5;
 }
 
-/* This makes the canvas transparent so it doesn't block the background */
+.player-canvas-container > div,
 .player-canvas-container canvas {
-    background-color: transparent !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: transparent !important;
 }
-
 
 .obstacle {
-    position: absolute;
-    width: 30px;
-    background-color: var(--AC-SC-1); /* Accent color */
-    bottom: 0;
-    z-index: 5;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    box-shadow: 3px 0px 5px okhsla(from var(--TX-PC-1) h s l / 0.3);
-    border: 3px solid okhsla(from var(--AC-SC-1) h s l / 0.8);
+  position: absolute;
+  width: 30px;
+  background-color: var(--AC-SC-1);
+  bottom: 0;
+  z-index: 5;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  box-shadow: 3px 0px 5px okhsla(from var(--TX-PC-1) h s l / 0.3);
+  border: 3px solid okhsla(from var(--AC-SC-1) h s l / 0.8);
 }
 
 .ground {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 120px;
-    background-color: var(--BG-SC-1); /* Use secondary background for ground */
-    z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background-color: var(--BG-SC-1);
+  z-index: 1;
 }
+
+/* ==========================================================================
+   Game Overlays (Game Over & Unlock Message)
+   ========================================================================== */
 
 .game-over-screen {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: okhsla(from var(--BG-SC-1) h s l / 0.8);
-    backdrop-filter: blur(8px);
-    padding: 30px 40px;
-    border-radius: 15px;
-    text-align: center;
-    z-index: 20;
-    box-shadow: 0 5px 15px okhsla(from var(--TX-PC-1) h s l / 0.2);
-    color: var(--TX-PC-1);
-    border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: okhsla(from var(--BG-SC-1) h s l / 0.8);
+  backdrop-filter: blur(8px);
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 20;
+  box-shadow: 0 5px 15px okhsla(from var(--TX-PC-1) h s l / 0.2);
+  color: var(--TX-PC-1);
+  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
 }
 
-.game-over-screen h2 {
-    font-family: var(--font-header);
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: var(--AC-PC-1);
+.unlock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--TX-PC-1);
 }
 
-.game-over-screen p {
-    font-size: 1.2rem;
-    margin-bottom: 25px;
+.game-over-screen h2,
+.unlock-message h2 {
+  font-family: var(--font-header);
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--AC-PC-1);
 }
 
-.game-over-screen button {
-    background-color: var(--AC-PC-1);
-    color: var(--BG-PC-1);
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-family: var(--font-ui);
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+.game-over-screen p,
+.unlock-message p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
 }
 
-.game-over-screen button:hover {
-    background-color: var(--AC-SC-1);
-    transform: scale(1.05);
+.game-over-screen button,
+.unlock-message button {
+  background-color: var(--AC-PC-1);
+  color: var(--BG-PC-1);
+  border: none;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-family: var(--font-ui);
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.game-over-screen button:hover,
+.unlock-message button:hover {
+  background-color: var(--AC-SC-1);
+  transform: scale(1.05);
+}
+
+.unlock-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 /* ==========================================================================
@@ -221,59 +189,90 @@
    ========================================================================== */
 
 .experience-section {
-    background-color: var(--BG-PC-1);
-    padding: 40px 20px;
-    border-radius: 12px;
-    max-width: 900px;
-    margin: 40px auto;
-    border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
-    text-align: left;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 2rem;
+  text-align: left;
 }
 
 .unlocked-title {
-    font-family: var(--font-header);
-    font-size: 2rem;
-    color: var(--AC-PC-1);
-    text-align: center;
-    margin-bottom: 30px;
+  font-family: var(--font-header);
+  font-size: 2.8rem;
+  color: var(--TX-PC-1);
+  text-align: center;
+  margin-bottom: 3.5rem;
 }
 
+/* --- Timeline Effect --- */
+.experience-history {
+  position: relative;
+  padding-left: 40px;
+  border-left: 3px solid okhsla(from var(--AC-PC-1) h s l / 0.2);
+}
+
+.job-entry::before {
+  content: '';
+  position: absolute;
+  left: -49px;
+  top: 8px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--AC-SC-1);
+  border: 3px solid var(--BG-SC-1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* --- Job Entry & Video Styling --- */
 .job-entry {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  position: relative;
+  background-color: var(--BG-SC-1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  box-shadow: 0 8px 20px okhsla(from var(--TX-PC-1) h s l / 0.05);
 }
 
-.job-entry:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
+.job-video {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  object-fit: cover;
+  max-height: 400px;
 }
 
+/* --- Typography --- */
 .job-entry h3 {
-    font-family: var(--font-header);
-    font-size: 1.5rem;
-    color: var(--TX-PC-1);
-    margin-bottom: 0.25rem;
+  font-family: var(--font-header);
+  font-size: 1.6rem;
+  color: var(--TX-PC-1);
+  margin-bottom: 0.25rem;
 }
 
 .job-entry h4 {
-    font-family: var(--font-ui);
-    font-size: 1rem;
-    color: var(--TX-SC-1);
-    margin-bottom: 1rem;
-    font-weight: 600;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--TX-SC-1);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 .job-entry ul {
-    list-style-position: outside;
-    padding-left: 20px;
+  list-style-position: outside;
+  padding-left: 20px;
+  margin: 0;
 }
 
 .job-entry li {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--TX-PC-1);
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--TX-PC-1);
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
 }
+
+.job-entry li::marker {
+  color: var(--AC-PC-1);
+}   

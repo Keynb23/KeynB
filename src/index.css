@@ -21,11 +21,11 @@
   /* CyberPunk */
   --BG-PC-1: rgba(230, 230, 255, 1);
   --BG-SC-1: rgba(250, 250, 255, 1);
-  --TX-PC-1: rgba(180, 0, 120, 1);
+  --TX-PC-1: rgb(13, 0, 9);
   --TX-SC-1: rgba(0, 150, 180, 1);
-  --AC-PC-1: rgba(255, 0, 200, 1);
-  --AC-SC-1: rgba(0, 220, 180, 1);
-  --AC-TC-1: rgba(255, 200, 0, 1);
+  --AC-PC-1: rgb(78, 22, 153);
+  --AC-SC-1: rgb(32, 101, 88);
+  --AC-TC-1: rgb(181, 98, 198);
 }
 
 [data-theme='dark'] {
@@ -33,60 +33,12 @@
 
   --BG-PC-1: rgba(5, 5, 15, 1);
   --BG-SC-1: rgba(15, 15, 35, 1);
-  --TX-PC-1: rgba(255, 0, 180, 1);
+  --TX-PC-1: rgb(255, 252, 254);
   --TX-SC-1: rgba(0, 200, 255, 1);
-  --AC-PC-1: rgba(255, 20, 147, 1);
-  --AC-SC-1: rgba(0, 255, 200, 1);
-  --AC-TC-1: rgba(255, 255, 0, 1);
+  --AC-PC-1: rgb(171, 231, 255);
+  --AC-SC-1: rgb(51, 208, 174);
+  --AC-TC-1: rgb(45, 0, 100);
 }
-
-
-
-  /* BLUE-ISH */
-
-    /* --BG-PC-1: rgba(240, 244, 248, 1);
-  --BG-SC-1: rgba(255, 255, 255, 1);
-  --TX-PC-1: rgba(34, 40, 49, 1);
-  --TX-SC-1: rgba(108, 117, 125, 1);
-  --AC-PC-1: rgba(0, 123, 255, 1);
-  --AC-SC-1: rgba(0, 105, 217, 1);
-  --AC-TC-1: rgba(220, 53, 69, 1);
-}
-
-[data-theme='dark'] {
-  color-scheme: dark;
-
-  --BG-PC-1: rgba(20, 24, 28, 1);
-  --BG-SC-1: rgba(34, 40, 49, 1);
-  --TX-PC-1: rgba(248, 249, 250, 1);
-  --TX-SC-1: rgba(173, 181, 189, 1);
-  --AC-PC-1: rgba(0, 123, 255, 1);
-  --AC-SC-1: rgba(102, 179, 255, 1);
-  --AC-TC-1: rgba(255, 99, 132, 1);
-} */
-
-/* OG */
-
-  /* --BG-PC-1: rgba(245, 247, 250, 1);
-  --BG-SC-1: rgba(255, 255, 255, 1);
-  --TX-PC-1: rgba(28, 37, 54, 1);
-  --TX-SC-1: rgba(100, 116, 139, 1);
-  --AC-PC-1: rgba(251, 191, 36, 1);
-  --AC-SC-1: rgba(245, 158, 11, 1);
-  --AC-TC-1: rgba(220, 38, 38, 1);
-}
-
-[data-theme="dark"] {
-  color-scheme: dark;
-
-  --BG-PC-1: rgba(17, 24, 39, 1);
-  --BG-SC-1: rgba(31, 41, 55, 1);
-  --TX-PC-1: rgba(229, 231, 235, 1);
-  --TX-SC-1: rgba(156, 163, 175, 1);
-  --AC-PC-1: rgba(251, 191, 36, 1);
-  --AC-SC-1: rgba(252, 211, 77, 1);
-  --AC-TC-1: rgb(51, 8, 70);
-} */
 
 /* ==========================================================================
    3. Global Styles & Resets
@@ -100,6 +52,11 @@
   padding: 0;
 }
 
+body, html, :root {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--BG-PC-1);
@@ -110,7 +67,7 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-}
+  }
 
 /* ==========================================================================
    5. Typography

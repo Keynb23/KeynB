@@ -1,0 +1,11 @@
+Model Information:
+* title:	Toad ninja
+* source:	https://sketchfab.com/3d-models/toad-ninja-cfd07556cb3f49379bcb4998fc01706d
+* author:	yokerwan09 (https://sketchfab.com/yokerwan09)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Toad ninja" (https://sketchfab.com/3d-models/toad-ninja-cfd07556cb3f49379bcb4998fc01706d) by yokerwan09 (https://sketchfab.com/yokerwan09) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

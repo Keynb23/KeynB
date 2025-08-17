@@ -1,6 +1,4 @@
 import './Footer.css';
-import Contact from './Contact'; // Assuming Contact.jsx is in the same folder
-import { contactInfo } from '../data/contactData.js';
 
 // SVG Icon for GitHub
 const GitHubIcon = () => (
@@ -19,18 +17,10 @@ const LinkedInIcon = () => (
 const Footer = () => {
   return (
     <footer className="footer-wrapper">
-      {/* The Contact component is now part of the footer */}
-      <Contact />
-
-      {/* This is the new bottom bar for social links and copyright */}
       <div className="footer-bottom">
         <div className="footer-sm-links">
-          <a href={contactInfo.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
             <GitHubIcon />
-          </a>
-          <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
             <LinkedInIcon />
-          </a>
         </div>
         <p className="copyright-text">
           &copy; {new Date().getFullYear()} Key'n Brosdahl. All Rights Reserved.

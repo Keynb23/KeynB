@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import './Footer.css';
-import { contactInfo } from '../data/contactData.js'; // Import your contact info
+import { contactInfo } from '../data/contactData.js'; 
+import './Contact.css'; 
 
 const Contact = () => {
   const [formData, setFormData] = useState({

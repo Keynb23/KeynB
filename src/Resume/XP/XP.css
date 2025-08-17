@@ -133,18 +133,20 @@
     right: 20px;
 }
 
-.player {
+.player-canvas-container {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: var(--AC-SC-1); /* Accent color */
-    border-radius: 8px;
-    left: 50px; /* Fixed horizontal position */
+    width: 100px;  /* Give it some width */
+    height: 100px; /* and height */
+    left: 20px;   /* Adjust horizontal position */
     z-index: 5;
     transition: top 0.05s linear;
-    box-shadow: 3px 3px 5px okhsla(from var(--TX-PC-1) h s l / 0.3);
-    border: 3px solid okhsla(from var(--AC-TC-1) h s l / 0.8);
 }
+
+/* This makes the canvas transparent so it doesn't block the background */
+.player-canvas-container canvas {
+    background-color: transparent !important;
+}
+
 
 .obstacle {
     position: absolute;

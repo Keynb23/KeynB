@@ -1,7 +1,3 @@
-import { Cred } from './assets/Cred';
-
-// src/components/Icon-BG.jsx
-
 // 1. Use import.meta.glob to find all .png and .svg files in the target directory.
 // The `{ eager: true }` option imports the modules directly, which is simpler for assets.
 const modules = import.meta.glob('../assets/Cred/*.{png,svg}', { eager: true });

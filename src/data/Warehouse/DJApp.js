@@ -1,4 +1,4 @@
-import MyDJApp from '../../assets/Cred/MyDJapp.png';
+import MyDJApp from '../../assets/DJApp//MyDJapp.png';
 import DJAppVid from '../../assets/DJApp/DJAppVid.mp4';
 
 // Export a single, self-contained project object

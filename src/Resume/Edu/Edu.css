@@ -106,24 +106,3 @@
   font-weight: 600;
   border: 1px solid okhsla(from var(--AC-PC-1) h s l / 0.3);
 }
-
-/* Update this class */
-.Icon-Bowl {
-  position: relative; /* Crucial for containing the absolute-positioned icons */
-  width: 100%;
-  max-width: 600px; /* Or whatever size you prefer */
-  height: 350px;
-  margin: 3rem auto 0;
-  border: 2px solid var(--AC-PC-1);
-  border-radius: 20px;
-  overflow: hidden; /* Keeps the icons from flying out */
-}
-
-/* Add this new class */
-.icon-instance {
-  position: absolute;
-  width: 50px; /* Adjust size as needed */
-  height: 50px;
-  transition: transform 0.2s ease-out; /* Smooths the movement */
-  will-change: transform; /* Performance hint for the browser */
-}

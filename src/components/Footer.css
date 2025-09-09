@@ -4,8 +4,8 @@
    ========================================================================== */
 
 .footer-bottom {
-    background-color: var(--TX-PC-1); /* Dark background for contrast */
-    color: var(--BG-PC-1);
+    background-color: var(--BG-SC-1); /* Dark background for contrast */
+    color: var(--AC-SC-1);
     padding: 2rem;
     text-align: center;
 }
@@ -18,12 +18,12 @@
 }
 
 .footer-sm-links a {
-    color: var(--BG-PC-1);
+    color: var(--AC-SC-1); /* Lighter text color */
     transition: all 0.2s ease;
 }
 
 .footer-sm-links a:hover {
-    color: var(--AC-PC-1);
+    color: var(--AC-SC-1);
     transform: scale(1.1);
 }
 

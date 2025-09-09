@@ -1,164 +1,183 @@
-import { useState, useRef, useEffect } from 'react';
-import './IconBowl.css';
+import { useEffect, useRef } from "react";
+import {
+  Engine,
+  Render,
+  Runner,
+  Bodies,
+  Composite,
+  Mouse,
+  MouseConstraint,
+  Body,
+} from "matter-js";
+import CodeTIcon from "../assets/Cred/CodeT.png";
+import CssIcon from "../assets/Cred/Css.svg";
+import JsIcon from "../assets/Cred/JS.svg";
+import PostmanIcon from "../assets/Cred/Postman.svg";
+import SQLIcon from "../assets/Cred/SQL.svg";
+import TSIcon from "../assets/Cred/TS.svg";
+import ThreejsIcon from "../assets/Cred/Threejs.svg";
+import ReactIcon from "../assets/Cred/logo.svg";
+import PythonIcon from "../assets/Cred/python.svg";
+import BlenderIcon from "../assets/Cred/Blender.svg";
+import UnrealEngineIcon from "../assets/Cred/UE5.png";
+import "./IconBowl.css";
 
-// --- Import all your icon images directly ---
-import CodeTIcon from '../assets/Cred/CodeT.png';
-import CssIcon from '../assets/Cred/Css.svg';
-import JsIcon from '../assets/Cred/JS.svg';
-import PostmanIcon from '../assets/Cred/Postman.svg';
-import SQLIcon from '../assets/Cred/SQL.svg';
-import TSIcon from '../assets/Cred/TS.svg';
-import ThreejsIcon from '../assets/Cred/Threejs.svg';
-import ReactIcon from '../assets/Cred/logo.svg';
-import PythonIcon from '../assets/Cred/python.svg';
-import BlenderIcon from '../assets/Cred/Blender.svg';
-import UnrealEngineIcon from '../assets/Cred/UE5.png';
+const icons = [
+  { src: CodeTIcon, alt: "CodeT" },
+  { src: CssIcon, alt: "CSS" },
+  { src: JsIcon, alt: "JavaScript" },
+  { src: PostmanIcon, alt: "Postman" },
+  { src: SQLIcon, alt: "SQL" },
+  { src: TSIcon, alt: "TypeScript" },
+  { src: ThreejsIcon, alt: "Three.js" },
+  { src: ReactIcon, alt: "React" },
+  { src: PythonIcon, alt: "Python" },
+  { src: BlenderIcon, alt: "Blender" },
+  { src: UnrealEngineIcon, alt: "Unreal Engine" },
+];
 
-// --- Physics & Interaction Constants ---
-const ICON_SIZE = 50;
-const DAMPING = 0.98; // Air resistance
-const MOUSE_RADIUS = 80; // The radius around the mouse that affects icons
-const MOUSE_PUSH_STRENGTH = 0.5; // How strongly the mouse pushes icons
+const preloadImages = (imageSources) => {
+  return Promise.all(
+    imageSources.map((img) => {
+      return new Promise((resolve) => {
+        const image = new Image();
+        image.onload = () => {
+          resolve({
+            src: img.src,
+            alt: img.alt,
+            width: image.naturalWidth,
+            height: image.naturalHeight,
+          });
+        };
+        image.src = img.src;
+      });
+    })
+  );
+};
 
 const IconBowl = () => {
-  const bowlRef = useRef(null);
-  const [icons, setIcons] = useState([]);
-  const animationFrameId = useRef(null);
-  const mousePos = useRef({ x: -999, y: -999 }); // Start mouse off-screen
+  const containerRef = useRef(null);
+  const engineRef = useRef(null);
+  const hasMountedRef = useRef(false); // Prevent double setup in StrictMode/dev
 
-  // Initialize icons
   useEffect(() => {
-    const bowlElement = bowlRef.current;
-    if (!bowlElement) return;
+    if (hasMountedRef.current) return;
+    hasMountedRef.current = true;
 
-    const allIconSrcs = [
-      CodeTIcon, CssIcon, JsIcon, PostmanIcon, SQLIcon, TSIcon,
-      ThreejsIcon, ReactIcon, PythonIcon, BlenderIcon, UnrealEngineIcon,
-    ];
+    let engine, runner, render;
 
-    const initialIcons = allIconSrcs.map((src, index) => ({
-      id: index,
-      src,
-      radius: ICON_SIZE / 2,
-      x: ICON_SIZE + Math.random() * (bowlElement.offsetWidth - ICON_SIZE * 2),
-      y: ICON_SIZE + Math.random() * (bowlElement.offsetHeight - ICON_SIZE * 2),
-      vx: (Math.random() - 0.5) * 4,
-      vy: (Math.random() - 0.5) * 4,
-    }));
-    setIcons(initialIcons);
-  }, []);
+    const setupMatter = async () => {
+      const container = containerRef.current;
+      if (!container) return;
 
-  // Main Animation Loop
-  useEffect(() => {
-    const updatePhysics = () => {
-      const bowlRect = bowlRef.current.getBoundingClientRect();
+      const loadedIcons = await preloadImages(icons);
+      const iconSize = 60;
 
-      setIcons(currentIcons => {
-        let newIcons = currentIcons.map(icon => ({ ...icon }));
+      const width = container.clientWidth;
+      const height = container.clientHeight;
 
-        // Update physics for ALL icons
-        newIcons.forEach(icon => {
-          // --- NEW: Apply mouse repulsion force ---
-          const dx = icon.x - mousePos.current.x;
-          const dy = icon.y - mousePos.current.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const minDist = icon.radius + MOUSE_RADIUS;
-        
-          if (dist < minDist) {
-            const angle = Math.atan2(dy, dx);
-            const force = (minDist - dist) / minDist; // Force is stronger when closer
-            
-            // Push icon away from mouse
-            icon.vx += Math.cos(angle) * force * MOUSE_PUSH_STRENGTH;
-            icon.vy += Math.sin(angle) * force * MOUSE_PUSH_STRENGTH;
-          }
-          
-          // Apply damping (friction)
-          icon.vx *= DAMPING;
-          icon.vy *= DAMPING;
-          
-          // Update position
-          icon.x += icon.vx;
-          icon.y += icon.vy;
+      engine = Engine.create();
+      engine.gravity.y = 0;
+      engineRef.current = engine;
 
-          // Wall collisions
-          if (icon.x - icon.radius < 0) { icon.x = icon.radius; icon.vx *= -0.9; }
-          if (icon.x + icon.radius > bowlRect.width) { icon.x = bowlRect.width - icon.radius; icon.vx *= -0.9; }
-          if (icon.y - icon.radius < 0) { icon.y = icon.radius; icon.vy *= -0.9; }
-          if (icon.y + icon.radius > bowlRect.height) { icon.y = bowlRect.height - icon.radius; icon.vy *= -0.9; }
-        });
-
-        // Icon-to-icon collisions
-        for (let i = 0; i < newIcons.length; i++) {
-          for (let j = i + 1; j < newIcons.length; j++) {
-            const iconA = newIcons[i];
-            const iconB = newIcons[j];
-            const dx = iconB.x - iconA.x;
-            const dy = iconB.y - iconA.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            const minDistance = iconA.radius + iconB.radius;
-
-            if (distance > 0 && distance < minDistance) {
-              const angle = Math.atan2(dy, dx);
-              const overlap = minDistance - distance;
-              const moveX = (overlap / 2) * Math.cos(angle);
-              const moveY = (overlap / 2) * Math.sin(angle);
-              
-              iconA.x -= moveX;
-              iconA.y -= moveY;
-              iconB.x += moveX;
-              iconB.y += moveY;
-              
-              const tempVx = iconA.vx;
-              const tempVy = iconA.vy;
-              iconA.vx = iconB.vx;
-              iconA.vy = iconB.vy;
-              iconB.vx = tempVx;
-              iconB.vy = tempVy;
-            }
-          }
-        }
-        return newIcons;
+      render = Render.create({
+        element: container,
+        engine,
+        options: {
+          width,
+          height,
+          wireframes: false,
+          background: "transparent",
+        },
       });
 
-      animationFrameId.current = requestAnimationFrame(updatePhysics);
+      // Create walls
+      const wallOptions = { isStatic: true, render: { visible: false } };
+      const walls = [
+        Bodies.rectangle(width / 2, 0, width, 50, wallOptions),
+        Bodies.rectangle(width / 2, height, width, 50, wallOptions),
+        Bodies.rectangle(0, height / 2, 50, height, wallOptions),
+        Bodies.rectangle(width, height / 2, 50, height, wallOptions),
+      ];
+      Composite.add(engine.world, walls);
+
+      // Create icon bodies
+      const iconBodies = loadedIcons.map((icon) => {
+        const xScale = iconSize / icon.width;
+        const yScale = iconSize / icon.height;
+        const radius = iconSize / 2;
+
+        return Bodies.circle(
+          Math.random() * width,
+          Math.random() * height,
+          radius,
+          {
+            restitution: 1,
+            friction: 0,
+            frictionAir: 0,
+            density: 0.001,
+            render: {
+              sprite: {
+                texture: icon.src,
+                xScale,
+                yScale,
+              },
+            },
+          }
+        );
+      });
+
+      Composite.add(engine.world, iconBodies);
+
+      // Apply random forces
+      iconBodies.forEach((body) => {
+        const forceMagnitude = 0.002;
+        const angle = Math.random() * 2 * Math.PI;
+        const force = {
+          x: forceMagnitude * Math.cos(angle),
+          y: forceMagnitude * Math.sin(angle),
+        };
+        Body.applyForce(body, body.position, force);
+      });
+
+      // Mouse constraint
+      const mouse = Mouse.create(render.canvas);
+      const mouseConstraint = MouseConstraint.create(engine, {
+        mouse,
+        constraint: {
+          stiffness: 0.2,
+          render: { visible: false },
+        },
+      });
+      Composite.add(engine.world, mouseConstraint);
+      render.mouse = mouse;
+
+      // Run Matter.js
+      runner = Runner.create();
+      Runner.run(runner, engine);
+      Render.run(render);
     };
 
-    animationFrameId.current = requestAnimationFrame(updatePhysics);
-    return () => cancelAnimationFrame(animationFrameId.current);
+    setupMatter();
+
+    // Cleanup
+    return () => {
+      if (render) {
+        Render.stop(render);
+        if (render.canvas && render.canvas.parentNode) {
+          render.canvas.parentNode.removeChild(render.canvas);
+        }
+        render.textures = {};
+      }
+      if (runner) Runner.stop(runner);
+      if (engine) {
+        Composite.clear(engine.world, false);
+        Engine.clear(engine);
+      }
+    };
   }, []);
 
-  const handleMouseMove = (e) => {
-    const rect = bowlRef.current.getBoundingClientRect();
-    mousePos.current.x = e.clientX - rect.left;
-    mousePos.current.y = e.clientY - rect.top;
-  };
-
-  const handleMouseLeave = () => {
-      // Move mouse far away so it doesn't affect icons
-      mousePos.current = { x: -9999, y: -9999 };
-  };
-
-  return (
-    <div 
-        className="Icon-Bowl" 
-        ref={bowlRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-    >
-      {icons.map(icon => (
-        <img
-          key={icon.id}
-          src={icon.src}
-          className="icon-instance"
-          alt=""
-          style={{
-            transform: `translate(${icon.x - icon.radius}px, ${icon.y - icon.radius}px)`,
-          }}
-        />
-      ))}
-    </div>
-  );
+  return <div ref={containerRef} className="icon-bowl" />;
 };
 
 export default IconBowl;

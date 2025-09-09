@@ -18,28 +18,29 @@
 
   color-scheme: light;
 
-  /* CyberPunk */
-  --BG-PC-1: rgba(230, 230, 255, 1);
-  --BG-SC-1: rgba(250, 250, 255, 1);
-  --TX-PC-1: rgb(13, 0, 9);
-  --TX-SC-1: rgba(0, 150, 180, 1);
-  --TX-AC: rgb(235, 228, 9);
-  --AC-PC-1: rgb(78, 22, 153);
-  --AC-SC-1: rgb(32, 101, 88);
-  --AC-TC-1: rgb(181, 98, 198);
+/* Crimson & Charcoal Theme */
+  --BG-PC-1: #c24040;    /* Dark Charcoal Background */
+  --BG-SC-1: #181818;    /* Slightly Lighter Gray for Cards/Sections */
+  --TX-PC-1: #e3e3e3;    /* Off-white Text for Readability */
+  --TX-SC-1: #ffffff;    /* Secondary Gray Text */
+  --TX-AC: #c32b2b;      /* Bright Crimson Accent for Headings/Links */
+  --AC-PC-1: #f7f0f0;    /* Primary Accent Color (e.g., buttons, highlights) */
+  --AC-SC-1: #6c6464a5;    /* Subtle Accent (e.g., borders, dividers) */
+  --AC-TC-1: #4b1515;    /* Pure Red for Call to Actions (CTA) */
 }
 
+/* No change needed for dark theme, as this is a dark theme by default */
 [data-theme='dark'] {
   color-scheme: dark;
-
-  --BG-PC-1: rgba(5, 5, 15, 1);
-  --BG-SC-1: rgba(15, 15, 35, 1);
-  --TX-PC-1: rgb(255, 252, 254);
-  --TX-SC-1: rgba(0, 200, 255, 1);
-  --TX-AC: rgb(235, 228, 9);
-  --AC-PC-1: rgb(171, 231, 255);
-  --AC-SC-1: rgb(51, 208, 174);
-  --AC-TC-1: rgb(45, 0, 100);
+  --BG-PC-1: #1a1a1a;
+  --BG-SC-1: #440c0c;
+  --TX-PC-1: #f2e6e6;
+  --TX-SC-1: #c0b8b8;
+  --TX-AC: #e0dcdc;
+  --AC-PC-1: #e1d5d5;
+  --AC-SC-1: #a8a0a0d4;
+  --AC-TC-1: #864848;
+  --AC-TC-1: rgb(116, 7, 7);
 }
 
 /* ==========================================================================

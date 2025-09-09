@@ -6,18 +6,10 @@ import { DJApp } from "./Warehouse/DJApp";
 
 export const projectsData = [
   BetterState,
-  DJApp,
-  BetterState,
-  DJApp,
-  BetterState,
-  DJApp,
-  BetterState,
-  DJApp,
-  BetterState,
-  DJApp,
-  BetterState,
-  DJApp,
+  DJApp
 ];
+
+  
 export const skillTags = [
   "All",
   "React",

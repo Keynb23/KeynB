@@ -7,6 +7,7 @@ import Projects from './Resume/Projects/Projects';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
 import EDU from './Resume/Edu/Edu';
+import SculptingCanvas from './components/SculptingCanvas';
 
 import { useEffect } from 'react';
 
@@ -35,6 +36,7 @@ function App() {
     <div className="app-container">
       {/* Navbar will appear on every page */}
       <Navbar />
+      <SculptingCanvas/>
 
       {/* Routes define the different pages of your application */}
       <Routes>

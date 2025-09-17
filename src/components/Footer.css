@@ -2,6 +2,13 @@
 /* ==========================================================================
    Footer Bottom Styles
    ========================================================================== */
+.footer-wrapper {
+    position: static;
+    bottom: 0;
+    width: 100%;
+    margin-top: 3rem;
+    border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.1);
+}
 
 .footer-bottom {
     background-color: var(--BG-SC-1); /* Dark background for contrast */

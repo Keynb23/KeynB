@@ -148,6 +148,11 @@ const IconBowl = () => {
           stiffness: 0.2,
           render: { visible: false },
         },
+        // This is the key change: By setting these properties, we tell the
+        // mouse constraint to NOT handle wheel or touch inputs, allowing
+        // the browser to perform its default action (scrolling).
+        input: { mouse: { element: render.canvas }, touch: { element: render.canvas }, wheel: { element: render.canvas } },
+        enabled: true
       });
       Composite.add(engine.world, mouseConstraint);
       render.mouse = mouse;

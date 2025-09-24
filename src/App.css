@@ -31,7 +31,7 @@
   background-color: var(--BG-SC-1);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 8px 24px okhsla(from var(--TX-PC-1) h s l / 0.05);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: background-color 0.3s ease;
 }
 

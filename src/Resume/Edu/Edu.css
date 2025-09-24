@@ -31,13 +31,13 @@
   margin-bottom: 2.5rem;
   text-align: left;
   border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
-  box-shadow: 0 8px 20px okhsla(from var(--TX-PC-1) h s l / 0.05);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .education-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px okhsla(from var(--AC-PC-1) h s l / 0.1);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 12px 30px;
 }
 
 .card-icon {

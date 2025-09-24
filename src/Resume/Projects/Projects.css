@@ -83,14 +83,14 @@
   cursor: pointer;
   aspect-ratio: 16 / 9;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 0 4px 12px okhsla(from var(--TX-PC-1) h s l / 0.05);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: relative;
   border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
 }
 
 .Project-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 24px okhsla(from var(--TX-PC-1) h s l / 0.1);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 10;
 }
 
@@ -104,7 +104,6 @@
   left: 0;
   transition: opacity 0.3s ease-in-out;
 }
-
 
 /* ==========================================================================
    Project Modal (Popup) Styles
@@ -133,9 +132,8 @@
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
   position: relative;
-  box-shadow: 0 10px 30px okhsla(from var(--TX-PC-1) h s l / 0.2);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
 
 .Pro-Model-Left {
   width: 100%;
@@ -207,23 +205,22 @@
 
 /* Style for primary link (Live Site) */
 .modal-link-btn.live-site {
-    background-color: var(--AC-PC-1);
-    color: var(--BG-PC-1);
-    border-color: var(--AC-PC-1);
+  background-color: var(--AC-PC-1);
+  color: var(--BG-PC-1);
+  border-color: var(--AC-PC-1);
 }
 
 /* Style for secondary link (Source Code) */
 .modal-link-btn.source-code {
-    background-color: transparent;
-    color: var(--AC-PC-1);
-    border-color: var(--AC-PC-1);
+  background-color: transparent;
+  color: var(--AC-PC-1);
+  border-color: var(--AC-PC-1);
 }
 
 .modal-link-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px okhsla(from var(--AC-PC-1) h s l / 0.3);
+  transform: translateY(-2px);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
 
 .hire-me-wrapper {
   padding-top: 1.5rem;
@@ -232,9 +229,9 @@
 }
 
 .hire-me-wrapper .to-btn {
-    width: 100%;
-    font-size: 1.2rem;
-    padding: 1em;
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 1em;
 }
 
 /* ==========================================================================
@@ -264,5 +261,5 @@
 }
 
 .slideshow-instructions p {
-    margin: 0; /* Remove default paragraph margin */
+  margin: 0; /* Remove default paragraph margin */
 }

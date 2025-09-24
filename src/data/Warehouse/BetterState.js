@@ -1,3 +1,5 @@
+// src/data/Warehouse/BetterState.js
+
 import BetterState1 from '../../assets/BetterStateMo/BetterState1.png';
 import BetterState2 from '../../assets/BetterStateMo/BetterState2.png';
 import BetterState3 from '../../assets/BetterStateMo/BetterState3.png';

@@ -1,5 +1,8 @@
+// src/Pages/Home.jsx
+
 import ToBtn from '../Buttons/ToBtn.jsx'; // Import the new button
-  
+import RecentProjects from '../components/highlights/RecentProjects.jsx'; 
+
 const Home = () => {
   return (
     <>
@@ -27,6 +30,10 @@ const Home = () => {
             <ToBtn to="/projects">
               View My Work
             </ToBtn>
+          </div>
+
+          <div className="highlights-section">
+            <RecentProjects />
           </div>
 
         </div>

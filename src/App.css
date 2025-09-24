@@ -57,3 +57,23 @@
   font-size: 1.1rem;
   padding: 0.8em 2em;
 }
+
+.to-btn:hover {
+  background-color: var(--AC-HC-1);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Highlights Section */
+.highlights-section {
+  margin-top: 4rem;
+}
+/* Highlights Styles */
+.Highlights-Section {
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}

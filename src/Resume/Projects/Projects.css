@@ -10,6 +10,27 @@
   margin: 0 auto;
 }
 
+/* New Style for the Admin Button */
+.admin-add-project-btn {
+  background-color: var(--AC-SC-1); /* Use an accent color */
+  color: var(--BG-PC-1);
+  padding: 0.75rem 1.5rem;
+  margin: 1rem 0 2rem 0; /* Space it out nicely */
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: block; 
+  max-width: 300px; /* Limit its width */
+}
+
+.admin-add-project-btn:hover {
+  background-color: var(--AC-PC-1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 /* ==========================================================================
    Filter Nav Bar Styles
    ========================================================================== */

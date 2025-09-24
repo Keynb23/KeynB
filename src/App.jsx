@@ -8,29 +8,8 @@ import Footer from './components/Footer';
 import Contact from './components/Contact';
 import EDU from './Resume/Edu/Edu';
 
-import { useEffect } from 'react';
 
 function App() {
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      // Check if the key pressed is the spacebar (keyCode 32)
-      if (event.keyCode === 32) {
-        // Prevent the default action (scrolling)
-        event.preventDefault();
-      }
-    };
-
-    // Add the event listener to the window object
-    window.addEventListener('keydown', handleKeyDown);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []); // The empty dependency array ensures this effect runs only once
-
-
   return (
     <div className="app-container">
       {/* Navbar will appear on every page */}

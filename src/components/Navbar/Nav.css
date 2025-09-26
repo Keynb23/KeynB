@@ -1,41 +1,111 @@
 /* ==========================================================================
-   Navbar Styles
+   Navbar Styles (Modern & Sleek)
    ========================================================================== */
 
 .navbar-header {
+  /* Use a slightly lighter background for the sticky header to make it pop */
   background-color: var(--BG-SC-1);
-  padding: 1rem 2rem;
+  /* Add a subtle shadow to emphasize sticky position */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  padding: 1rem 3rem; /* Increased padding for a more spacious feel */
   position: sticky;
   top: 0;
   z-index: 1000;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* max-width: 1200px; */
+  max-width: 1400px; /* Max width for large screens */
   margin: 0 auto;
 }
 
 /* Logo styling */
 .navbar-logo {
   font-family: var(--font-header);
-  font-size: 1.75rem;
+  font-size: 1.8rem; /* Slightly larger logo */
   font-weight: 700;
-  color: var(--AC-PC-1);
+  color: var(--TX-AC); /* Use the bright crimson for the logo */
+  letter-spacing: 0.05em; /* A little spacing for style */
   transition: color 0.2s ease;
+  padding: 0; /* Remove default link padding */
 }
 
 .navbar-logo:hover {
-  color: var(--AC-SC-1);
+  color: var(--AC-PC-1); /* Subtle off-white hover */
+  text-shadow: 0 0 5px rgba(247, 240, 240, 0.5); /* Glowing effect */
 }
 
+/* ------------------------------------------------------------------------- */
+/* Hidden Login Trigger Styles */
+/* ------------------------------------------------------------------------- */
+
+.login-trigger-secret {
+  /* Position the trigger element near the logo, top-left */
+  position: absolute; 
+  top: 1rem;
+  left: 1rem; /* Closer to the edge than the logo's padding */
+  
+  /* Make it invisible but clickable */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  
+  /* Define the secret clickable area */
+  width: 50px; 
+  height: 50px; 
+  padding: 0;
+  
+  /* Hide content */
+  color: transparent; 
+  font-size: 0;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Hidden Login Dropdown Styles */
+/* ------------------------------------------------------------------------- */
+
+.hidden-dropdown {
+  position: absolute;
+  /* Position it directly below the secret trigger */
+  top: 55px; /* Adjust based on your header height */
+  left: 10px; /* Align with the secret trigger */
+  
+  /* Styling for the dropdown itself */
+  background-color: var(--BG-SC-1); 
+  border: 1px solid var(--AC-SC-1);
+  border-radius: 6px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  
+  /* Hidden State */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  pointer-events: none; 
+  z-index: 999;
+}
+
+.hidden-dropdown.visible {
+  /* Visible State */
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto; 
+}
+
+
+/* ------------------------------------------------------------------------- */
 /* Navigation links container */
+/* ------------------------------------------------------------------------- */
+
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 3rem; /* Increased gap for better spacing */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -45,25 +115,39 @@
 .nav-link {
   font-family: var(--font-ui);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.05rem; /* Slightly larger text */
   color: var(--TX-SC-1);
   padding: 0.5rem 0;
   position: relative;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 .nav-link:hover {
-  color: var(--TX-PC-1);
+  color: var(--AC-PC-1); /* Use primary accent on hover */
 }
 
-/* Active link styling */
+/* Active link styling - Underline effect */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--AC-PC-1);
+  transform: scaleX(0); /* Start hidden */
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+  transform: scaleX(1); /* Full width on hover/active */
+  transform-origin: bottom left;
+}
+
 .nav-link.active {
   color: var(--AC-PC-1);
-}
-
-.nav-link.active::after {
-  transform: scaleX(1);
-  background-color: var(--AC-PC-1);
 }
 
 /* Theme toggle container */
@@ -76,29 +160,39 @@
 /* ==========================================================================
    Responsive Styles for Mobile
    ========================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .navbar-header {
     padding: 1rem;
   }
   
   .navbar {
-    flex-direction: column;
+    /* Stack items vertically on smaller screens */
+    flex-direction: column; 
     gap: 1.5rem;
   }
 
   .nav-links {
+    /* Full width and justify for mobile links */
     width: 100%;
     justify-content: space-around;
-    gap: 1rem;
+    gap: 0; /* Remove internal gap when space-around is used */
   }
 
   .nav-link {
     font-size: 0.9rem;
+    padding: 0.5rem 0.2rem;
   }
   
   .navbar-theme-toggle {
+    /* Keep the theme toggle button in a discrete corner */
     position: absolute;
     top: 1rem;
     right: 1rem;
+  }
+
+  /* Adjust secret button position relative to the compacted mobile nav */
+  .login-trigger-secret {
+    left: 4px; 
+    top: 0.5rem;
   }
 }

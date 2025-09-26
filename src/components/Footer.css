@@ -3,7 +3,7 @@
    Footer Bottom Styles
    ========================================================================== */
 .footer-wrapper {
-    position: static;
+    position: fixed;
     bottom: 0;
     width: 100%;
     margin-top: 3rem;

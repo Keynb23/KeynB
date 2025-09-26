@@ -1,5 +1,7 @@
+// components/highlights/RecentProjects.jsx
+
 import { useEffect, useState } from "react";
-import "./RecentProjects.css"; // You'll rename/update your CSS file too
+import "./RecentProjects.css"; 
 
 // Renamed from Highlights to RecentProjects
 const RecentProjects = () => {

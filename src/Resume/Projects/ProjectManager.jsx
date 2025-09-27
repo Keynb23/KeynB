@@ -1,38 +1,36 @@
-// src/Resume/Projects/ProjectManager.jsx
-
-import { useState } from "react";
-// Import Firestore functions
+import React, { useState, useCallback } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../lib/firebase"; // Firestore database instance
+import { db } from "../../lib/firebase";
 
-import { useAuth } from "../../hooks/useAuth";
-import './ProjectManager.css';
-import { CloseBtn } from "../../Buttons/Modal-Btns";
-import ProjectManager from './ProjectManager';
+import { useAuth } from "../../hooks/useAuth.jsx";
+import { CloseBtn } from "../../Buttons/Modal-Btns.jsx";
+import { skillTags } from "../../data/projectsData.js"; // IMPORTED skillTags
+import "./ProjectManager.css";
 
-// The data structure for the form input is fine, but we'll simplify media input for now.
 const initialProjectState = {
   title: "",
-  summary: "", // Description of the project
-  coverImage: "", // URL for the main screenshot
-  screenshots: "", // Comma-separated URLs for screenshots
-  videos: "", // Comma-separated URLs for videos (e.g., YouTube/Vimeo links)
-  tags: "", // Comma-separated list of tags
-  source: "", // Source code link
-  links: "", // Live site link
+  summary: "",
+  coverImage: "",
+  screenshots: [],
+  videos: [],
+  tags: [],
+  liveSiteLink: "",
+  sourceCode: "",
 };
 
-// Update the component signature to accept the onClose prop
 const ProjectManager = ({ onProjectAdded, onClose }) => {
-  const { isAuthenticated, user } = useAuth(); // Get user for potential future use
+  const { isAuthenticated, user } = useAuth();
   const [formData, setFormData] = useState(initialProjectState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [currentTagInput, setCurrentTagInput] = useState("");
+  const [filesToUpload, setFilesToUpload] = useState({
+    coverImage: null,
+    screenshots: [],
+  });
 
-  // Access control check
   if (!isAuthenticated) {
-    // If the modal somehow opened without authentication, close it.
     if (onClose) onClose();
     return null;
   }
@@ -42,6 +40,63 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleFileChange = useCallback((e) => {
+    const { name, files } = e.target;
+
+    if (name === "coverImage" && files.length > 0) {
+      setFilesToUpload((prev) => ({ ...prev, coverImage: files[0] }));
+    } else if (name === "screenshots" && files.length > 0) {
+      setFilesToUpload((prev) => ({ ...prev, screenshots: Array.from(files) }));
+    }
+  }, []);
+
+  // Helper function to add a tag from either input or click
+  const addTag = useCallback(
+    (tag) => {
+      const cleanTag = tag.trim();
+      if (cleanTag && !formData.tags.includes(cleanTag)) {
+        setFormData((prev) => ({
+          ...prev,
+          tags: [...prev.tags, cleanTag],
+        }));
+        return true;
+      }
+      return false;
+    },
+    [formData.tags]
+  );
+
+  // Handler for adding tag from input field
+  const handleAddTagFromInput = useCallback(() => {
+    addTag(currentTagInput);
+    setCurrentTagInput(""); // Clear input
+  }, [currentTagInput, addTag]);
+
+  // Handler for adding tag from the suggested list
+  const handleAddTagFromSuggestion = useCallback(
+    (tag) => {
+      addTag(tag);
+    },
+    [addTag]
+  );
+
+  const handleRemoveTag = useCallback((tagToRemove) => {
+    setFormData((prev) => ({
+      ...prev,
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
+    }));
+  }, []);
+
+  const handleTagKeyDown = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleAddTagFromInput(); // Use the input handler
+      }
+    },
+    [handleAddTagFromInput]
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -49,44 +104,28 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
     setIsSubmitting(true);
 
     try {
-      // 1. Prepare and clean the data for Firestore
       const newProject = {
         title: formData.title,
-        summary: formData.summary,
+        description: formData.summary,
         coverImage: formData.coverImage.trim(),
-        source: formData.source.trim(),
-        links: formData.links.trim(),
+        screenshots: formData.screenshots,
+        videos: formData.videos,
+        tags: formData.tags,
+        liveSiteLink: formData.liveSiteLink.trim(),
+        sourceCode: formData.sourceCode.trim(),
 
-        // Convert comma-separated strings into arrays of trimmed values
-        tags: formData.tags
-          .split(",")
-          .map((tag) => tag.trim())
-          .filter((tag) => tag),
-        screenshots: formData.screenshots
-          .split(",")
-          .map((url) => url.trim())
-          .filter((url) => url),
-        videos: formData.videos
-          .split(",")
-          .map((url) => url.trim())
-          .filter((url) => url),
-
-        // Add necessary metadata for sorting and security
-        dateAdded: serverTimestamp(), // Use Firestore server timestamp
-        adminId: user ? user.uid : null, // Record the admin user who created it (optional but good practice)
+        dateAdded: serverTimestamp(),
+        adminId: user.uid,
       };
 
-      // 2. Call the Firebase Firestore API to add the document
-      const docRef = await addDoc(collection(db, "projects"), newProject);
+      await addDoc(collection(db, "projects"), newProject);
 
       setSuccess(true);
-      setFormData(initialProjectState); // Reset form
-      onProjectAdded(); // Callback to refresh project list in parent component
+      setFormData(initialProjectState);
+      setFilesToUpload({ coverImage: null, screenshots: [] });
+      onProjectAdded();
 
-      // Close the modal 1 second after success to give visual feedback
-      setTimeout(() => {
-        onClose();
-      }, 1000);
+      setTimeout(() => onClose(), 1000);
     } catch (err) {
       console.error("Firestore Add Error:", err);
       setError("Failed to add project. Check console and Firebase Rules.");
@@ -95,27 +134,21 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
     }
   };
 
-  // WRAPPER: Uses existing modal styling classes (.Project-Model, .modal-content)
   return (
-    <div className="Project-Model" onClick={onClose}>
-      {/* Prevent clicks inside the content from closing the modal */}
-      <div
-        className="modal-content admin-modal-content"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close Button */}
+    <div className="pm-Wrapper" onClick={onClose}>
+      <div className="pm-modal-content" onClick={(e) => e.stopPropagation()}>
         <CloseBtn onClick={onClose} />
-
-        <div className="Project-Manager-Container">
+        <div className="pm-container">
           <h2>Add New Project (Admin Only)</h2>
-          {error && <p className="error-message">Error: {error}</p>}
+          {error && <p className="alert-error">Error: {error}</p>}
           {success && (
-            <p className="success-message">Project added successfully!</p>
+            <p className="alert-success">Project added successfully!</p>
           )}
 
-          <form onSubmit={handleSubmit} className="Project-Form">
-            {/* Title */}
-            <label htmlFor="title">Title</label>
+          <form onSubmit={handleSubmit} className="pm-form">
+            <label htmlFor="title" className="pm-form-label">
+              Title
+            </label>
             <input
               type="text"
               id="title"
@@ -123,10 +156,12 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
               value={formData.title}
               onChange={handleChange}
               required
+              className="pm-form-input"
             />
 
-            {/* Description/Summary */}
-            <label htmlFor="summary">Description</label>
+            <label htmlFor="summary" className="pm-form-label">
+              Description
+            </label>
             <textarea
               id="summary"
               name="summary"
@@ -134,77 +169,148 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
               onChange={handleChange}
               required
               rows="5"
+              className="form-textarea"
             />
 
-            {/* Tags */}
-            <label htmlFor="tags">
-              Tags (Comma-separated, e.g., React, CSS, Python)
+            <fieldset className="pm-form-fieldset">
+              <legend>Images/Videos (Add from Device)</legend>
+
+              <label htmlFor="coverImage" className="pm-form-label">
+                Cover Image
+              </label>
+              <input
+                type="file"
+                id="coverImage"
+                name="coverImage"
+                onChange={handleFileChange}
+                accept="image/*"
+                className="pm-form-input-file"
+              />
+              {filesToUpload.coverImage && (
+                <p className="pm-file-preview-name">
+                  Selected: {filesToUpload.coverImage.name}
+                </p>
+              )}
+
+              <label htmlFor="screenshots" className="pm-form-label">
+                Additional Images/Videos
+              </label>
+              <input
+                type="file"
+                id="screenshots"
+                name="screenshots"
+                onChange={handleFileChange}
+                accept="image/*,video/*"
+                multiple
+                className="pm-form-input-file"
+              />
+              {filesToUpload.screenshots.length > 0 && (
+                <p className="pm-file-preview-name">
+                  Selected {filesToUpload.screenshots.length} file(s)
+                </p>
+              )}
+
+              <label htmlFor="coverImageUrl" className="pm-form-image">
+                Cover Image URL (Fallback)
+              </label>
+              <input
+                type="url"
+                id="coverImageUrl"
+                name="coverImage"
+                value={formData.coverImage}
+                onChange={handleChange}
+                className="pm-form-input"
+              />
+            </fieldset>
+
+            {/* --- TAGS SECTION --- */}
+            <label htmlFor="tagInput" className="pm-form-label">
+              Tags
+            </label>
+            <div className="pm-tag-input-group">
+              <input
+                type="text"
+                id="tagInput"
+                value={currentTagInput}
+                onChange={(e) => setCurrentTagInput(e.target.value)}
+                onKeyDown={handleTagKeyDown}
+                placeholder="Type tag and press Enter"
+                className="pm-form-input"
+              />
+              <button
+                type="button"
+                onClick={handleAddTagFromInput}
+                className="pm-btn-tag-add"
+                disabled={!currentTagInput.trim()}
+              >
+                Add
+              </button>
+            </div>
+
+            {/* Suggested Tags to Pull From */}
+            <div className="pm-suggested-tags-container">
+              {skillTags.map((tag) => {
+                // Ignore the "All" filter tag and tags already selected
+                if (tag === "All" || formData.tags.includes(tag)) return null;
+
+                return (
+                  <span
+                    key={tag}
+                    className="pm-suggested-tag"
+                    onClick={() => handleAddTagFromSuggestion(tag)}
+                  >
+                    {tag}
+                  </span>
+                );
+              })}
+            </div>
+
+            <label className="pm-form-label">
+              Active Tags (Click to Remove)
+            </label>
+            <div className="pm-tag-container">
+              {formData.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="pm-project-tag"
+                  onClick={() => handleRemoveTag(tag)}
+                >
+                  {tag}
+                  <span className="pm-tag-remove-btn">&times;</span>
+                </span>
+              ))}
+            </div>
+            {/* --- END TAGS SECTION --- */}
+
+            <label htmlFor="liveSiteLink" className="pm-form-label">
+              Live Site Link
             </label>
             <input
-              type="text"
-              id="tags"
-              name="tags"
-              value={formData.tags}
-              onChange={handleChange}
-              required
-            />
-
-            {/* Screenshot/Cover Image */}
-            <label htmlFor="coverImage">Cover Screenshot URL</label>
-            <input
               type="url"
-              id="coverImage"
-              name="coverImage"
-              value={formData.coverImage}
+              id="liveSiteLink"
+              name="liveSiteLink"
+              value={formData.liveSiteLink}
               onChange={handleChange}
-              required
+              className="pm-form-input"
             />
 
-            {/* Multiple Screenshots (NEW FIELD) */}
-            <label htmlFor="screenshots">
-              Additional Screenshots (Comma-separated URLs)
+            <label htmlFor="sourceCode" className="pm-form-label">
+              Source Code Link
             </label>
             <input
-              type="text"
-              id="screenshots"
-              name="screenshots"
-              value={formData.screenshots}
-              onChange={handleChange}
-              placeholder="https://example.com/img1.jpg, https://example.com/img2.jpg"
-            />
-
-            {/* Multiple Videos (NEW FIELD) */}
-            <label htmlFor="videos">Videos (Comma-separated URLs)</label>
-            <input
-              type="text"
-              id="videos"
-              name="videos"
-              value={formData.videos}
-              onChange={handleChange}
-              placeholder="https://youtube.com/link1, https://vimeo.com/link2"
-            />
-
-            {/* Source Code Link (Optional) */}
-            <label htmlFor="source">Source Code Link (Optional)</label>
-            <input
               type="url"
-              id="source"
-              name="source"
-              value={formData.source}
+              id="sourceCode"
+              name="sourceCode"
+              value={formData.sourceCode}
               onChange={handleChange}
+              className="pm-form-input"
             />
 
-            {/* Links to Live Site (Optional) */}
-            <label htmlFor="links">Live Site Link (Optional)</label>
-            <input
-              type="url"
-              id="links"
-              name="links"
-              value={formData.links}
-              onChange={handleChange}
-            />
-
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="pm-btn-submit"
+            >
               {isSubmitting ? "Adding Project..." : "Add Project to Portfolio"}
             </button>
           </form>

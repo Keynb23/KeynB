@@ -1,100 +1,121 @@
-// components/highlights/RecentProjects.jsx
+// src/Resume/Projects/Projects.jsx
 
-import { useEffect, useState } from "react";
-// Import Firebase functions for fetching and limiting
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
-import { db } from "../../lib/firebase"; // Your Firestore instance
-import "./Projects.css";
+import { useState, useEffect, useCallback } from 'react';
+import './Projects.css';
 
-const RecentProjects = () => {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+// Firebase Imports
+import { collection, getDocs, query, orderBy } from 'firebase/firestore'; 
+import { db } from '../../lib/firebase';
+import { useAuth } from '../../hooks/useAuth.jsx'; // 👈 Use the .jsx extension
 
-  useEffect(() => {
-    async function fetchRecentProjects() {
-      setLoading(true);
-      try {
-        // 1. Create a reference to the 'projects' collection
-        const projectsCollection = collection(db, "projects");
+// Component Imports
+import { skillTags } from '../../data/projectsData.js';
+import ProjectManager from './ProjectManager.jsx'; // The Admin Modal
+import ProjectCard from './ProjectCard.jsx'; // 👈 Keep only the import
+import ProjectModal from './ProjectModal'; // 👈 Keep only the import
+import { CloseBtn } from '../../Buttons/Modal-Btns.jsx';
+// NOTE: Ensure './ProjectCard.jsx' and './ProjectModal.jsx' files exist!
 
-        // 2. Create a query: order by dateAdded (newest first) and limit to 3
-        const q = query(
-          projectsCollection,
-          orderBy("dateAdded", "desc"),
-          limit(3)
-        );
+const Projects = () => {
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [activeFilter, setActiveFilter] = useState('All');
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [showAdminModal, setShowAdminModal] = useState(false); 
+    
+    // 🔥 CRUCIAL: Check for login status
+    const { isAuthenticated } = useAuth(); 
 
-        // 3. Execute the query
-        const snapshot = await getDocs(q);
-
-        // 4. Map the documents to an array of project objects
-        const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setProjects(data);
-      } catch (err) {
-        console.error("Failed to fetch recent projects from Firestore:", err);
-      } finally {
+    // Fetches ALL projects from Firestore
+    const fetchProjects = useCallback(async () => {
+        setLoading(true);
+        let apiProjects = [];
+        
+        try {
+            const projectsCollection = collection(db, "projects");
+            const q = query(projectsCollection, orderBy("dateAdded", "desc"));
+            const snapshot = await getDocs(q);
+            
+            apiProjects = snapshot.docs.map(doc => ({
+                id: doc.id, 
+                ...doc.data() 
+            }));
+            
+        } catch (error) {
+            console.error("Failed to fetch projects from Firestore:", error);
+        } 
+        
+        setProjects(apiProjects);
         setLoading(false);
-      }
-    }
-    fetchRecentProjects();
-  }, []);
+    }, []);
 
-  // ... (rest of the component remains the same) ...
+    useEffect(() => {
+        fetchProjects();
+    }, [fetchProjects]);
+    
+    // When a project is added/edited, fetch the list again to update the UI
+    const handleProjectAdded = () => {
+        fetchProjects(); 
+    };
 
-  if (loading) {
+    const filteredProjects = activeFilter === 'All'
+        ? projects 
+        : projects.filter(project => project.tags && project.tags.includes(activeFilter));
+
+    const handleFilterClick = (tag) => {
+        setActiveFilter(tag);
+    };
+
     return (
-      <div className="RecentProjects-Wrapper">
-        <p className="RecentProjects-Message">Loading recent projects...</p>
-      </div>
-    );
-  }
+        <>
+            <div className="project-Container">
+                <div className="project-Content">
+                    
+                    {/* 🔥 THE ADD PROJECT BUTTON APPEARS ONLY WHEN AUTHENTICATED */}
+                    {isAuthenticated && (
+                        <button 
+                            className="admin-add-project-btn" 
+                            onClick={() => setShowAdminModal(true)}
+                        >
+                            + Add New Project
+                        </button>
+                    )}
+                    
+                    {/* Project Manager rendered as a modal */}
+                    {isAuthenticated && showAdminModal && (
+                        <ProjectManager 
+                            onProjectAdded={handleProjectAdded} 
+                            onClose={() => setShowAdminModal(false)}
+                        />
+                    )}
+                    
+                    {/* Project Filter Tabs (Add logic here) */}
+                    <div className="Project-Tabs">
+                        {/* Filter tabs mapping */}
+                    </div>
 
-  if (!projects.length) {
-    return (
-      <div className="RecentProjects-Wrapper">
-        <p className="RecentProjects-Message">
-          No recent projects to display yet.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <section className="RecentProjects-Wrapper">
-      <h2 className="RecentProjects-Title">Recent Projects</h2>
-      <div className="RecentProjects-Grid">
-        {projects.map((item) => (
-          <div key={item.id} className="Project-Card-Home">
-            {item.coverImage && (
-              <img
-                src={item.coverImage}
-                alt={item.title}
-                className="Project-Image"
-              />
-            )}
-            <div className="Project-Content">
-              <h3 className="Project-Heading">{item.title}</h3>
-              <p className="Project-Description">{item.summary}</p>
-              {item.source && (
-                <a
-                  href={item.source}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="Project-Link"
-                >
-                  Source Code →
-                </a>
-              )}
+                    <div className="Project-Main-Content">
+                        {loading && <p>Loading portfolio projects...</p>}
+                        
+                        <div className="Pro-Card-Rows">
+                            {filteredProjects.map(project => (
+                                <ProjectCard
+                                    key={project.id} 
+                                    project={project}
+                                    onCardClick={setSelectedProject}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+            
+            <ProjectModal
+                project={selectedProject}
+                onClose={() => setSelectedProject(null)}
+            />
+        </>
+    );
 };
 
-export default RecentProjects;
+export default Projects;

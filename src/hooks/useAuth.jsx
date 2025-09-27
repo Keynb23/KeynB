@@ -1,4 +1,4 @@
-// src/hooks/useAuth.js
+// src/hooks/useAuth.jsx
 
 import { useState, useEffect, useContext, createContext } from 'react';
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
@@ -34,13 +34,13 @@ export const AuthProvider = ({ children }) => {
 
     const value = {
         user,
-        isAuthenticated: !!user,
+        isAuthenticated: !!user, // This is the boolean check used by Projects.jsx
         loading,
         login,
         logout,
     };
 
-    // The component return statement.
+    // We only render children once we know the loading state is resolved
     return (
         <AuthContext.Provider value={value}>
             {!loading && children}

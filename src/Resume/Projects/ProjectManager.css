@@ -1,87 +1,301 @@
-/* src/Resume/Projects/ProjectManager.css */
-
-/* --- Modal Content Adjustments --- */
-
-/* Override grid settings from ProjectModal styles, restrict size, allow scroll */
-.modal-content.admin-modal-content {
-    grid-template-columns: 1fr !important; 
-    max-width: 800px;
-    max-height: 90vh; 
-    overflow-y: auto; 
+/* Overlay for modal backdrop */
+.pm-Wrapper {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-family: var(--font-ui);
+    transition: background-color 0.2s;
+    padding: 20px;
+    margin: 0 auto;
 }
 
-.Project-Manager-Container {
-    padding: 0; /* Remove padding if modal content already has it */
-}
-
-/* --- Form Styles --- */
-.Project-Form {
-    display: grid;
-    gap: 1rem;
-    padding-top: 1rem;
-}
-
-.Project-Form label {
-    font-weight: 600;
-    margin-top: 0.5rem;
+/* Modal content itself */
+.pm-modal-content {
+    background: var(--BG-PC-1);
     color: var(--TX-PC-1);
+    padding: 20px 12px 14px 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    width: 90%;
+    height: 100%;
+    max-width: 850px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: appearModal 0.25s ease;
+}
+@keyframes appearModal {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
 }
 
-.Project-Form input[type="text"],
-.Project-Form input[type="url"],
-.Project-Form textarea {
+.modal-close-btn {
+    position: absolute;
+    z-index: 10000;
+    top: 14px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--TX-PC-1);
+    transition: color 0.2s;
+    font-size: large;
+    padding: 4px 8px;
+    border-radius: 50%;
+}
+
+/* Container for headline and form */
+.pm-container {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--BG-PC-2);
-    border-radius: 6px;
-    background-color: var(--BG-PC-1);
+}
+
+/* Alerts */
+.alert-success, .alert-error {
+    font-size: 0.98rem;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 7px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+/* Form styling */
+.pm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+.pm-form-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-family: var(--font-ui);
     color: var(--TX-PC-1);
+    letter-spacing: 0.02em;
+}
+
+.pm-form-image {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-family: var(--font-ui);
+    color: var(--TX-PC-1);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+    transition: color 0.2s;
+}
+
+.pm-form-input,
+.pm-form-textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--AC-SC-1);
+    border-radius: 6px;
     font-size: 1rem;
+    background: var(--BG-SC-1);
+    color: var(--TX-PC-1);
+    margin-bottom: 2px;
     transition: border-color 0.2s;
 }
 
-.Project-Form input:focus,
-.Project-Form textarea:focus {
-    outline: none;
+.pm-form-input:focus,
+.pm-form-textarea:focus {
     border-color: var(--AC-PC-1);
+    outline: none;
 }
 
-.Project-Form textarea {
+.pm-form-textarea {
+    min-height: 80px;
+    max-height: 200px;
     resize: vertical;
 }
 
-.Project-Form button[type="submit"] {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background-color: var(--AC-PC-1);
-    color: var(--BG-PC-1);
+.pm-form-fieldset {
     border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s, opacity 0.2s;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
 }
 
-.Project-Form button[type="submit"]:disabled {
+/* File Inputs */
+.pm-form-input-file {
+    padding: 7px 6px;
+    border: 1px solid var(--AC-SC-1);
+    border-radius: 6px;
+    font-size: 1rem;
+    /* background: var(--AC-PC-1); */
+    color: var(--TX-PC-1);
+    width: fit-content;
+    min-width: 160px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+    margin: auto;
+}
+
+.pm-file-preview-name {
+    font-size: 0.92rem;
+    color: var(--TX-PC-1);
+    padding: 3px 8px;
+    border: 1px solid var(--AC-SC-1);
+    border-radius: 5px;
+    margin-top: 2px;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Tag input and tags */
+.pm-tag-input-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    padding: 5px 0;
+    width: 100%;
+    cursor: pointer;
+    transition: border-color 0.2s;  
+}
+
+.pm-btn-tag-add {
+    background: var(--AC-PC-1);
+    color: var(--AC-TC-1);
+    border: none;
+    padding: 7px 16px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.pm-btn-tag-add:hover {
+    background: var(--AC-SC-1);
+    color: var(--TX-PC-1);
+}
+
+.pm-tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 3px;
+}
+
+.pm-suggested-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 3px;
+    max-width: 100%;
+    /* border: 1px var(--AC-PC-1) solid; */
+    padding: 8px 10px;
+    border-radius: 8px;
+    /* background: var(--BG-SC-1); */
+    transition: border-color 0.2s;
+}
+
+.pm-suggested-tag {
+    background: var(--AC-PC-1);
+    color: var(--AC-TC-1);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.18s;
+    border: 1px solid var(--AC-SC-1);
+}
+.pm-project-tag {
+    background: var(--AC-PC-1);
+    color: var(--AC-TC-1);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.18s;
+    border: 1px solid var(--AC-SC-1);
+}
+.pm-project-tag:hover {
+    background: var(--AC-SC-1);
+    color: var(--TX-PC-1);
+}
+
+.pm-tag-remove-btn {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-left: 4px;
+    cursor: pointer;
+    color: var(--AC-TC-1);
+    transition: color 0.2s;
+}
+.pm-tag-remove-btn:hover {
+    color: var(--TX-PC-1);
+}
+
+/* Submit Button */
+.pm-btn-submit {
+    align-self: flex-end;
+    background: var(--AC-PC-1);
+    color: var(--AC-TC-1);
+    border: none;
+    padding: 11px 24px;
+    border-radius: 6px;
+    font-size: 1.04rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+}
+
+.pm-btn-submit:hover:enabled {
+    background: var(--AC-SC-1);
+    color: var(--TX-PC-1);
+}
+
+.pm-btn-submit:disabled {
+    background: var(--AC-PC-1);
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-.success-message {
-    color: green;
-    padding: 10px;
-    background-color: #e6ffe6;
-    border: 1px solid green;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
-
-.error-message {
-    color: red;
-    padding: 10px;
-    background-color: #ffe6e6;
-    border: 1px solid red;
-    border-radius: 4px;
-    margin-bottom: 1rem;
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .pm-modal-content {
+        padding: 18px 6px 12px 6px;
+        max-width: 98vw;
+        min-width: 0;
+    }
+    .pm-form-input, .pm-form-textarea {
+        font-size: 0.97rem;
+    }
+    .pm-btn-submit {
+        width: 100%;
+        align-self: stretch;
+        padding: 12px 0;
+    }
 }

@@ -1,4 +1,3 @@
-# .github/workflows/cicd.yaml
 # Workflow name that appears in GitHub Actions tab
 name: CI/CD Pipeline
 
@@ -38,7 +37,7 @@ jobs:
       - name: 🧪 Run Tests
         run: npm test -- --coverage --watchAll=false # Assuming you have a "test" script
 
-  # The Continuous Deployment (CD) job (Handles Vercel deployment via Vercel's GitHub App)
+  # The Continuous Deployment (CD) job
   cd:
     name: Vercel Deployment
     runs-on: ubuntu-latest
@@ -46,9 +45,25 @@ jobs:
     if: github.ref == 'refs/heads/main' # Only deploy on push to main
 
     steps:
-      - name: 🚀 Deployment Triggered by Vercel App
-        # This step is mostly symbolic when using the Vercel GitHub Integration.
-        # The Vercel app automatically detects the push to 'main' (or the branch
-        # defined in your Vercel settings) and runs the build/deploy process,
-        # leveraging the Environment Variables defined in Vercel's dashboard.
-        run: echo "Vercel deployment is handled by the Vercel GitHub App."
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: 🚀 Deploy to Vercel
+        # Uses the community Vercel action to deploy the project
+        uses: amondnet/vercel-action@v25
+        with:
+          # VERCEL_TOKEN environment variable (references your GitHub secret)
+          vercel-token: ${{ secrets.VC_PORT_SECRET }} 
+          
+          # VERCEL_ORG_ID and VERCEL_PROJECT_ID are required for this action 
+          # to deploy correctly to a specific Vercel project/organization.
+          # You must get these values from your Vercel project settings and 
+          # add them to your GitHub secrets.
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} 
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          
+          # The production flag tells Vercel this is the main deployment
+          vercel-args: '--prod'
+          
+          # Sets the build directory (optional, but good practice for Vite/React)
+          working-directory: './' 

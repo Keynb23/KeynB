@@ -1,21 +1,53 @@
-import React, { useState, useCallback } from "react";
+// Resume/Projects/ProjectManger.jsx
+
+import { useState, useCallback } from "react";
+// 1. Storage Imports
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../lib/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+// 2. Firebase Config and Services
+import { db, storage } from "../../lib/firebase";
 
 import { useAuth } from "../../hooks/useAuth.jsx";
 import { CloseBtn } from "../../Buttons/Modal-Btns.jsx";
-import { skillTags } from "../../data/projectsData.js"; // IMPORTED skillTags
+import { skillTags } from "../../data/projectsData.js";
 import "./ProjectManager.css";
 
 const initialProjectState = {
   title: "",
   summary: "",
-  coverImage: "",
-  screenshots: [],
+  coverImage: "", // This will store the URL
+  screenshots: [], // This will store an array of URLs
   videos: [],
   tags: [],
   liveSiteLink: "",
   sourceCode: "",
+};
+
+// ----------------------------------------------------
+// 🔥 HELPER FUNCTION FOR FILE UPLOAD
+// ----------------------------------------------------
+/**
+ * Uploads a file to Firebase Storage and returns its public URL.
+ * @param {File} file - The file object to upload.
+ * @param {string} path - The storage path (e.g., "projectCovers" or "screenshots").
+ * @returns {Promise<string>} The public download URL or an empty string on error/no file.
+ */
+const uploadFile = async (file, path) => {
+  if (!file) return "";
+
+  // Create a unique file name
+  const fileName = `${Date.now()}_${file.name}`;
+  const storageRef = ref(storage, `${path}/${fileName}`);
+
+  try {
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    return downloadURL;
+  } catch (error) {
+    console.error(`Error uploading file to ${path}:`, error);
+    throw new Error(`Failed to upload ${file.name}.`);
+  }
 };
 
 const ProjectManager = ({ onProjectAdded, onClose }) => {
@@ -27,7 +59,7 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
   const [currentTagInput, setCurrentTagInput] = useState("");
   const [filesToUpload, setFilesToUpload] = useState({
     coverImage: null,
-    screenshots: [],
+    screenshots: [], // Array of File objects
   });
 
   if (!isAuthenticated) {
@@ -45,8 +77,12 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
 
     if (name === "coverImage" && files.length > 0) {
       setFilesToUpload((prev) => ({ ...prev, coverImage: files[0] }));
+      // Optional: Clear the URL input if a file is selected
+      setFormData((prev) => ({ ...prev, coverImage: "" }));
     } else if (name === "screenshots" && files.length > 0) {
       setFilesToUpload((prev) => ({ ...prev, screenshots: Array.from(files) }));
+      // Optional: Clear the screenshots array if files are selected
+      setFormData((prev) => ({ ...prev, screenshots: [] }));
     }
   }, []);
 
@@ -97,19 +133,45 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
     [handleAddTagFromInput]
   );
 
+  // ----------------------------------------------------
+  // 🔥 UPDATED SUBMIT HANDLER
+  // ----------------------------------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSuccess(false);
     setIsSubmitting(true);
 
+    let coverImageUrl = formData.coverImage.trim(); // Start with the manual URL fallback
+    let screenshotUrls = formData.screenshots; // Start with the manual URLs (if applicable)
+
     try {
+      // --- 1. UPLOAD COVER IMAGE ---
+      if (filesToUpload.coverImage) {
+        coverImageUrl = await uploadFile(
+          filesToUpload.coverImage,
+          "projectCovers"
+        );
+      }
+
+      // --- 2. UPLOAD SCREENSHOTS (MULTIPLE FILES) ---
+      if (filesToUpload.screenshots.length > 0) {
+        const uploadPromises = filesToUpload.screenshots.map((file) =>
+          uploadFile(file, "projectScreenshots")
+        );
+        screenshotUrls = await Promise.all(uploadPromises);
+        // Filter out any empty strings if an upload failed, though `uploadFile` throws an error
+        screenshotUrls = screenshotUrls.filter((url) => url);
+      }
+
+      // --- 3. PREPARE FIRESTORE DOCUMENT ---
       const newProject = {
         title: formData.title,
         description: formData.summary,
-        coverImage: formData.coverImage.trim(),
-        screenshots: formData.screenshots,
-        videos: formData.videos,
+        // Save the resulting URL (from file upload or the URL fallback)
+        coverImage: coverImageUrl,
+        screenshots: screenshotUrls,
+        videos: formData.videos, // Note: You'd upload videos similarly if needed
         tags: formData.tags,
         liveSiteLink: formData.liveSiteLink.trim(),
         sourceCode: formData.sourceCode.trim(),
@@ -118,6 +180,7 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
         adminId: user.uid,
       };
 
+      // --- 4. SAVE DATA TO FIRESTORE ---
       await addDoc(collection(db, "projects"), newProject);
 
       setSuccess(true);
@@ -127,14 +190,20 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
 
       setTimeout(() => onClose(), 1000);
     } catch (err) {
-      console.error("Firestore Add Error:", err);
-      setError("Failed to add project. Check console and Firebase Rules.");
+      console.error("Submission Error:", err);
+      // Display a more helpful error if it came from the upload
+      setError(
+        err.message.includes("upload")
+          ? err.message
+          : "Failed to add project. Check console and Firebase Rules."
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
+    // ... (JSX render remains the same)
     <div className="pm-Wrapper" onClick={onClose}>
       <div className="pm-modal-content" onClick={(e) => e.stopPropagation()}>
         <CloseBtn onClick={onClose} />
@@ -146,6 +215,8 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
           )}
 
           <form onSubmit={handleSubmit} className="pm-form">
+            {/* Title, Description, Links, Tags remain the same */}
+
             <label htmlFor="title" className="pm-form-label">
               Title
             </label>

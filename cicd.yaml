@@ -5,10 +5,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main # Run when changes are pushed to the main branch
+      - master # Run when changes are pushed to the main branch
   pull_request:
     branches:
-      - main # Run when a pull request is opened/updated against main
+      - master # Run when a pull request is opened/updated against main
 
 # A workflow run is made up of one or more jobs
 jobs:

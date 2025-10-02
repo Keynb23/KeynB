@@ -6,15 +6,23 @@ import './Projects.css';
 // Firebase Imports
 import { collection, getDocs, query, orderBy } from 'firebase/firestore'; 
 import { db } from '../../lib/firebase';
-import { useAuth } from '../../hooks/useAuth.jsx'; // 👈 Use the .jsx extension
+import { useAuth } from '../../hooks/useAuth.jsx'; 
 
 // Component Imports
 import { skillTags } from '../../data/projectsData.js';
-import ProjectManager from './ProjectManager.jsx'; // The Admin Modal
-import ProjectCard from './ProjectCard.jsx'; // 👈 Keep only the import
-import ProjectModal from './ProjectModal'; // 👈 Keep only the import
+import ProjectManager from './ProjectManager.jsx'; 
+import ProjectCard from './ProjectCard.jsx'; 
+import ProjectModal from './ProjectModal';
 import { CloseBtn } from '../../Buttons/Modal-Btns.jsx';
-// NOTE: Ensure './ProjectCard.jsx' and './ProjectModal.jsx' files exist!
+
+// Function to group projects into rows of 4 (for desktop display)
+const groupProjectsIntoRows = (projects, projectsPerRow = 4) => {
+    const rows = [];
+    for (let i = 0; i < projects.length; i += projectsPerRow) {
+        rows.push(projects.slice(i, i + projectsPerRow));
+    }
+    return rows;
+};
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -23,7 +31,6 @@ const Projects = () => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [showAdminModal, setShowAdminModal] = useState(false); 
     
-    // 🔥 CRUCIAL: Check for login status
     const { isAuthenticated } = useAuth(); 
 
     // Fetches ALL projects from Firestore
@@ -53,14 +60,16 @@ const Projects = () => {
         fetchProjects();
     }, [fetchProjects]);
     
-    // When a project is added/edited, fetch the list again to update the UI
-    const handleProjectAdded = () => {
+    // When a project is added/edited/deleted, fetch the list again to update the UI
+    const handleProjectUpdate = () => {
         fetchProjects(); 
     };
 
     const filteredProjects = activeFilter === 'All'
         ? projects 
         : projects.filter(project => project.tags && project.tags.includes(activeFilter));
+
+    const groupedRows = groupProjectsIntoRows(filteredProjects);
 
     const handleFilterClick = (tag) => {
         setActiveFilter(tag);
@@ -71,7 +80,7 @@ const Projects = () => {
             <div className="project-Container">
                 <div className="project-Content">
                     
-                    {/* 🔥 THE ADD PROJECT BUTTON APPEARS ONLY WHEN AUTHENTICATED */}
+                    {/* ADMIN ADD BUTTON */}
                     {isAuthenticated && (
                         <button 
                             className="admin-add-project-btn" 
@@ -81,38 +90,59 @@ const Projects = () => {
                         </button>
                     )}
                     
-                    {/* Project Manager rendered as a modal */}
+                    {/* Project Manager Modal */}
                     {isAuthenticated && showAdminModal && (
                         <ProjectManager 
-                            onProjectAdded={handleProjectAdded} 
+                            onProjectAdded={handleProjectUpdate} 
                             onClose={() => setShowAdminModal(false)}
                         />
                     )}
                     
-                    {/* Project Filter Tabs (Add logic here) */}
-                    <div className="Project-Tabs">
-                        {/* Filter tabs mapping */}
+                    {/* Project Filter Tabs */}
+                    <div className="Project-Tabs-Wrapper">
+                        {skillTags.map(tag => (
+                            <button
+                                key={tag}
+                                className={`Project-Tab ${activeFilter === tag ? 'active' : ''}`}
+                                onClick={() => handleFilterClick(tag)}
+                            >
+                                {tag}
+                            </button>
+                        ))}
                     </div>
 
                     <div className="Project-Main-Content">
                         {loading && <p>Loading portfolio projects...</p>}
                         
-                        <div className="Pro-Card-Rows">
-                            {filteredProjects.map(project => (
-                                <ProjectCard
-                                    key={project.id} 
-                                    project={project}
-                                    onCardClick={setSelectedProject}
-                                />
-                            ))}
-                        </div>
+                        {/* Render Rows of Projects */}
+                        {groupedRows.map((row, index) => (
+                            <div key={index} className="Pro-Card-Row">
+                                {row.map(project => (
+                                    <ProjectCard
+                                        key={project.id} 
+                                        project={project}
+                                        onCardClick={setSelectedProject}
+                                    />
+                                ))}
+                            </div>
+                        ))}
+                        
+                        {/* No projects message */}
+                        {!loading && filteredProjects.length === 0 && (
+                            <p className="no-projects-message">
+                                No projects found for filter: "{activeFilter}"
+                            </p>
+                        )}
+                        
                     </div>
                 </div>
             </div>
             
+            {/* Project Details Modal (Netflix-style) */}
             <ProjectModal
                 project={selectedProject}
                 onClose={() => setSelectedProject(null)}
+                onProjectDeleted={handleProjectUpdate}
             />
         </>
     );

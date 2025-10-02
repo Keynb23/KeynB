@@ -2,285 +2,379 @@
    Project Page Container Styles
    ========================================================================== */
 .project-Container {
-  padding: 2rem clamp(1rem, 5vw, 4rem); /* Responsive padding */
-  width: 100%;
-  height: 100%;
-  min-width: 100vh;
-  /* max-width: 1600px; */
-  margin: 0 auto;
+    padding: 2rem clamp(1rem, 5vw, 4rem); 
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
 }
 
-/* New Style for the Admin Button */
+/* Admin Button Styles */
 .admin-add-project-btn {
-  background-color: var(--AC-SC-1); /* Use an accent color */
-  color: var(--BG-PC-1);
-  padding: 0.75rem 1.5rem;
-  margin: 1rem 0 2rem 0; /* Space it out nicely */
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: block; 
-  max-width: 300px; /* Limit its width */
+    background-color: var(--AC-SC-1); 
+    color: var(--BG-PC-1);
+    padding: 0.75rem 1.5rem;
+    margin: 1rem 0 2rem 0; 
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: block; 
+    max-width: 300px;
 }
 
 .admin-add-project-btn:hover {
-  background-color: var(--AC-PC-1);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--AC-PC-1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 /* ==========================================================================
-   Filter Nav Bar Styles
+   Filter Tab Styles
    ========================================================================== */
-.project-top {
-  position: sticky;
-  top: 80px; /* Adjust based on your main navbar's height */
-  background-color: var(--BG-PC-1);
-  padding: 1rem 0;
-  z-index: 900;
-  overflow-x: auto; /* Allows horizontal scrolling on small screens */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+.Project-Tabs-Wrapper {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 0.75rem;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.project-top::-webkit-scrollbar {
-  display: none;
+.Project-Tab {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--TX-PC-1);
+    background-color: var(--BG-SC-1);
+    padding: 0.6em 1.2em;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
 }
 
-.project-top nav ul {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem 0;
-  justify-content: flex-start;
-  white-space: nowrap; /* Prevents tabs from wrapping */
+.Project-Tab:hover {
+    background-color: var(--AC-SC-1);
+    color: var(--BG-PC-1);
 }
 
-.Project-Tabs {
-  font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--TX-PC-1);
-  background-color: var(--BG-SC-1);
-  padding: 0.6em 1.2em;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  border: 1px solid transparent;
-}
-
-.Project-Tabs:hover {
-  background-color: var(--AC-SC-1);
-  color: var(--BG-PC-1);
-}
-
-.Project-Tabs.active {
-  background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
-  border-color: var(--AC-SC-1);
+.Project-Tab.active {
+    background-color: var(--AC-PC-1);
+    color: var(--BG-PC-1);
+    border-color: var(--AC-SC-1);
 }
 
 /* ==========================================================================
-   Project Card Grid Styles
+   Project Card Rows (Streaming Service Style)
    ========================================================================== */
 .Project-Main-Content {
-  padding-top: 2rem;
+    padding-top: 1rem;
 }
 
-.Pro-Card-Rows {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem 1.5rem;
+/* Row container for the cards */
+.Pro-Card-Row {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    padding: 1rem 0; 
+    gap: 1rem; 
+    -webkit-overflow-scrolling: touch; 
+    
+    /* Hide scrollbar for a cleaner look */
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
 }
 
-.Project-card {
-  background-color: var(--BG-SC-1);
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  aspect-ratio: 16 / 9;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  position: relative;
-  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+.Pro-Card-Row::-webkit-scrollbar {
+    display: none;
 }
 
-.Project-card:hover {
-  transform: scale(1.05);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  z-index: 10;
+/* Individual Project Card */
+.Project-Card {
+    flex: 0 0 auto; 
+    width: 280px; 
+    background-color: var(--BG-SC-1);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 16 / 9;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
+    border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
 }
 
-.project-image,
-.project-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: opacity 0.3s ease-in-out;
+.Project-Card:hover {
+    transform: scale(1.1); 
+    z-index: 10;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.Project-Card-Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.Project-Card-Content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 0.5rem 1rem;
+    transform: translateY(100%); 
+    transition: transform 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.Project-Card:hover .Project-Card-Content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.Project-Card-Title {
+    color: var(--TX-PC-1);
+    font-size: 1.1rem;
+    margin: 0;
 }
 
 /* ==========================================================================
-   Project Modal (Popup) Styles
+   Project Modal (Popup) Styles - NETFLIX DETAIL SCREEN
    ========================================================================== */
 .Project-Model {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: okhsla(from var(--BG-PC-1) h s l / 0.8);
-  backdrop-filter: blur(10px);
-  z-index: 2000;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+    position: fixed; /* Locks the modal to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* The Overlay Effect */
+    background-color: okhsla(from var(--BG-PC-1) h s l / 0.95); 
+    backdrop-filter: blur(15px); 
+    z-index: 2000; /* CRUCIAL: Must be higher than all other page elements */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    overflow-y: auto; /* Allows the entire modal container to scroll if needed */
 }
 
-.modal-content {
-  background-color: var(--BG-SC-1);
-  border-radius: 16px;
-  padding: 2rem;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
-  position: relative;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.modal-content.project-details-content {
+    background-color: var(--BG-SC-1);
+    border-radius: 16px;
+    padding: 0; 
+    width: 95%;
+    max-width: 1200px;
+    max-height: 90vh; /* Limits the modal height, forcing inner scroll */
+    min-height: 60vh;
+    display: flex; 
+    flex-direction: row;
+    gap: 0;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+    overflow: hidden; 
+    animation: openModal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes openModal {
+    from { opacity: 0; transform: scale(0.9);}
+    to { opacity: 1; transform: scale(1);}
 }
 
 .Pro-Model-Left {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 8px;
-  background-color: var(--BG-PC-1);
-  position: relative;
+    /* Media Column */
+    flex: 2; 
+    min-width: 60%; 
+    height: 100%;
+    min-height: 60vh;
+    overflow: hidden;
+    position: relative;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-media {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    display: block;
 }
 
 .Pro-Model-Right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    /* Details Column */
+    flex: 1; 
+    min-width: 400px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    /* CRUCIAL: This makes the right panel scrollable inside the modal */
+    overflow-y: auto; 
+    max-height: 90vh; /* Match modal's max-height */
 }
 
-.Pro-Model-Right h2 {
-  font-size: 2rem;
-  color: var(--AC-PC-1);
-  margin-bottom: 1rem;
+.project-title-modal {
+    font-size: 2.5rem;
+    color: var(--AC-PC-1);
+    margin-bottom: 0.5rem;
 }
 
-.Pro-Model-Right p {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+.project-description-modal {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--TX-SC-1);
 }
 
 .modal-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .modal-tag {
-  background-color: var(--BG-PC-1);
-  color: var(--TX-SC-1);
-  padding: 0.4em 0.8em;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
+    background-color: var(--BG-PC-1);
+    color: var(--TX-SC-1);
+    padding: 0.4em 0.8em;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
-/* Add these new styles to your existing Projects.css file */
+/* Modal Navigation and Actions */
+.modal-actions-area {
+    border-top: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+    padding-top: 2rem;
+}
 
 .modal-links-wrapper {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .modal-link-btn {
-  flex: 1; /* Make buttons share space equally */
-  text-align: center;
-  padding: 0.75em 1em;
-  border-radius: 8px;
-  text-decoration: none;
-  font-family: var(--font-ui);
-  font-weight: 600;
-  transition: all 0.2s ease;
-  border: 2px solid transparent;
+    flex: 1; 
+    text-align: center;
+    padding: 0.8em 1em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
 }
 
-/* Style for primary link (Live Site) */
 .modal-link-btn.live-site {
-  background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
-  border-color: var(--AC-PC-1);
+    background-color: var(--AC-PC-1);
+    color: var(--BG-PC-1);
+    border-color: var(--AC-PC-1);
 }
 
-/* Style for secondary link (Source Code) */
 .modal-link-btn.source-code {
-  background-color: transparent;
-  color: var(--AC-PC-1);
-  border-color: var(--AC-PC-1);
+    background-color: transparent;
+    color: var(--AC-PC-1);
+    border-color: var(--AC-PC-1);
 }
 
 .modal-link-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.hire-me-wrapper {
-  padding-top: 1.5rem;
-  margin-top: 1.5rem;
-  border-top: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+/* Media Navigation Arrows */
+.media-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    padding: 1rem 0.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s;
 }
 
-.hire-me-wrapper .to-btn {
-  width: 100%;
-  font-size: 1.2rem;
-  padding: 1em;
+.media-nav:hover {
+    background: rgba(0, 0, 0, 0.7);
 }
 
-/* ==========================================================================
-   Slideshow Instructional Text Styles
-   ========================================================================== */
+.media-prev {
+    left: 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.media-next {
+    right: 0;
+    border-radius: 8px 0 0 8px;
+}
 
 .slideshow-instructions {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: okhsla(from var(--BG-PC-1) h s l / 0.5);
-  backdrop-filter: blur(4px);
-  color: var(--TX-PC-1);
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-family: var(--font-ui);
-  pointer-events: none; /* So it doesn't interfere with clicks */
-  opacity: 0; /* Hidden by default */
-  transition: opacity 0.3s ease;
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    z-index: 10;
 }
 
-/* Show the instructional text when hovering over the media panel */
-.Pro-Model-Left:hover .slideshow-instructions {
-  opacity: 1;
+/* Admin Delete Button */
+.admin-actions {
+    padding-top: 1rem;
 }
 
-.slideshow-instructions p {
-  margin: 0; /* Remove default paragraph margin */
+.btn-delete {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #c9302c;
+}
+
+/* Responsive adjustments for the Modal */
+@media (max-width: 1000px) {
+    .modal-content.project-details-content {
+        flex-direction: column; 
+        min-height: 90vh;
+        max-width: 90%;
+    }
+    
+    .Pro-Model-Left {
+        min-height: 300px; /* Reduced height on mobile */
+        min-width: unset;
+        flex: unset;
+    }
+
+    .Pro-Model-Right {
+        padding: 2rem;
+        min-width: unset;
+        max-height: unset; /* Let it expand naturally on mobile stack */
+        flex: unset;
+    }
+    
+    .project-title-modal {
+        font-size: 2rem;
+    }
 }

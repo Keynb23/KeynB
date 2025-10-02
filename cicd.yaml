@@ -1,0 +1,54 @@
+# .github/workflows/cicd.yaml
+# Workflow name that appears in GitHub Actions tab
+name: CI/CD Pipeline
+
+# Controls when the workflow should run
+on:
+  push:
+    branches:
+      - main # Run when changes are pushed to the main branch
+  pull_request:
+    branches:
+      - main # Run when a pull request is opened/updated against main
+
+# A workflow run is made up of one or more jobs
+jobs:
+  # The Continuous Integration (CI) job
+  ci:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use your project's Node version
+
+      - name: 📦 Install Dependencies
+        run: npm install
+
+      # Example: Run linting checks
+      - name: 🔍 Run Lint
+        run: npm run lint # Assuming you have a "lint" script in package.json
+
+      # Example: Run unit tests
+      - name: 🧪 Run Tests
+        run: npm test -- --coverage --watchAll=false # Assuming you have a "test" script
+
+  # The Continuous Deployment (CD) job (Handles Vercel deployment via Vercel's GitHub App)
+  cd:
+    name: Vercel Deployment
+    runs-on: ubuntu-latest
+    needs: ci # This job only runs if the 'ci' job passes
+    if: github.ref == 'refs/heads/main' # Only deploy on push to main
+
+    steps:
+      - name: 🚀 Deployment Triggered by Vercel App
+        # This step is mostly symbolic when using the Vercel GitHub Integration.
+        # The Vercel app automatically detects the push to 'main' (or the branch
+        # defined in your Vercel settings) and runs the build/deploy process,
+        # leveraging the Environment Variables defined in Vercel's dashboard.
+        run: echo "Vercel deployment is handled by the Vercel GitHub App."

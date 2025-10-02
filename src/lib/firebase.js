@@ -1,5 +1,3 @@
-// src/lib/firebase.js (or similar)
-
 // Import core initialization function
 import { initializeApp } from "firebase/app";
 
@@ -7,26 +5,28 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage"; // For image/media files
-// import { getAnalytics } from "firebase/analytics"; // Analytics is optional
 
-// Your web app's Firebase configuration (unchanged)
+// WARNING: Do NOT hardcode secrets here for production deployment.
+// Instead, load them securely from environment variables (VITE_ prefix for Vite/React).
 const firebaseConfig = {
-  apiKey: "AIzaSyCwB5e8dH_t7DUCms-31IZlYlVLm1Yu6yE",
-  authDomain: "tech-portfolio-c6d24.firebaseapp.com",
-  projectId: "tech-portfolio-c6d24",
-  storageBucket: "tech-portfolio-c6d24.firebasestorage.app",
-  messagingSenderId: "106033908897",
-  appId: "1:106033908897:web:c368102465402ce3ccb4e0",
-  measurementId: "G-1WCLGMGXNF",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  // measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID, // Optional
 };
 
 // 1. Initialize Firebase App
+// Check if all necessary config values are present before initializing
+if (!firebaseConfig.apiKey) {
+    console.error("Firebase API Key is missing. Ensure VITE_FIREBASE_API_KEY is set in environment variables (e.g., .env or Vercel settings).");
+}
+
 const app = initializeApp(firebaseConfig);
 
 // 2. Initialize and Export Services
 export const auth = getAuth(app); // For user login/logout
 export const db = getFirestore(app); // For storing project data
 export const storage = getStorage(app); // For storing images/media
-
-// If you want analytics:
-// const analytics = getAnalytics(app);

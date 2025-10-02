@@ -32,9 +32,7 @@ const Home = () => {
             </ToBtn>
           </div>
 
-          <div className="highlights-section">
             <RecentProjects />
-          </div>
 
         </div>
       </div>

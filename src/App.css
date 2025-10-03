@@ -40,7 +40,9 @@
   border: 1px solid var(--AC-PC-1);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: rgba(79, 5, 148, 0.16) 0px 3px 6px, rgba(118, 5, 150, 0.389) 0px 3px 6px;
+  box-shadow:
+    rgba(79, 5, 148, 0.16) 0px 3px 6px,
+    rgba(118, 5, 150, 0.389) 0px 3px 6px;
   transition: background-color 0.3s ease;
 }
 
@@ -61,8 +63,27 @@
 .home-nav-button {
   margin-top: 2.5rem;
 }
-/* 
-.RPH-Wrapper {
-  display: flex;
-  flex-direction: column;
-} */
+/* mouse trail */
+
+.mouse-trail-dot {
+ position: fixed;
+ width: 10px;
+ height: 10px;
+ border-radius: 50%;
+ pointer-events: none;
+ background: var(--trail-color); 
+ transform: translate(-50%, -50%);
+ z-index: 9999;
+ transition: background 0.3s ease;
+}
+/* Light theme: trail is dark */
+:root {
+  --trail-color: #490575d4;/* Dark trail for light theme */
+  /* ... (The rest of your :root variables) */
+}
+
+/* Dark theme: trail is light */
+[data-theme="dark"] {
+  --trail-color: #7b27d5; /* Light trail for dark theme */
+  /* ... (The rest of your [data-theme="dark"] variables) */
+}

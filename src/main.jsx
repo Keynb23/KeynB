@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import { ButtonProvider } from "./Buttons/Btns-Context.jsx"; // Context for UI buttons
 import { AuthProvider } from "./hooks/useAuth.jsx"; // 👈 NEW: Auth Context for Login
 import "./index.css";
+import MouseTrail from "./MouseTrail.jsx";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -17,7 +18,9 @@ root.render(
     <AuthProvider>
       <ButtonProvider>
         <BrowserRouter>
-          <App />
+          <MouseTrail>
+            <App />
+          </MouseTrail>
         </BrowserRouter>
       </ButtonProvider>
     </AuthProvider>

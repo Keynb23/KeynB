@@ -46,23 +46,28 @@
 
 .to-btn {
   background-color: var(--AC-TC-1);
-  color: var(--TX-PC-1);
+  color: #fff;
   border: 2px solid var(--AC-PC-1);
   font-size: 1.1rem;
   padding: 0.8em 2em;
+  transition: background-color ease-in-out .03s;
+  -webkit-transition: background-color ease-in-out .03s;
+  -moz-transition: background-color ease-in-out .03s;
+  -ms-transition: background-color ease-in-out .03s;
+  -o-transition: background-color ease-in-out .03s;
 }
 
-.to-btn:hover,
-.to-btn:focus {
-  /* background-color: var(--AC-PC-1); */
-  color: #161616;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px okhsla(from var(--AC-PC-1) h s l / 0.3);
+.to-btn:hover {
+  background-color: var(--AC-PC-1);
 }
 
 .to-btn:active {
   transform: translateY(0);
   box-shadow: none;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
 }
 
 /* ==========================================================================

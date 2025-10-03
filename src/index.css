@@ -12,35 +12,37 @@
   color-scheme: light;
 
   /* Typography */
-  --font-header: "Poppins", sans-serif;
+  --font-header: lucida, sans-serif;
   --font-body: "Source Sans Pro", sans-serif;
   --font-ui: "Poppins", sans-serif;
 
   color-scheme: light;
 
-/* Crimson & Charcoal Theme */
-  --BG-PC-1: #c24040;    /* Dark Charcoal Background */
-  --BG-SC-1: #181818;    /* Slightly Lighter Gray for Cards/Sections */
-  --TX-PC-1: #e3e3e3;    /* Off-white Text for Readability */
-  --TX-SC-1: #ffffff;    /* Secondary Gray Text */
-  --TX-AC: #c32b2b;      /* Bright Crimson Accent for Headings/Links */
-  --AC-PC-1: #f7f0f0;    /* Primary Accent Color (e.g., buttons, highlights) */
-  --AC-SC-1: #6c6464a5;    /* Subtle Accent (e.g., borders, dividers) */
-  --AC-TC-1: #4b1515;    /* Pure Red for Call to Actions (CTA) */
+  /* Crimson & Charcoal Theme */
+  --BG-PC-1: #fcfcfc; /* Dark Charcoal Background */
+  --BG-SC-1: #f2f2f2; /* Slightly Lighter Gray for Cards/Sections */
+  --COMP: #e6e6e6;
+  --TX-PC-1: #000000; /* Off-white Text for Readability */
+  --TX-SC-1: #171414; /* Secondary Gray Text */
+  --TX-AC: #8848d1; /* Bright Crimson Accent for Headings/Links */
+  --AC-PC-1: #6c27d4; /* Primary Accent Color (e.g., buttons, highlights) */
+  --AC-SC-1: #433896a5; /* Subtle Accent (e.g., borders, dividers) */
+  --AC-TC-1: #691a8d; /* Pure Red for Call to Actions (CTA) */
 }
 
 /* No change needed for dark theme, as this is a dark theme by default */
-[data-theme='dark'] {
+[data-theme="dark"] {
   color-scheme: dark;
-  --BG-PC-1: #1a1a1a;
-  --BG-SC-1: #440c0c;
-  --TX-PC-1: #f2e6e6;
-  --TX-SC-1: #c0b8b8;
-  --TX-AC: #e0dcdc;
-  --AC-PC-1: #e1d5d5;
-  --AC-SC-1: #a8a0a0d4;
-  --AC-TC-1: #864848;
-  --AC-TC-1: rgb(116, 7, 7);
+  --BG-PC-1: #080009;
+  --BG-SC-1: #000000;
+  --COMP: #201f1f;
+  --TX-PC-1: #fdfdfd;
+  --TX-SC-1: #e4e4e4;
+  --TX-AC: #7b27d5;
+  --AC-PC-1: #800fb0;
+  --AC-SC-1: #490575d4;
+  --AC-TC-1: #433896a5;
+  --AC-TC-1: #691a8d;
 }
 
 /* ==========================================================================
@@ -55,7 +57,9 @@
   padding: 0;
 }
 
-body, html, :root {
+body,
+html,
+:root {
   height: 100%;
   width: 100%;
 }
@@ -70,7 +74,7 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-  }
+}
 
 /* ==========================================================================
    5. Typography

@@ -32,8 +32,9 @@ const Home = () => {
             </ToBtn>
           </div>
 
+        <div className="RPH-Wrapper">
             <RecentProjects />
-
+        </div>
         </div>
       </div>
     </>

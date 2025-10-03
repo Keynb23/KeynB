@@ -3,9 +3,7 @@
    ========================================================================== */
 
 .navbar-header {
-  /* Use a slightly lighter background for the sticky header to make it pop */
   background-color: var(--BG-SC-1);
-  /* Add a subtle shadow to emphasize sticky position */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   padding: 1rem 3rem; /* Increased padding for a more spacious feel */
   position: sticky;

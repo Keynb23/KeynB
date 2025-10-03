@@ -4,24 +4,20 @@ import { useEffect, useState } from "react";
 import "./RecentProjects.css";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../../lib/firebase";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Import icons for navigation
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const RecentProjects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  // State to track the currently visible project index
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // ... (fetchRP logic remains unchanged)
     async function fetchRP() {
       setLoading(true);
       try {
-        // Fetch the 3 most recent projects using Firestore query
         const projectsCollection = collection(db, "projects");
         const q = query(
           projectsCollection,
-          // Assuming 'dateAdded' is a field you set when creating the project
           orderBy("dateAdded", "desc"),
           limit(3)
         );
@@ -42,14 +38,12 @@ const RecentProjects = () => {
     fetchRP();
   }, []);
 
-  // Function to handle next project (wraps around)
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === projects.length - 1 ? 0 : prevIndex + 1
     );
   };
 
-  // Function to handle previous project (wraps around)
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? projects.length - 1 : prevIndex - 1
@@ -57,20 +51,18 @@ const RecentProjects = () => {
   };
 
   if (loading) {
-    // ... (loading state remains unchanged)
     return (
-      <div className="RP-Wrapper">
+      <section className="RP-Wrapper">
         <p className="RP-Message">Loading recent projects...</p>
-      </div>
+      </section>
     );
   }
 
   if (!projects.length) {
-    // ... (no projects state remains unchanged)
     return (
-      <div className="RP-Wrapper">
+      <section className="RP-Wrapper">
         <p className="RP-Message">No recent projects to display yet.</p>
-      </div>
+      </section>
     );
   }
 
@@ -78,9 +70,7 @@ const RecentProjects = () => {
     <section className="RP-Wrapper">
       <h2 className="RP-Title">Recent Projects</h2>
 
-      {/* New Carousel Container that holds all the elements */}
       <div className="RP-Carousel-Container">
-        {/* Navigation Buttons */}
         <button
           className="RP-Nav-Button RP-Prev"
           onClick={handlePrev}
@@ -89,56 +79,23 @@ const RecentProjects = () => {
           <FaChevronLeft />
         </button>
 
-        {/* The Carousel Track (The list of projects) */}
-        <div className="RP-Carousel">
-          {projects.map((item, index) => {
-            // Calculate the card state relative to the current index
-            const isCurrent = index === currentIndex;
-            const isNext = index === (currentIndex + 1) % projects.length;
-            // Use modulo for 'prev' to handle wrapping from index 0
-            const isPrev =
-              index === (currentIndex - 1 + projects.length) % projects.length;
-
-            let carouselState = "hidden";
-            if (isCurrent) {
-              carouselState = "current";
-            } else if (isNext) {
-              carouselState = "next";
-            } else if (isPrev) {
-              carouselState = "prev";
-            }
-
-            return (
-              <div
-                key={item.id}
-                // Apply the data-attribute for CSS styling
-                data-carousel-state={carouselState}
-                className="RP-Card-Home"
-              >
-                {item.coverImage && (
+        <div 
+          className="RP-Carousel" 
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {projects.map((item) => (
+            <article key={item.id} className="RP-Card">
+              {item.coverImage && (
+                <div className="RP-Media">
                   <img
                     src={item.coverImage}
                     alt={item.title}
                     className="RP-Image"
                   />
-                )}
-                <div className="RP-Content">
-                  <h3 className="RP-Heading">{item.title}</h3>
-                  <p className="RP-Description">{item.summary}</p>
-                  {item.source && (
-                    <a
-                      href={item.source}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="RP-Link"
-                    >
-                      Source Code →
-                    </a>
-                  )}
                 </div>
-              </div>
-            );
-          })}
+              )}
+            </article>
+          ))}
         </div>
 
         <button
@@ -149,7 +106,19 @@ const RecentProjects = () => {
           <FaChevronRight />
         </button>
       </div>
+
+      <div className="RP-Indicators">
+        {projects.map((_, index) => (
+          <button
+            key={index}
+            className={`RP-Indicator ${index === currentIndex ? 'active' : ''}`}
+            onClick={() => setCurrentIndex(index)}
+            aria-label={`Go to project ${index + 1}`}
+          />
+        ))}
+      </div>
     </section>
   );
 };
+
 export default RecentProjects;

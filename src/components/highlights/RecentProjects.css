@@ -1,13 +1,12 @@
 /* RecentProjects.css */
 
-/* Wrapper for the entire section */
 .RP-Wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   margin: 4rem 0 auto;
 }
 
@@ -32,28 +31,25 @@
   padding: 2rem;
 }
 
-/* Carousel container */
+
+/* Carousel container (The Viewport) */
 .RP-Carousel-Container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  width: 100%;
   margin-bottom: 2rem;
   overflow: hidden;
   border-radius: 4px;
-  /* background-color: var(--BG-SC-1); */
 }
 
-/* Carousel track */
+/* Carousel track (The Sliding Content) */
 .RP-Carousel {
   display: flex;
-  width: 100%;
   height: 100%;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  overflow: hidden;
 }
 
-/* Individual project card */
+/* Individual project card (The 100% Slide) */
 .RP-Card {
   flex: 0 0 100%;
   width: 100%;
@@ -64,6 +60,8 @@
   overflow: hidden;
   border-radius: 0;
 }
+
+/* --- CAROUSEL FIXES END HERE --- */
 
 /* Media wrapper for image and overlay */
 .RP-Media {
@@ -83,9 +81,9 @@
 
 }
 
-.RP-Card:hover .RP-Image {
+/* .RP-Card:hover .RP-Image {
   transform: scale(1.02);
-}
+} */
 
 /* Overlay for text */
 .RP-Overlay {
@@ -131,6 +129,38 @@
   transform: scale(1.1);
 }
 
+.RP-Nav-Button {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  transition: background 0.3s;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.RP-Nav-Button:hover {
+  background: var(--AC-PC-1);
+}
+
+.RP-Prev {
+  left: 10px;
+}
+
+.RP-Next {
+  right: 10px;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .RP-Wrapper {
@@ -141,9 +171,6 @@
     font-size: 2rem;
   }
 
-  .RP-Carousel {
-    height: 300px;
-  }
 
   .RP-Nav-Button {
     width: 40px;
@@ -153,20 +180,31 @@
   .RP-Overlay {
     padding: 1rem 1rem 0.75rem;
   }
-
-  .RP-Heading {
-    font-size: 1.25rem;
-  }
 }
 
 @media (max-width: 480px) {
   .RP-Carousel-Container {
-    flex-direction: column;
-    gap: 1.5rem;
+    flex-direction: row;
+    gap: 0;
+    padding: 0 10px;
   }
 
   .RP-Nav-Button {
-    order: 0;
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    transform: none;
+    width: 30px;
+    height: 30px;
+    background: var(--AC-PC-1);
+  }
+
+  .RP-Prev {
+    left: 5px;
+  }
+
+  .RP-Next {
+    right: 5px;
   }
 
   .RP-Carousel {

@@ -21,12 +21,14 @@ const firebaseConfig = {
 // 1. Initialize Firebase App
 // Check if all necessary config values are present before initializing
 if (!firebaseConfig.apiKey) {
-    console.error("Firebase API Key is missing. Ensure VITE_FIREBASE_API_KEY is set in environment variables (e.g., .env or Vercel settings).");
+  console.error(
+    "Firebase API Key is missing. Ensure VITE_FIREBASE_API_KEY is set in environment variables (e.g., .env or Vercel settings)."
+  );
 }
 
 const app = initializeApp(firebaseConfig);
 
 // 2. Initialize and Export Services
 export const auth = getAuth(app); // For user login/logout
-export const db = getFirestore(app); // For storing project data
+export const db = getFirestore(app); // For storing project data  <-- This is what you need!
 export const storage = getStorage(app); // For storing images/media

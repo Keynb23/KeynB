@@ -1,6 +1,6 @@
 // src/Pages/Home.jsx
 
-import ToBtn from '../Buttons/ToBtn.jsx'; // Import the new button
+import ToBtn from '../Buttons/ToBtn.jsx';
 import RecentProjects from '../components/highlights/RecentProjects.jsx'; 
 
 const Home = () => {
@@ -29,6 +29,10 @@ const Home = () => {
           <div className="home-nav-button">
             <ToBtn to="/projects">
               View My Work
+            </ToBtn>
+            
+            <ToBtn to="/Contact">
+            Contact me
             </ToBtn>
           </div>
 

@@ -5,6 +5,7 @@ import "./RecentProjects.css";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import ToBtn from "../../Buttons/ToBtn";
 
 const RecentProjects = () => {
   const [projects, setProjects] = useState([]);

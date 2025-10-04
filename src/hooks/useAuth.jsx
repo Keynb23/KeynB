@@ -4,6 +4,9 @@ import { useState, useEffect, useContext, createContext } from 'react';
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../lib/firebase'; 
 
+// 👇 Keep your Admin UID defined here
+const ADMIN_UID = "35UDzCTYRaa0NY4KLMXzeriwFf12"; 
+
 const AuthContext = createContext(null);
 
 export const useAuth = () => {
@@ -32,9 +35,13 @@ export const AuthProvider = ({ children }) => {
         return signOut(auth);
     };
 
+    // 👇 NEW: Check if the current user's UID matches the admin UID
+    const isAuthorizedAdmin = !!user && user.uid === ADMIN_UID;
+
     const value = {
         user,
-        isAuthenticated: !!user, // This is the boolean check used by Projects.jsx
+        isAuthenticated: !!user, // User is logged in
+        isAuthorizedAdmin: isAuthorizedAdmin, // 👇 User is the specific admin
         loading,
         login,
         logout,

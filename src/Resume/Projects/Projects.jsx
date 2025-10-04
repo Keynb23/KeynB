@@ -31,10 +31,12 @@ const Projects = () => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [showAdminModal, setShowAdminModal] = useState(false); 
     
-    const { isAuthenticated } = useAuth(); 
+    // 👇 UPDATE: Destructure 'isAuthorizedAdmin' instead of 'isAuthenticated'
+    const { isAuthorizedAdmin } = useAuth(); 
 
     // Fetches ALL projects from Firestore
     const fetchProjects = useCallback(async () => {
+    // ... (fetchProjects logic is unchanged)
         setLoading(true);
         let apiProjects = [];
         
@@ -81,7 +83,7 @@ const Projects = () => {
                 <div className="project-Content">
                     
                     {/* ADMIN ADD BUTTON */}
-                    {isAuthenticated && (
+                    {isAuthorizedAdmin && (
                         <button 
                             className="admin-add-project-btn" 
                             onClick={() => setShowAdminModal(true)}
@@ -91,7 +93,7 @@ const Projects = () => {
                     )}
                     
                     {/* Project Manager Modal */}
-                    {isAuthenticated && showAdminModal && (
+                    {isAuthorizedAdmin && showAdminModal && (
                         <ProjectManager 
                             onProjectAdded={handleProjectUpdate} 
                             onClose={() => setShowAdminModal(false)}

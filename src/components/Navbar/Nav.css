@@ -37,67 +37,6 @@
 }
 
 /* ------------------------------------------------------------------------- */
-/* Hidden Login Trigger Styles */
-/* ------------------------------------------------------------------------- */
-
-.login-trigger-secret {
-  /* Position the trigger element near the logo, top-left */
-  position: absolute; 
-  top: 1rem;
-  left: 1rem; /* Closer to the edge than the logo's padding */
-  
-  /* Make it invisible but clickable */
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 1001;
-  
-  /* Define the secret clickable area */
-  width: 50px; 
-  height: 50px; 
-  padding: 0;
-  
-  /* Hide content */
-  color: transparent; 
-  font-size: 0;
-  overflow: hidden;
-}
-
-/* ------------------------------------------------------------------------- */
-/* Hidden Login Dropdown Styles */
-/* ------------------------------------------------------------------------- */
-
-.hidden-dropdown {
-  position: absolute;
-  /* Position it directly below the secret trigger */
-  top: 55px; /* Adjust based on your header height */
-  left: 10px; /* Align with the secret trigger */
-  
-  /* Styling for the dropdown itself */
-  background-color: var(--BG-SC-1); 
-  border: 1px solid var(--AC-SC-1);
-  border-radius: 6px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  
-  /* Hidden State */
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  pointer-events: none; 
-  z-index: 999;
-}
-
-.hidden-dropdown.visible {
-  /* Visible State */
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto; 
-}
-
-
-/* ------------------------------------------------------------------------- */
 /* Navigation links container */
 /* ------------------------------------------------------------------------- */
 
@@ -188,9 +127,4 @@
     right: 1rem;
   }
 
-  /* Adjust secret button position relative to the compacted mobile nav */
-  .login-trigger-secret {
-    left: 4px; 
-    top: 0.5rem;
-  }
 }

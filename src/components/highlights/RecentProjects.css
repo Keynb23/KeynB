@@ -4,6 +4,7 @@
 .RP-Wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: relative;
   width: 100%;
   height: 100%;
@@ -19,7 +20,7 @@
   text-align: center;
   margin: 5rem;
   letter-spacing: -0.025em;
-  align-self: flex-start;
+  align-self: center;
 }
 
 /* Loading/No projects message */

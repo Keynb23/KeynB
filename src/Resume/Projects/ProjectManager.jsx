@@ -1,17 +1,12 @@
-// Resume/Projects/ProjectManger.jsx
-
 import { useState, useCallback } from "react";
-// 1. Storage Imports
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
-// 2. Firebase Config and Services
 import { db, storage } from "../../lib/firebase";
-
 import { useAuth } from "../../hooks/useAuth.jsx";
 import { CloseBtn } from "../../Buttons/Modal-Btns.jsx";
 import { skillTags } from "../../data/projectsData.js";
 import "./ProjectManager.css";
+import imageCompression from "browser-image-compression"; // LIBRARY IMPORT
 
 const initialProjectState = {
   title: "",
@@ -24,11 +19,10 @@ const initialProjectState = {
   sourceCode: "",
 };
 
-// ----------------------------------------------------
-// 🔥 HELPER FUNCTION FOR FILE UPLOAD
-// ----------------------------------------------------
+// 🔥 HELPER FUNCTION FOR FILE UPLOAD (Updated for Compression)
 /**
  * Uploads a file to Firebase Storage and returns its public URL.
+ * It automatically compresses images (like large screenshots) first.
  * @param {File} file - The file object to upload.
  * @param {string} path - The storage path (e.g., "projectCovers" or "screenshots").
  * @returns {Promise<string>} The public download URL or an empty string on error/no file.
@@ -36,12 +30,36 @@ const initialProjectState = {
 const uploadFile = async (file, path) => {
   if (!file) return "";
 
-  // Create a unique file name
-  const fileName = `${Date.now()}_${file.name}`;
+  let fileToUpload = file; // Start with the original file
+
+  // 1. 🗜️ COMPRESSION OPTIONS: Target a reasonable web size (1MB max, standard screen width)
+  const options = {
+    maxSizeMB: 1, // Max size of the image file (1 MB)
+    maxWidthOrHeight: 1920, // Max width/height for display (Full HD)
+    useWebWorker: true,
+    // Convert to JPEG for best size reduction, especially for PNG screenshots
+    fileType: "image/jpeg",
+  };
+
+  // 2. CONDITIONAL COMPRESSION
+  if (file.type.startsWith("image/")) {
+    // Only compress images, skip videos/other files
+    try {
+      // Compress the image/screenshot
+      fileToUpload = await imageCompression(file, options);
+      // DEBUG: console.log(`Original size: ${(file.size / 1024 / 1024).toFixed(2)} MB. Compressed size: ${(fileToUpload.size / 1024 / 1024).toFixed(2)} MB`);
+    } catch (error) {
+      // If compression fails, fall back to uploading the original file
+      console.warn("Image compression failed, uploading original file:", error);
+    }
+  }
+
+  // Create a unique file name using the (potentially compressed) file
+  const fileName = `${Date.now()}_${fileToUpload.name || file.name}`;
   const storageRef = ref(storage, `${path}/${fileName}`);
 
   try {
-    const snapshot = await uploadBytes(storageRef, file);
+    const snapshot = await uploadBytes(storageRef, fileToUpload); // Use fileToUpload
     const downloadURL = await getDownloadURL(snapshot.ref);
     return downloadURL;
   } catch (error) {
@@ -133,9 +151,7 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
     [handleAddTagFromInput]
   );
 
-  // ----------------------------------------------------
-  // 🔥 UPDATED SUBMIT HANDLER
-  // ----------------------------------------------------
+  // 🔥 SUBMIT HANDLER
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -157,6 +173,7 @@ const ProjectManager = ({ onProjectAdded, onClose }) => {
       // --- 2. UPLOAD SCREENSHOTS (MULTIPLE FILES) ---
       if (filesToUpload.screenshots.length > 0) {
         const uploadPromises = filesToUpload.screenshots.map((file) =>
+          // The compression now happens inside `uploadFile` for each screenshot
           uploadFile(file, "projectScreenshots")
         );
         screenshotUrls = await Promise.all(uploadPromises);

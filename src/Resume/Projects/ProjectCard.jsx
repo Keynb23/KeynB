@@ -21,7 +21,6 @@ const ProjectCard = ({ project, onCardClick }) => {
             )}
             <div className="Project-Card-Content">
                 <h3 className="Project-Card-Title">{project.title || 'Untitled Project'}</h3>
-                <p className="Project-Card-Summary">{project.summary || 'Click to see details.'}</p>
             </div>
         </div>
     );

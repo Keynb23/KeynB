@@ -21,6 +21,7 @@
   /* Crimson & Charcoal Theme */
   --BG-PC-1: #fcfcfc; /* Dark Charcoal Background */
   --BG-SC-1: #f2f2f2; /* Slightly Lighter Gray for Cards/Sections */
+  --INVL: #080009;
   --COMP: #e6e6e6;
   --TX-PC-1: #000000; /* Off-white Text for Readability */
   --TX-SC-1: #171414; /* Secondary Gray Text */
@@ -35,6 +36,7 @@
   color-scheme: dark;
   --BG-PC-1: #080009;
   --BG-SC-1: #000000;
+  --INVD: #fcfcfc;
   --COMP: #201f1f;
   --TX-PC-1: #fdfdfd;
   --TX-SC-1: #e4e4e4;

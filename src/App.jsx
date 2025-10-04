@@ -5,7 +5,6 @@ import Home from "./Pages/Home";
 import Exp from "./Resume/XP/Exp";
 import Projects from "./Resume/Projects/Projects";
 import Footer from "./components/Footer";
-import Contact from "./components/Contact";
 import EDU from "./Resume/Edu/Edu";
 import { Login } from "./components/Login/Login";
 import { useEffect, useState } from 'react'; 
@@ -61,7 +60,7 @@ function App() {
                     <Route path="/projects" element={<Projects />} />
                     <Route path="/experience" element={<Exp />} />
                     <Route path="/education" element={<EDU />} />
-                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/contact" element={<Footer />} />
                 </Routes>
             </div>
             <Footer />

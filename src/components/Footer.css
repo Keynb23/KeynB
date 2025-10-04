@@ -1,41 +1,181 @@
+/* Contact Section Styles (Base for the entire Footer structure)*/
 
-/* ==========================================================================
-   Footer Bottom Styles
-   ========================================================================== */
-.footer-wrapper {
-    bottom: 0;
-    width: 100%;
-    margin-top: 3rem;
-    border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.1);
+/* The main <footer class="contact-section"> element */
+.contact-section {
+    padding: 5rem 2rem 0;
+    /* Reduced bottom padding to account for footer-bottom */
+    background-color: var(--BG-SC-1);
+    /* Removed original border-top for cleaner integration */
 }
 
+.contact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    background-color: var(--BG-PC-1);
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-bottom: 3rem;
+    /* Add space between the contact box and the copyright section */
+}
+
+.contact-form-wrapper h2,
+.contact-info-wrapper h3 {
+    font-family: var(--font-header);
+    font-size: 2.5rem;
+    color: var(--TX-PC-1);
+    margin-bottom: 1rem;
+}
+
+.contact-form-wrapper p,
+.contact-info-wrapper p {
+    color: var(--TX-SC-1);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* --- Form Styles --- */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--TX-PC-1);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 2px solid okhsla(from var(--TX-SC-1) h s l / 0.3);
+    background-color: var(--BG-SC-1);
+    color: var(--TX-PC-1);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--AC-PC-1);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--BG-PC-1);
+    background-color: var(--AC-PC-1);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--AC-SC-1);
+    transform: translateY(-2px);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* --- Contact Info Styles --- */
+.contact-info-wrapper {
+    padding-left: 2rem;
+    border-left: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.2);
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-list li {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--TX-PC-1);
+}
+
+.contact-list a {
+    color: var(--AC-PC-1);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-list a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+ Footer Bottom Styles (For the Copyright Bar)
+ ========================================================================== */
+
+/* Removed .footer-wrapper styles */
+
 .footer-bottom {
-    background-color: var(--BG-SC-1); /* Dark background for contrast */
+    background-color: var(--BG-SC-1);
+    /* Dark background for contrast */
     color: var(--AC-SC-1);
     padding: 2rem;
     text-align: center;
+    border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.1);
+    /* Keep this divider */
 }
 
 .footer-sm-links {
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    /* Added margin to separate from list items */
     display: flex;
-    justify-content: center;
     gap: 1.5rem;
 }
 
 .footer-sm-links a {
-    color: var(--AC-SC-1); /* Lighter text color */
+    color: var(--AC-PC-1);
+    /* Use primary accent for icons */
     transition: all 0.2s ease;
 }
 
 .footer-sm-links a:hover {
     color: var(--AC-SC-1);
+    /* Use secondary accent on hover */
     transform: scale(1.1);
 }
 
 .copyright-text {
     font-family: var(--font-body);
     font-size: 0.9rem;
-    color: var(--TX-SC-1); /* Lighter text color */
+    color: var(--TX-SC-1);
     margin: 0;
+}
+
+/* ==========================================================================
+ Responsive Styles
+ ========================================================================== */
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info-wrapper {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.2);
+        padding-top: 2rem;
+    }
+
+    .footer-sm-links {
+        justify-content: center;
+    }
 }

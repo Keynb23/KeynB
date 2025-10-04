@@ -3,7 +3,8 @@ import { useState } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { contactInfo } from "../data/contactData.js";
-import "./Footer.css"; // Assuming Contact.css content is now merged or handled by Footer.css
+// NOTE: This now refers to the merged styles (Contact + Footer Bottom)
+import "./Footer.css";
 
 // ==========================================================
 // 1. SVG Icons (Moved from Contact.jsx)
@@ -75,21 +76,14 @@ const Footer = () => {
     setSubmitSuccess(false);
 
     try {
-      // --- 1. Save the form data to a new 'inquiries' collection in Firestore
       await addDoc(collection(db, "inquiries"), {
         ...formData,
-        timestamp: serverTimestamp(), // For sorting/tracking
+        timestamp: serverTimestamp(),
         status: "new",
       });
 
-      // --- 2. Success Feedback
       setSubmitSuccess(true);
-      console.log("Form submitted and saved to Firestore:", formData);
-
-      // --- 3. Reset the form
       setFormData({ name: "", phone: "", email: "", message: "" });
-
-      // Hide success message after a few seconds
       setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (error) {
       console.error("Error submitting contact form:", error);
@@ -102,127 +96,123 @@ const Footer = () => {
   };
 
   return (
-    <footer className="footer-wrapper">
-      <div className="contact-section" id="contact">
-        <div className="contact-container">
-          {/* ---------------------------------------------------- */}
-          {/* 4. FORM WRAPPER (Moved from Contact.jsx) */}
-          {/* ---------------------------------------------------- */}
-          <div className="contact-form-wrapper">
-            <h2>Get in Touch</h2>
-            <p>
-              Have a question or want to work together? Leave your details and
-              I'll get back to you.
+    // We use 'contact-section' as the main wrapper for the footer
+    <footer className="contact-section" id="contact">
+      <div className="contact-container">
+        {/* FORM WRAPPER */}
+        <div className="contact-form-wrapper">
+          <h2>Get in Touch</h2>
+          <p>
+            Have a question or want to work together? Leave your details and
+            I'll get back to you.
+          </p>
+
+          {submitSuccess && (
+            <p className="form-alert success">
+              Message sent successfully! I'll be in touch.
             </p>
+          )}
+          {submitError && (
+            <p className="form-alert error">Error: {submitError}</p>
+          )}
 
-            {submitSuccess && (
-              <p className="form-alert success">
-                Message sent successfully! I'll be in touch.
-              </p>
-            )}
-            {submitError && (
-              <p className="form-alert error">Error: {submitError}</p>
-            )}
-
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Your Name"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="phone">Phone</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Your Phone Number"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Your Email Address"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Your Message"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="submit-btn"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </button>
-            </form>
-          </div>
-
-          {/* ---------------------------------------------------- */}
-          {/* 5. INFO WRAPPER (Moved from Contact.jsx) */}
-          {/* ---------------------------------------------------- */}
-          <div className="contact-info-wrapper">
-            <h3>Contact Information</h3>
-            <p>
-              Feel free to reach out to me directly through any of the following
-              channels.
-            </p>
-            <ul className="contact-list">
-              <li>
-                <strong>Email:</strong>{" "}
-                <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
-              </li>
-              <li>
-                <strong>Phone:</strong>{" "}
-                <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
-              </li>
-            </ul>
-            {/* Social Media Icons (Using the external contactInfo links) */}
-            <div className="footer-sm-links">
-              <a
-                href={contactInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub Profile"
-              >
-                <GitHubIcon />
-              </a>
-              <a
-                href={contactInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
-              >
-                <LinkedInIcon />
-              </a>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your Name"
+                required
+              />
             </div>
+            <div className="form-group">
+              <label htmlFor="phone">Phone</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Your Phone Number"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your Email Address"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Your Message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="submit-btn"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+        </div>
+
+        {/* INFO WRAPPER */}
+        <div className="contact-info-wrapper">
+          <h3>Contact Information</h3>
+          <p>
+            Feel free to reach out to me directly through any of the following
+            channels.
+          </p>
+          <ul className="contact-list">
+            <li>
+              <strong>Email:</strong>{" "}
+              <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+            </li>
+            <li>
+              <strong>Phone:</strong>{" "}
+              <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
+            </li>
+          </ul>
+          {/* Social Media Icons (Using the external contactInfo links) */}
+          <div className="footer-sm-links">
+            <a
+              href={contactInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+            >
+              <GitHubIcon />
+            </a>
+            <a
+              href={contactInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+            >
+              <LinkedInIcon />
+            </a>
           </div>
         </div>
       </div>
+      {/* Separate div for the copyright text */}
       <div className="footer-bottom">
         <p className="copyright-text">
           &copy; {new Date().getFullYear()} Key'n Brosdahl. All Rights Reserved.

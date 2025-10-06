@@ -36,7 +36,8 @@
   color-scheme: dark;
   --BG-PC-1: #080009;
   --BG-SC-1: #000000;
-  --INVD: #fcfcfc;
+  --INVD: #fcfcfc; /* Inverse Dark (white/light color) */
+  --INVL: var(--INVD);
   --COMP: #201f1f;
   --TX-PC-1: #fdfdfd;
   --TX-SC-1: #e4e4e4;

@@ -1,11 +1,7 @@
 /* Contact Section Styles (Base for the entire Footer structure)*/
-
-/* The main <footer class="contact-section"> element */
 .contact-section {
     padding: 5rem 2rem 0;
-    /* Reduced bottom padding to account for footer-bottom */
     background-color: var(--BG-SC-1);
-    /* Removed original border-top for cleaner integration */
 }
 
 .contact-container {
@@ -14,10 +10,10 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 3rem;
-    background-color: var(--BG-PC-1);
+    background-color: var(--COMP);
     padding: 3rem;
     border-radius: 16px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: var(--AC-TC-1)0px 3px 8px;
     margin-bottom: 3rem;
     /* Add space between the contact box and the copyright section */
 }
@@ -109,13 +105,15 @@
 }
 
 .contact-list a {
-    color: var(--AC-PC-1);
+    color: var(--TX-SC-1);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .contact-list a:hover {
     text-decoration: underline;
+    color: var(--TX-SC-1);
+
 }
 
 /* ==========================================================================

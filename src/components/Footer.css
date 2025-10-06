@@ -159,23 +159,290 @@
     color: var(--TX-SC-1);
     margin: 0;
 }
-
 /* ==========================================================================
- Responsive Styles
- ========================================================================== */
-@media (max-width: 900px) {
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
+   Media Queries
+   ========================================================================== */
 
-    .contact-info-wrapper {
-        padding-left: 0;
-        border-left: none;
-        border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.2);
-        padding-top: 2rem;
-    }
+/* Smallest phones (280px and up) */
+@media (min-width: 280px) and (max-width: 349px) {
+  /* Styles for ultra-small screens like Galaxy Fold */
+  .contact-section {
+    padding: 3rem 1rem 0;
+  }
 
-    .footer-sm-links {
-        justify-content: center;
-    }
+  .contact-container {
+    grid-template-columns: 1fr; /* Stack layout */
+    padding: 1.5rem;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+  }
+
+  .contact-form-wrapper h2,
+  .contact-info-wrapper h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-form-wrapper p,
+  .contact-info-wrapper p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 6px;
+  }
+
+  .submit-btn {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 6px;
+  }
+
+  .contact-info-wrapper {
+    padding-top: 1.5rem;
+    border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.2);
+    padding-left: 0; /* Ensure it stays centered/stacked */
+    border-left: none; /* Ensure it stays centered/stacked */
+  }
+
+  .contact-list li {
+    font-size: 0.95rem;
+  }
+
+  .footer-bottom {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-sm-links {
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+
+  .copyright-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Small phones (350px – 479px) */
+@media (min-width: 350px) and (max-width: 479px) {
+  /* Styles for small devices like older iPhones */
+  .contact-section {
+    padding: 4rem 1.5rem 0;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+    gap: 2.5rem;
+  }
+
+  .contact-form-wrapper h2,
+  .contact-info-wrapper h3 {
+    font-size: 2rem;
+  }
+
+  .contact-form-wrapper p,
+  .contact-info-wrapper p {
+    font-size: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .submit-btn {
+    padding: 0.9rem;
+  }
+
+  .contact-info-wrapper {
+    padding-top: 2rem;
+    padding-left: 0; /* Ensure it stays centered/stacked */
+    border-left: none; /* Ensure it stays centered/stacked */
+  }
+}
+
+/* Medium phones (480px – 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+  /* Styles for most mid-size Android and iPhones (Stacked layout fix) */
+  .contact-section {
+    padding: 5rem 2rem 0;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr; /* ENSURE STACKED LAYOUT */
+    max-width: 90%;
+    padding: 2.5rem;
+  }
+
+  .contact-info-wrapper {
+    padding-left: 0; /* Reset left padding */
+    border-left: none; /* Remove left divider */
+    border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.2); /* Add top divider */
+    padding-top: 2.5rem;
+  }
+}
+
+/* Large phones (600px – 750px) */
+@media (min-width: 600px) and (max-width: 750px) {
+  /* Styles for large phones and small phablets (Stacked layout fix) */
+  .contact-container {
+    grid-template-columns: 1fr; /* ENSURE STACKED LAYOUT */
+    max-width: 720px;
+    padding: 3rem;
+  }
+
+  .contact-form-wrapper h2,
+  .contact-info-wrapper h3 {
+    font-size: 2.2rem;
+  }
+
+  .contact-form-wrapper p,
+  .contact-info-wrapper p {
+    font-size: 1.05rem;
+  }
+
+  .contact-info-wrapper {
+    padding-left: 0; /* Reset left padding */
+    border-left: none; /* Remove left divider */
+    border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.2); /* Add top divider */
+    padding-top: 3rem;
+  }
+}
+
+/* Small tablets (768px – 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Portrait tablets and small landscape tablets (Keeping stacked for a clean, single-column look) */
+  .contact-container {
+    grid-template-columns: 1fr;
+    max-width: 850px;
+    padding: 3.5rem;
+    gap: 3.5rem;
+  }
+
+  .contact-form-wrapper h2,
+  .contact-info-wrapper h3 {
+    font-size: 2.6rem;
+  }
+
+  .contact-info-wrapper {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.2);
+    padding-top: 3.5rem; /* Increased top padding to match gap */
+  }
+}
+
+/* Medium tablets / small laptops (1024px – 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Landscape tablets, small laptops, Chromebooks */
+  .contact-section {
+    padding-top: 6rem;
+  }
+
+  .contact-container {
+    max-width: 1000px;
+    grid-template-columns: 2fr 1fr; /* Back to 2 columns */
+    padding: 4rem;
+    gap: 4rem;
+  }
+
+  .contact-form-wrapper h2,
+  .contact-info-wrapper h3 {
+    font-size: 2.8rem;
+  }
+
+  .contact-info-wrapper {
+    padding-left: 2rem; /* Restore default left padding */
+    border-left: 1px solid okhsla(from var(--TX-SC-1) h s l / 0.2); /* Restore default border */
+    border-top: none;
+    padding-top: 0;
+  }
+}
+
+/* Large tablets / standard desktops (1280px – 1680px) */
+@media (min-width: 1280px) and (max-width: 1680px) {
+  /* Standard desktop screens, large tablets */
+  .contact-section {
+    padding-top: 7rem;
+  }
+
+  .contact-container {
+    max-width: 1200px;
+    padding: 5rem;
+    gap: 5rem;
+    margin-bottom: 4rem;
+  }
+
+  .contact-form-wrapper h2,
+  .contact-info-wrapper h3 {
+    font-size: 3rem;
+  }
+
+  .contact-form-wrapper p,
+  .contact-info-wrapper p {
+    font-size: 1.2rem;
+  }
+
+  .submit-btn {
+    padding: 1.2rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* Ultra-Large Desktops (1681px and up) */
+@media (min-width: 1681px) {
+  /* Styles for ultra-wide and 4K+ monitors */
+  .contact-section {
+    padding-top: 8rem;
+  }
+
+  .contact-container {
+    max-width: 1400px;
+    padding: 6rem;
+    gap: 6rem;
+    margin-bottom: 5rem;
+    border-radius: 20px;
+  }
+
+  .contact-form-wrapper h2,
+  .contact-info-wrapper h3 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-form-wrapper p,
+  .contact-info-wrapper p {
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 1rem 1.2rem;
+    font-size: 1.1rem;
+  }
+
+  .submit-btn {
+    padding: 1.4rem;
+    font-size: 1.3rem;
+  }
+
+  .footer-bottom {
+    padding: 3rem;
+  }
+
+  .copyright-text {
+    font-size: 1rem;
+  }
 }

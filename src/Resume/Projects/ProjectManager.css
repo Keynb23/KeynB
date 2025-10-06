@@ -283,19 +283,219 @@
     cursor: not-allowed;
 }
 
-/* Responsive tweaks */
-@media (max-width: 600px) {
-    .pm-modal-content {
-        padding: 18px 6px 12px 6px;
-        max-width: 98vw;
-        min-width: 0;
-    }
-    .pm-form-input, .pm-form-textarea {
-        font-size: 0.97rem;
-    }
-    .pm-btn-submit {
-        width: 100%;
-        align-self: stretch;
-        padding: 12px 0;
-    }
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+/* Smallest phones (280px and up) */
+@media (min-width: 280px) and (max-width: 349px) {
+  /* Styles for ultra-small screens like Galaxy Fold */
+  .pm-Wrapper {
+    padding: 10px;
+  }
+
+  .pm-modal-content {
+    padding: 14px 8px 10px 8px;
+    width: 100%;
+    max-width: 98vw;
+  }
+
+  .modal-close-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+  }
+
+  .pm-container {
+    gap: 15px;
+  }
+
+  .pm-form {
+    gap: 14px;
+  }
+
+  .pm-form-input,
+  .pm-form-textarea {
+    padding: 8px 10px;
+    font-size: 0.95rem;
+  }
+
+  .pm-form-label {
+    font-size: 0.9rem;
+  }
+
+  .pm-project-tag,
+  .pm-suggested-tag {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+  }
+
+  .pm-btn-tag-add {
+    font-size: 0.9rem;
+    padding: 6px 14px;
+  }
+
+  .pm-btn-submit {
+    width: 100%;
+    align-self: stretch;
+    padding: 10px 0;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .pm-file-preview-name {
+    font-size: 0.85rem;
+  }
+}
+
+/* Small phones (350px – 479px) */
+@media (min-width: 350px) and (max-width: 479px) {
+  /* Styles for small devices like older iPhones */
+  .pm-modal-content {
+    padding: 18px 10px 12px 10px;
+    width: 95%;
+  }
+
+  .pm-container {
+    gap: 18px;
+  }
+
+  .pm-form-input,
+  .pm-form-textarea {
+    font-size: 0.97rem;
+  }
+
+  .pm-form-label {
+    font-size: 0.95rem;
+  }
+
+  .pm-btn-submit {
+    width: 100%;
+    align-self: stretch;
+    padding: 12px 0;
+    margin-top: 12px;
+  }
+
+  .pm-tag-input-group {
+    gap: 10px;
+  }
+}
+
+/* Medium phones (480px – 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+  /* Styles for most mid-size Android and iPhones */
+  .pm-modal-content {
+    padding: 20px 15px 14px 15px;
+    width: 85%;
+    max-width: 550px;
+  }
+
+  .pm-btn-submit {
+    padding: 11px 20px;
+    font-size: 1.04rem;
+    width: auto;
+    align-self: flex-end;
+  }
+}
+
+/* Large phones (600px – 750px) */
+@media (min-width: 600px) and (max-width: 750px) {
+  /* Styles for large phones and small phablets */
+  .pm-modal-content {
+    padding: 25px 20px 18px 20px;
+    max-width: 700px;
+  }
+
+  .pm-form-input,
+  .pm-form-textarea {
+    padding: 10px 14px;
+  }
+}
+
+/* Small tablets (768px – 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Portrait tablets and small landscape tablets */
+  .pm-modal-content {
+    max-width: 750px;
+    max-height: 85vh;
+  }
+
+  .pm-form-textarea {
+    min-height: 100px;
+  }
+
+  .pm-btn-submit {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Medium tablets / small laptops (1024px – 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Landscape tablets, small laptops, Chromebooks */
+  .pm-modal-content {
+    max-width: 900px;
+    padding: 30px 25px 20px 25px;
+  }
+
+  .pm-form {
+    gap: 20px;
+  }
+
+  .pm-form-input,
+  .pm-form-textarea {
+    font-size: 1.05rem;
+  }
+}
+
+/* Large tablets / standard desktops (1280px – 1680px) */
+@media (min-width: 1280px) and (max-width: 1680px) {
+  /* Standard desktop screens, large tablets */
+  .pm-modal-content {
+    max-width: 1000px;
+    padding: 35px 30px 25px 30px;
+  }
+
+  .pm-form-label {
+    font-size: 1.05rem;
+  }
+
+  .pm-btn-submit {
+    padding: 14px 30px;
+    font-size: 1.15rem;
+  }
+}
+
+/* Ultra-Large Desktops (1681px and up) */
+@media (min-width: 1681px) {
+  /* Styles for ultra-wide and 4K+ monitors */
+  .pm-modal-content {
+    max-width: 1100px;
+    max-height: 70vh; /* Keep it centered and not too tall */
+    border-radius: 15px;
+  }
+
+  .pm-container {
+    gap: 30px;
+  }
+
+  .pm-form {
+    gap: 25px;
+  }
+
+  .pm-form-label {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .pm-form-input,
+  .pm-form-textarea {
+    font-size: 1.15rem;
+    padding: 12px 18px;
+  }
+
+  .pm-btn-submit {
+    padding: 16px 40px;
+    font-size: 1.2rem;
+  }
 }

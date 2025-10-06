@@ -130,3 +130,233 @@
 .next-btn {
   right: 1rem;
 }
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+/* Smallest phones (280px and up) */
+@media (min-width: 280px) and (max-width: 349px) {
+  /* Styles for ultra-small screens like Galaxy Fold */
+
+  /* Theme Toggle */
+  .theme-toggle-btn {
+    width: 40px;
+    height: 40px;
+    border-width: 1px;
+  }
+  .theme-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Universal Redirect Button (ToBtn) */
+  .to-btn {
+    font-size: 0.9rem;
+    padding: 0.7em 1.5em;
+  }
+
+  /* Modal Buttons */
+  .modal-close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  .modal-nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+  .prev-btn {
+    left: 0.5rem;
+  }
+  .next-btn {
+    right: 0.5rem;
+  }
+}
+
+/* Small phones (350px – 479px) */
+@media (min-width: 350px) and (max-width: 479px) {
+  /* Styles for small devices like older iPhones */
+
+  /* Theme Toggle */
+  .theme-toggle-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .theme-toggle-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Universal Redirect Button (ToBtn) */
+  .to-btn {
+    font-size: 1rem;
+    padding: 0.75em 1.75em;
+  }
+
+  /* Modal Buttons */
+  .modal-close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+  .modal-nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+  .prev-btn {
+    left: 0.75rem;
+  }
+  .next-btn {
+    right: 0.75rem;
+  }
+}
+
+/* Medium phones (480px – 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+  /* Styles for most mid-size Android and iPhones */
+
+  /* Theme Toggle */
+  .theme-toggle-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  /* Universal Redirect Button (ToBtn) */
+  .to-btn {
+    font-size: 1.05rem;
+  }
+}
+
+/* Large phones (600px – 750px) */
+@media (min-width: 600px) and (max-width: 750px) {
+  /* Styles for large phones and small phablets */
+
+  /* Theme Toggle */
+  .theme-toggle-btn {
+    width: 48px; /* Default size */
+    height: 48px;
+  }
+
+  /* Universal Redirect Button (ToBtn) */
+  .to-btn {
+    font-size: 1.1rem; /* Default size */
+  }
+}
+
+/* Small tablets (768px – 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Portrait tablets and small landscape tablets */
+
+  /* Modal Buttons */
+  .modal-close-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.6rem;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+  .modal-nav-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.6rem;
+  }
+  .prev-btn {
+    left: 1.25rem;
+  }
+  .next-btn {
+    right: 1.25rem;
+  }
+}
+
+/* Medium tablets / small laptops (1024px – 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Landscape tablets, small laptops, Chromebooks */
+
+  /* Modal Buttons */
+  .modal-close-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.75rem;
+  }
+  .modal-nav-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.75rem;
+  }
+}
+
+/* Large tablets / standard desktops (1280px – 1680px) */
+@media (min-width: 1280px) and (max-width: 1680px) {
+  /* Standard desktop screens, large tablets */
+
+  /* Theme Toggle */
+  .theme-toggle-btn {
+    width: 52px;
+    height: 52px;
+  }
+  .theme-toggle-btn svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Universal Redirect Button (ToBtn) */
+  .to-btn {
+    font-size: 1.2rem;
+    padding: 0.9em 2.2em;
+  }
+
+  /* Modal Buttons */
+  .modal-close-btn {
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+  }
+  .modal-nav-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 1.8rem;
+  }
+}
+
+/* Ultra-Large Desktops (1681px and up) */
+@media (min-width: 1681px) {
+  /* Styles for ultra-wide and 4K+ monitors */
+
+  /* Theme Toggle */
+  .theme-toggle-btn {
+    width: 56px;
+    height: 56px;
+  }
+  .theme-toggle-btn svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Universal Redirect Button (ToBtn) */
+  .to-btn {
+    font-size: 1.3rem;
+    padding: 1em 2.5em;
+  }
+
+  /* Modal Buttons */
+  .modal-close-btn {
+    top: 2rem;
+    right: 2rem;
+    width: 55px;
+    height: 55px;
+    font-size: 2rem;
+  }
+  .modal-nav-btn {
+    left: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+}

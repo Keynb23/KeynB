@@ -161,42 +161,49 @@
 }
 
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+/* Smallest phones (280px and up) */
+@media (min-width: 280px) and (max-width: 349px) {
+  /* Styles for ultra-small screens like Galaxy Fold */
   .RP-Wrapper {
-    padding: 2rem 1rem;
+    width: 100%;
+    margin: 2rem 0 auto;
   }
 
   .RP-Title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin: 3rem 0 2rem;
   }
 
+  .RP-Message {
+    font-size: 1rem;
+    padding: 1rem;
+  }
 
-  .RP-Nav-Button {
-    width: 40px;
-    height: 40px;
+  .RP-Carousel-Container {
+    /* Keep default width 100% */
+  }
+
+  .RP-Carousel {
+    /* Set an explicit height for the carousel track */
+    height: 200px;
   }
 
   .RP-Overlay {
-    padding: 1rem 1rem 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .RP-Carousel-Container {
-    flex-direction: row;
-    gap: 0;
-    padding: 0 10px;
+    padding: 0.8rem 0.8rem 0.6rem;
   }
 
   .RP-Nav-Button {
-    position: absolute;
-    top: auto;
-    bottom: 5px;
-    transform: none;
+    /* Reduced button size */
     width: 30px;
     height: 30px;
-    background: var(--AC-PC-1);
+    padding: 5px;
+    font-size: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .RP-Prev {
@@ -207,8 +214,196 @@
     right: 5px;
   }
 
+  .RP-Indicators {
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+
+  .RP-Indicator {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Small phones (350px – 479px) */
+@media (min-width: 350px) and (max-width: 479px) {
+  /* Styles for small devices like older iPhones */
+  .RP-Title {
+    font-size: 2rem;
+    margin: 4rem 0 2.5rem;
+  }
+
   .RP-Carousel {
-    width: 100%;
-    height: 250px;
+    height: 240px;
+  }
+
+  .RP-Overlay {
+    padding: 1rem 1rem 0.75rem;
+  }
+
+  .RP-Nav-Button {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .RP-Indicators {
+    gap: 0.6rem;
+  }
+}
+
+/* Medium phones (480px – 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+  /* Styles for most mid-size Android and iPhones */
+  .RP-Wrapper {
+    width: 95%;
+  }
+
+  .RP-Title {
+    font-size: 2.2rem;
+    margin: 4rem 0;
+  }
+
+  .RP-Carousel {
+    height: 280px;
+  }
+
+  .RP-Nav-Button {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .RP-Prev {
+    left: 10px;
+  }
+
+  .RP-Next {
+    right: 10px;
+  }
+}
+
+/* Large phones (600px – 750px) */
+@media (min-width: 600px) and (max-width: 750px) {
+  /* Styles for large phones and small phablets */
+  .RP-Title {
+    font-size: 2.4rem;
+    margin: 4.5rem 0;
+  }
+
+  .RP-Carousel {
+    height: 350px;
+  }
+
+  .RP-Nav-Button {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Small tablets (768px – 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Portrait tablets and small landscape tablets */
+  .RP-Wrapper {
+    width: 85%;
+    max-width: 900px;
+  }
+
+  .RP-Title {
+    font-size: 2.8rem;
+    margin: 5rem 0;
+  }
+
+  .RP-Carousel {
+    height: 450px;
+  }
+
+  .RP-Nav-Button {
+    width: 50px; /* Default size */
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .RP-Overlay {
+    padding: 1.5rem 1.5rem 1rem; /* Default padding */
+  }
+}
+
+/* Medium tablets / small laptops (1024px – 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Landscape tablets, small laptops, Chromebooks */
+  .RP-Wrapper {
+    width: 80%;
+    max-width: 1000px;
+  }
+
+  .RP-Title {
+    font-size: 3rem;
+  }
+
+  .RP-Carousel {
+    height: 550px;
+  }
+
+  .RP-Nav-Button {
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
+  }
+}
+
+/* Large tablets / standard desktops (1280px – 1680px) */
+@media (min-width: 1280px) and (max-width: 1680px) {
+  /* Standard desktop screens, large tablets */
+  .RP-Wrapper {
+    width: 75%;
+    max-width: 1200px;
+    margin: 6rem 0 auto;
+  }
+
+  .RP-Title {
+    font-size: 3.2rem;
+    margin: 6rem 0;
+  }
+
+  .RP-Carousel {
+    height: 650px;
+  }
+
+  .RP-Nav-Button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+  }
+}
+
+/* Ultra-Large Desktops (1681px and up) */
+@media (min-width: 1681px) {
+  /* Styles for ultra-wide and 4K+ monitors */
+  .RP-Wrapper {
+    width: 70%;
+    max-width: 1400px;
+    margin: 7rem 0 auto;
+  }
+
+  .RP-Title {
+    font-size: 3.5rem;
+    margin: 7rem 0;
+  }
+
+  .RP-Carousel {
+    height: 800px;
+  }
+
+  .RP-Nav-Button {
+    width: 65px;
+    height: 65px;
+    font-size: 1.5rem;
+    /* Move buttons slightly further from the edge */
+    left: 20px;
+    right: 20px;
   }
 }

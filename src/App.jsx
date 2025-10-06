@@ -1,3 +1,5 @@
+// App.jsx (No functional changes from last step, just included for completeness)
+
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,9 +10,21 @@ import Footer from "./components/Footer";
 import EDU from "./Resume/Edu/Edu";
 import { Login } from "./components/Login/Login";
 import { useEffect, useState } from 'react'; 
+import Skills from "./components/Skills/Skills"; // Import the Skills component
 
 function App() {
-    // 1. State to manage the visibility of the Login modal
+    // 1. Loading State
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Callback function passed to the Skills component
+    const handleLoadingComplete = () => {
+        // Use a slight delay for a smoother transition/fade-out
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 300); 
+    };
+
+    // 2. Login Modal State
     const [isLoginVisible, setIsLoginVisible] = useState(false);
 
     // Function to close the modal (passed as a prop to Login)
@@ -18,24 +32,21 @@ function App() {
         setIsLoginVisible(false);
     };
 
-    // 2. The secret click handler
+    // 3. The secret click handler (only relevant when loading is complete)
     const handleSecretClick = (e) => {
-        // Check if the left Control key (e.ctrlKey) was held down
-        // And if the primary mouse button (e.button === 0) was clicked
         if (e.ctrlKey) {
-            e.preventDefault(); // Prevent default button behavior, just in case
-            setIsLoginVisible(true); // Show the modal
-            // Stop propagation to prevent any parent click handlers from firing
+            e.preventDefault(); 
+            setIsLoginVisible(true); 
             e.stopPropagation(); 
         }
     };
     
-    // 3. Effect to listen for keyboard events (optional, but good for cleanup)
-    // You don't need this for the secret click, but it's often used with secret access.
-    
-    // Cleanup of the incorrect Click function and placeholder button
-    // The Login component renders the backdrop, so we just need a hidden trigger element.
+    // If we are loading, ONLY render the Skills component
+    if (isLoading) {
+        return <Skills onAnimationEnd={handleLoadingComplete} />;
+    }
 
+    // Once loading is complete, render the main application
     return (
         <>
             <Navbar />
@@ -47,7 +58,6 @@ function App() {
                 onContextMenu={(e) => e.preventDefault()} // Prevent right-click menu appearing
                 tabIndex={0} // Makes it focusable, though click is main trigger
             >
-                {/* A hidden marker that is only clickable in a specific area */}
                 {/* Content is purely semantic for screen readers if you want to leave it empty */}
             </div>
 

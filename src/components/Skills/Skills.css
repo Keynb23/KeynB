@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Skills/Pre-Loader Styles (Skills.css)
+   ========================================================================== */
+
+@keyframes zoom-in {
+  0% {
+    transform: translateZ(-1000px);
+    opacity: 0;
+    filter: blur(5px);
+  }
+  50% {
+    transform: translateZ(0px);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: translateZ(1000px);
+    opacity: 0;
+    filter: blur(5px);
+  }
+}
+
+.stuck-grid {
+    margin-top: 2.5%;
+  /* Pre-loader setup */
+  position: fixed; /* Fixes the component over the entire viewport */
+  top: 0;
+  left: 0;
+  z-index: 9999; /* Ensure it is above all content */
+  /* Use global variable for a clean dark/light background */
+  background-color: var(--BG-PC-1); 
+  
+  /* Layout adjustments for Denser Grid (9x9) */
+  block-size: 100vh; 
+  width: 100vw; 
+  perspective: 1000px;
+  transform-style: preserve-3d;
+
+  /* NEW DENSE GRID: 9 columns and 9 rows to fit more items */
+  display: grid;
+  grid: repeat(9, 11.11vh) / repeat(9, 11.11vw);
+  place-items: center;
+
+  overflow: hidden; 
+}
+
+.stuck-grid > .grid-item {
+  transform-style: preserve-3d;
+  font-weight: lighter;
+  text-wrap: nowrap;
+  
+  /* NEW: Smaller font size for standard items */
+  font-size: 3vmin; 
+  /* Use secondary text color for a subtle look */
+  color: var(--TX-SC-1); 
+
+  /* Standard Time-Based Animation */
+  animation: zoom-in 3.5s ease-in-out forwards; 
+  /* Calculate staggered delay using the --i variable from JSX */
+  animation-delay: calc(var(--i) * 0.05s); 
+  will-change: transform, opacity, filter;
+  transition: color 0.3s ease;
+}
+
+.stuck-grid > .grid-item.special {
+  /* Center Item Styling */
+  grid-row: 4 / span 3; /* Center row over 3 rows (4, 5, 6) */
+  grid-column: 4 / span 3; /* Center column over 3 columns (4, 5, 6) */
+  
+  /* Ensure name is larger and primary text color */
+  font-size: 5vmin; 
+  color: var(--TX-PC-1); 
+
+  /* Give the key item a longer duration and immediate start */
+  animation-duration: 4s; 
+  animation-delay: 0s; 
+  z-index: 10000; 
+}
+
+.stuck-grid > .grid-item > b {
+  font-size: 15vmin;
+  font-weight: bold;
+  color: var(--TX-AC); /* Use the accent color for the main name */
+}
+
+/* ==========================================================================
+   Media Queries for Skills.css
+   ========================================================================== */
+
+/* Smallest phones (280px and up) */
+@media (min-width: 280px) and (max-width: 349px) {
+  /* Styles for ultra-small screens like Galaxy Fold */
+  .stuck-grid {
+    margin-top: 10%; /* Increase margin for tiny screens */
+    grid: repeat(10, 10vh) / repeat(10, 10vw); /* Even denser grid */
+  }
+  .stuck-grid > .grid-item {
+    font-size: 2.5vmin;
+  }
+  .stuck-grid > .grid-item.special {
+    font-size: 4vmin;
+    grid-row: 4 / span 3;
+    grid-column: 4 / span 3;
+  }
+  .stuck-grid > .grid-item > b {
+    font-size: 10vmin;
+  }
+} 
+
+/* Small phones (350px – 479px) */
+@media (min-width: 350px) and (max-width: 479px) { 
+  /* Styles for small devices like older iPhones */
+  .stuck-grid {
+    margin-top: 5%;
+  }
+  .stuck-grid > .grid-item {
+    font-size: 2.7vmin;
+  }
+  .stuck-grid > .grid-item.special {
+    font-size: 4.5vmin;
+  }
+  .stuck-grid > .grid-item > b {
+    font-size: 12vmin;
+  }
+} 
+
+/* Medium phones (480px – 599px) */ 
+@media (min-width: 480px) and (max-width: 599px) { 
+  /* Styles for most mid-size Android and iPhones */ 
+  .stuck-grid {
+    margin-top: 2.5%; /* Match current setting */
+  }
+  .stuck-grid > .grid-item {
+    font-size: 3vmin;
+  }
+  .stuck-grid > .grid-item.special {
+    font-size: 5vmin;
+  }
+  .stuck-grid > .grid-item > b {
+    font-size: 15vmin;
+  }
+} 
+
+/* Large phones (600px – 750px) */ 
+@media (min-width: 600px) and (max-width: 750px) { 
+  /* Styles for large phones and small phablets */
+  .stuck-grid {
+    margin-top: 0;
+  }
+} 
+
+/* Small tablets (768px – 1023px) */ 
+@media (min-width: 768px) and (max-width: 1023px) { 
+  /* Portrait tablets and small landscape tablets */ 
+} 
+
+/* Medium tablets / small laptops (1024px – 1279px) */ 
+@media (min-width: 1024px) and (max-width: 1279px) { 
+  /* Landscape tablets, small laptops, Chromebooks */ 
+} 
+
+/* Large tablets / standard desktops (1280px – 1680px) */ 
+@media (min-width: 1280px) and (max-width: 1680px) { 
+  /* Standard desktop screens, large tablets */ 
+} 
+
+/* Ultra-Large Desktops (1681px and up) */ 
+@media (min-width: 1681px) { 
+  /* Styles for ultra-wide and 4K+ monitors */ 
+}

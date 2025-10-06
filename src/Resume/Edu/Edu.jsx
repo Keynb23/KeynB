@@ -1,7 +1,6 @@
 // src/Pages/Resume/Edu/Edu.jsx
 
 import './Edu.css';
-import IconBowl from '../../components/IconBowl.jsx'; // Import the new component
 
 const Edu = () => {
   return (
@@ -36,8 +35,6 @@ const Edu = () => {
         </div>
       </div>
 
-        {/* Use the new component here, passing the icons as a prop */}
-        <IconBowl/>
     </section>
   );
 };

@@ -138,7 +138,6 @@
   z-index: 10;
   position: absolute;
   top: 50%;
-  /* transform: translateY(-50%); */
   transition: background 0.3s;
   border-radius: 50%;
   width: 50px;
@@ -398,12 +397,4 @@
     height: 800px;
   }
 
-  .RP-Nav-Button {
-    width: 65px;
-    height: 65px;
-    font-size: 1.5rem;
-    /* Move buttons slightly further from the edge */
-    left: 20px;
-    right: 20px;
-  }
 }

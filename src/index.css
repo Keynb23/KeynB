@@ -19,14 +19,14 @@
   color-scheme: light;
 
   /* Crimson & Charcoal Theme */
-  --BG-PC-1: #fcfcfc; /* Dark Charcoal Background */
-  --BG-SC-1: #f2f2f2; /* Slightly Lighter Gray for Cards/Sections */
-  --INVL: #080009;
-  --COMP: #e6e6e6;
-  --TX-PC-1: #000000; /* Off-white Text for Readability */
-  --TX-SC-1: #171414; /* Secondary Gray Text */
+  --BG-PC-1: #dad2dc; /* Dark Charcoal Background */
+  --BG-SC-1: #090212; /* Slightly Lighter Gray for Cards/Sections */
+  --INVL: #15081ba1;
+  --COMP: #0c0b0e;
+  --TX-PC-1: #ede3f8; /* Off-white Text for Readability */
+  --TX-SC-1: #e4e4e4; /* Secondary Gray Text */
   --TX-AC: #8848d1; /* Bright Crimson Accent for Headings/Links */
-  --AC-PC-1: #6c27d4; /* Primary Accent Color (e.g., buttons, highlights) */
+  --AC-PC-1: #aa5edc; /* Primary Accent Color (e.g., buttons, highlights) */
   --AC-SC-1: #433896a5; /* Subtle Accent (e.g., borders, dividers) */
   --AC-TC-1: #691a8d; /* Pure Red for Call to Actions (CTA) */
 }
@@ -34,18 +34,12 @@
 /* No change needed for dark theme, as this is a dark theme by default */
 [data-theme="dark"] {
   color-scheme: dark;
-  --BG-PC-1: #080009;
-  --BG-SC-1: #000000;
-  --INVD: #fcfcfc; /* Inverse Dark (white/light color) */
+  --BG-PC-1: #1b0421;
+  --BG-SC-1: #dfdde0;
+  --INVD: #cf92f5bb; /* Inverse Dark (white/light color) */
   --INVL: var(--INVD);
-  --COMP: #201f1f;
-  --TX-PC-1: #fdfdfd;
-  --TX-SC-1: #e4e4e4;
-  --TX-AC: #7b27d5;
-  --AC-PC-1: #800fb0;
-  --AC-SC-1: #490575d4;
-  --AC-TC-1: #433896a5;
-  --AC-TC-1: #691a8d;
+  --COMP: #e9e7ef;
+  --TX-PC-1: #1b0d24;
 }
 
 /* ==========================================================================
@@ -69,7 +63,7 @@ html,
 
 body {
   font-family: var(--font-body);
-  background-color: var(--BG-PC-1);
+  background-color: var(--BG-SC-1);
   color: var(--TX-PC-1);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;

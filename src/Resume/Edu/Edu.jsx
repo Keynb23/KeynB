@@ -8,7 +8,7 @@ const Edu = () => {
       <h1 className="education-title">Education & Skills</h1>
 
       <div className="education-card">
-        <div className="card-content">
+        <div className="EDU-card-content">
           <h2 className="degree-title">Frontend Development</h2>
           <p className="school-info">Coding Temple | March 2025 – July 2025</p>
           <p className="card-description">
@@ -22,7 +22,7 @@ const Edu = () => {
       </div>
 
       <div className="education-card">
-        <div className="card-content">
+        <div className="EDU-card-content">
           <h2 className="degree-title">Self-Taught 3D Developer & Designer</h2>
           <p className="school-info">Online Learning | 2025 – Present</p>
           <p className="card-description">

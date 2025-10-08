@@ -9,73 +9,78 @@ import Projects from "./Resume/Projects/Projects";
 import Footer from "./components/Footer";
 import EDU from "./Resume/Edu/Edu";
 import { Login } from "./components/Login/Login";
-import { useEffect, useState } from 'react'; 
-import Skills from "./components/Skills/Skills"; // Import the Skills component
+import { useEffect, useState } from "react";
+import Skills from "./components/Skills/Skills";
+import { Decoys } from "./components/Decoys";
+import { BgIcons } from "./components/BG-Icons";
 
 function App() {
-    // 1. Loading State
-    const [isLoading, setIsLoading] = useState(true);
+  // 1. Loading State
+  const [isLoading, setIsLoading] = useState(true);
 
-    // Callback function passed to the Skills component
-    const handleLoadingComplete = () => {
-        // Use a slight delay for a smoother transition/fade-out
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 300); 
-    };
+  // Callback function passed to the Skills component
+  const handleLoadingComplete = () => {
+    // Use a slight delay for a smoother transition/fade-out
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+  };
 
-    // 2. Login Modal State
-    const [isLoginVisible, setIsLoginVisible] = useState(false);
+  // 2. Login Modal State
+  const [isLoginVisible, setIsLoginVisible] = useState(false);
 
-    // Function to close the modal (passed as a prop to Login)
-    const closeLoginModal = () => {
-        setIsLoginVisible(false);
-    };
+  // Function to close the modal (passed as a prop to Login)
+  const closeLoginModal = () => {
+    setIsLoginVisible(false);
+  };
 
-    // 3. The secret click handler (only relevant when loading is complete)
-    const handleSecretClick = (e) => {
-        if (e.ctrlKey) {
-            e.preventDefault(); 
-            setIsLoginVisible(true); 
-            e.stopPropagation(); 
-        }
-    };
-    
-    // If we are loading, ONLY render the Skills component
-    if (isLoading) {
-        return <Skills onAnimationEnd={handleLoadingComplete} />;
+  // 3. The secret click handler (only relevant when loading is complete)
+  const handleSecretClick = (e) => {
+    if (e.ctrlKey) {
+      e.preventDefault();
+      setIsLoginVisible(true);
+      e.stopPropagation();
     }
+  };
 
-    // Once loading is complete, render the main application
-    return (
-        <>
-            <Navbar />
-            
-            {/* The hidden trigger element, placed outside the main content flow */}
-            <div 
-                className="hidden-login-trigger" 
-                onClick={handleSecretClick}
-                onContextMenu={(e) => e.preventDefault()} // Prevent right-click menu appearing
-                tabIndex={0} // Makes it focusable, though click is main trigger
-            >
-                {/* Content is purely semantic for screen readers if you want to leave it empty */}
-            </div>
+  // If we are loading, ONLY render the Skills component
+  if (isLoading) {
+    return <Skills onAnimationEnd={handleLoadingComplete} />;
+  }
 
-            {/* Render the Login modal only when isLoginVisible is true */}
-            {isLoginVisible && <Login onClose={closeLoginModal} />}
+  // Once loading is complete, render the main application
+  return (
+    <>
+      <Navbar />
+      <BgIcons />
+      <Decoys />
 
-            <div className="app-container">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/projects" element={<Projects />} />
-                    <Route path="/experience" element={<Exp />} />
-                    <Route path="/education" element={<EDU />} />
-                    <Route path="/contact" element={<Footer />} />
-                </Routes>
-            </div>
-            <Footer />
-        </>
-    );
+      {/* The hidden trigger element, placed outside the main content flow */}
+      <div
+        className="hidden-login-trigger"
+        onClick={handleSecretClick}
+        onContextMenu={(e) => e.preventDefault()} // Prevent right-click menu appearing
+        tabIndex={0} // Makes it focusable, though click is main trigger
+      >
+        {/* Content is purely semantic for screen readers if you want to leave it empty */}
+      </div>
+
+      {/* Render the Login modal only when isLoginVisible is true */}
+      {isLoginVisible && <Login onClose={closeLoginModal} />}
+
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/experience" element={<Exp />} />
+          <Route path="/education" element={<EDU />} />
+          <Route path="/contact" element={<Footer />} />
+        </Routes>
+        
+      </div>
+      <Footer />
+    </>
+  );
 }
 
 export default App;

@@ -1,12 +1,16 @@
 // components/Skills/Skills.jsx
 
-import { useEffect } from 'react'; 
+
+import { useEffect } from 'react';
 import './Skills.css';
 
-// Define the total duration for the animation to complete in milliseconds.
-const TOTAL_ANIMATION_TIME_MS = 3800; 
 
-const Skills = ({ onAnimationEnd }) => { 
+// Define the total duration for the animation to complete in milliseconds.
+const TOTAL_ANIMATION_TIME_MS = 3800;
+
+
+const Skills = ({ onAnimationEnd }) => {
+
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -15,9 +19,13 @@ const Skills = ({ onAnimationEnd }) => {
             }
         }, TOTAL_ANIMATION_TIME_MS);
 
+
         return () => clearTimeout(timer);
 
+
     }, [onAnimationEnd]);
+
+
 
 
     const items = [
@@ -31,12 +39,14 @@ const Skills = ({ onAnimationEnd }) => {
         "UNREAL ENGINE"
     ];
 
+
     return (
         <div className="stuck-grid">
             {/* The special item - given i=0 to ensure immediate start (as per CSS) */}
-            <div className="grid-item special" style={{'--i': 0}}> 
+            <div className="grid-item special" style={{'--i': 0}}>
                 <b>Key'n Brosdahl</b>
             </div>
+
 
             {/* Map over the other items */}
             {items.map((item, index) => {
@@ -45,7 +55,7 @@ const Skills = ({ onAnimationEnd }) => {
                     <div
                         key={index}
                         className="grid-item"
-                        style={{ '--i': index + 1 }} 
+                        style={{ '--i': index + 1 }}
                     >
                         {item}
                     </div>
@@ -54,5 +64,6 @@ const Skills = ({ onAnimationEnd }) => {
         </div>
     );
 };
+
 
 export default Skills;

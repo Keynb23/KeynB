@@ -5,7 +5,8 @@
   justify-content: center;
   align-items: center;
   padding: 4rem 2rem;
-  min-height: calc(100vh - 120px); /* Adjust based on your navbar height */
+  min-height: calc(100vh - 120px);
+  /* Adjust based on your navbar height */
 }
 
 .Home-Content {
@@ -15,20 +16,24 @@
   align-items: center;
   width: 100%;
   justify-content: center;
-  /* max-width: 800px; */
-  /* text-align: center; */
+  background-color: var(--INV);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(17, 5, 24, 0.1);
+  backdrop-filter: blur(11.4px);
+  -webkit-backdrop-filter: blur(11.4px);
 }
 
 .title h1 {
-  font-size: clamp(2.5rem, 10vw, 4.5rem); /* Responsive font size */
-  color: var(--AC-PC-1);
+  font-size: clamp(2.5rem, 10vw, 4.5rem);
+  color: var(--BG-PC-1);
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
+
 .sub-title h3 {
   font-size: clamp(1.5rem, 5vw, 2rem);
   font-family: var(--font-ui);
-  color: var(--TX-SC-1);
+  color: var(--TX-PC-1);
   margin-bottom: 2.5rem;
 }
 
@@ -36,19 +41,18 @@
   max-width: 750px;
   text-align: left;
   background-color: var(--COMP);
-  border: 1px solid var(--AC-PC-1);
   padding: 2rem;
   border-radius: 12px;
   box-shadow:
-    rgba(79, 5, 148, 0.16) 0px 3px 6px,
-    rgba(118, 5, 150, 0.389) 0px 3px 6px;
+    rgba(21, 1, 39, 0.13) 0px 3px 6px,
+    rgba(22, 2, 35, 0.249) 0px 3px 6px;
   transition: background-color 0.3s ease;
 }
 
 .pro-sum h4 {
   font-size: 1.75rem;
   font-weight: 500;
-  color: var(--AC-PC-1);
+  color: var(--TX-PC-1);
   border-bottom: 2px solid var(--AC-SC-1);
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
@@ -57,6 +61,8 @@
 .Pro-Sum-P {
   font-size: 1.1rem;
   line-height: 1.7;
+  color: var(--TX-PC-1);
+  filter: brightness(.8)
 }
 
 .home-nav-button {
@@ -73,54 +79,89 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 /* mouse trail */
-
 .mouse-trail-dot {
- position: fixed;
- width: 10px;
- height: 10px;
- border-radius: 50%;
- pointer-events: none;
- background: var(--trail-color); 
- transform: translate(-50%, -50%);
- z-index: 9999;
- transition: background 0.3s ease;
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: var(--trail-color);
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: background 0.3s ease;
 }
+
 /* Light theme: trail is dark */
 :root {
-  --trail-color: #490575d4;/* Dark trail for light theme */
-  /* ... (The rest of your :root variables) */
+  --trail-color: var(--TX-AC);
 }
-
-/* Dark theme: trail is light */
-[data-theme="dark"] {
-  --trail-color: #7b27d5; /* Light trail for dark theme */
-  /* ... (The rest of your [data-theme="dark"] variables) */
-}
-
-/* hidden login button */
 
 .hidden-login-trigger {
-    position: fixed;
-    bottom: 1%;           /* Top edge of the screen */
-    right: 1%;         /* Right edge of the screen */
-    width: 5rem;      /* Small clickable area */
-    height: 5rem;     /* Small clickable area */
-    background-color: transparent;
-    border-radius: 50%;
-    color: transparent;
-    cursor: default;  /* Don't change the cursor to imply interactivity */
-    z-index: 999;     /* Ensure it sits above most content, but below the modal (z-index 1000) */
+  position: fixed;
+  top: 10%;
+  left: 1%;
+  width: 5rem;
+  height: 5rem;
+  background-color: transparent;
+  border: 1px solid var(--TX-AC);
+  border-radius: 50%;
+  color: transparent;
+  cursor: default;
+  z-index: -999;
+  opacity: .25;
 }
 
-/* Optional: For testing, you can temporarily add this */
-/* 
-.hidden-login-trigger {
-    border: 1px solid red; 
-    cursor: crosshair !important;
-} */
+.decoys {
+  position: fixed;
+  display: flex;
+  width: 5rem;
+  height: 5rem;
+  background-color: transparent;
+  border: 1px solid var(--TX-AC);
+  border-radius: 50%;
+  color: transparent;
+  cursor: default;
+  opacity: .25;
+  z-index: -999;
+}
+
+.bg-icon {
+  position: fixed;
+  opacity: 0.25;
+  filter: brightness(.75);
+  z-index: -10;
+  pointer-events: none;
+  animation: float 60s ease-in-out infinite;
+  will-change: transform;
+  transition: transform 8s linear, opacity 2s ease;
+}
+
+/* Floating, underwater-style motion */
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(-15px, -10px) scale(1.05) rotate(90deg);
+  }
+
+  50% {
+    transform: translate(10px, 15px) scale(0.95) rotate(180deg);
+  }
+
+  75% {
+    transform: translate(-10px, 10px) scale(1.02) rotate(270deg);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1) rotate(360deg);
+  }
+}
+
+
 
 /* ==========================================================================
    Media Queries
@@ -128,15 +169,19 @@
 
 /* Smallest phones (280px and up) */
 @media (min-width: 280px) and (max-width: 349px) {
+
   /* Styles for ultra-small screens like Galaxy Fold */
   .Home-wrapper {
     padding: 2rem 1rem;
-    min-height: calc(100vh - 80px); /* Tighter height adjustment */
+    min-height: calc(100vh - 80px);
+    /* Tighter height adjustment */
   }
 
   .title h1 {
-    font-size: 2.5rem; /* Cap clamp minimum for very small screens */
+    font-size: 2.5rem;
+    /* Cap clamp minimum for very small screens */
   }
+
   .sub-title h3 {
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
@@ -160,7 +205,8 @@
 
   .home-nav-button {
     margin-top: 3rem;
-    gap: 2rem; /* Reduce gap between buttons */
+    gap: 2rem;
+    /* Reduce gap between buttons */
   }
 
   .mouse-trail-dot {
@@ -171,6 +217,7 @@
 
 /* Small phones (350px – 479px) */
 @media (min-width: 350px) and (max-width: 479px) {
+
   /* Styles for small devices like older iPhones */
   .Home-wrapper {
     padding: 3rem 1.5rem;
@@ -179,6 +226,7 @@
   .title h1 {
     font-size: 3rem;
   }
+
   .sub-title h3 {
     font-size: 1.4rem;
     margin-bottom: 2rem;
@@ -209,6 +257,7 @@
 
 /* Medium phones (480px – 599px) */
 @media (min-width: 480px) and (max-width: 599px) {
+
   /* Styles for most mid-size Android and iPhones */
   .Home-wrapper {
     padding: 4rem 2rem;
@@ -217,6 +266,7 @@
   .title h1 {
     font-size: 3.5rem;
   }
+
   .sub-title h3 {
     font-size: 1.6rem;
   }
@@ -240,6 +290,7 @@
 
 /* Large phones (600px – 750px) */
 @media (min-width: 600px) and (max-width: 750px) {
+
   /* Styles for large phones and small phablets */
   .aboutMe-wrapper {
     max-width: 650px;
@@ -248,12 +299,14 @@
   .title h1 {
     font-size: 4rem;
   }
+
   .sub-title h3 {
     font-size: 1.8rem;
   }
 
   .Pro-Sum-P {
-    font-size: 1.1rem; /* Default size */
+    font-size: 1.1rem;
+    /* Default size */
   }
 
   .home-nav-button {
@@ -263,6 +316,7 @@
 
 /* Small tablets (768px – 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
+
   /* Portrait tablets and small landscape tablets */
   .Home-wrapper {
     padding: 5rem 3rem;
@@ -273,14 +327,18 @@
   }
 
   .title h1 {
-    font-size: 4.5rem; /* Max font size */
+    font-size: 4.5rem;
+    /* Max font size */
   }
+
   .sub-title h3 {
-    font-size: 2rem; /* Max font size */
+    font-size: 2rem;
+    /* Max font size */
   }
 
   .aboutMe-wrapper {
-    max-width: 750px; /* Default max-width */
+    max-width: 750px;
+    /* Default max-width */
   }
 
   .pro-sum h4 {
@@ -294,6 +352,7 @@
 
 /* Medium tablets / small laptops (1024px – 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
+
   /* Landscape tablets, small laptops, Chromebooks */
   .Home-wrapper {
     padding: 6rem 4rem;
@@ -315,6 +374,7 @@
 
 /* Large tablets / standard desktops (1280px – 1680px) */
 @media (min-width: 1280px) and (max-width: 1680px) {
+
   /* Standard desktop screens, large tablets */
   .Home-wrapper {
     padding: 8rem 5rem;
@@ -346,6 +406,7 @@
 
 /* Ultra-Large Desktops (1681px and up) */
 @media (min-width: 1681px) {
+
   /* Styles for ultra-wide and 4K+ monitors */
   .Home-wrapper {
     padding: 10rem 8rem;
@@ -358,6 +419,7 @@
   .title h1 {
     font-size: 5.5rem;
   }
+
   .sub-title h3 {
     font-size: 2.2rem;
   }

@@ -35,6 +35,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+
 .education-card:hover {
   transform: translateY(-5px);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 12px 30px;
@@ -45,7 +46,7 @@
   margin-top: 5px;
 }
 
-.card-content {
+.EDU-card-content {
   flex: 1;
 }
 

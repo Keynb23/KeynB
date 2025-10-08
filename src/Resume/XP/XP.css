@@ -2,16 +2,12 @@
    General Page & Game Wrapper Styles
    ========================================================================== */
 
-.xp-section {
+.experience-section {
   font-family: var(--font-body);
-  background-color: var(--BG-SC-1);
   padding: 40px 20px;
-  border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   text-align: center;
   max-width: 900px;
   margin: 40px auto;
-  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -23,93 +19,6 @@
   color: var(--TX-PC-1);
   margin-bottom: 10px;
 }
-
-.xp-instructions {
-  font-size: 1.1rem;
-  color: var(--TX-SC-1);
-  margin-bottom: 30px;
-  line-height: 1.6;
-}
-
-.game-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ==========================================================================
-   Mini-Game Styles
-   ========================================================================== */
-
-.game-container {
-  border: 5px solid var(--TX-PC-1);
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  height: 400px; /* Fixed height */
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.score-display,
-.high-score-display {
-  position: absolute;
-  top: 15px;
-  font-family: var(--font-header);
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--TX-PC-1);
-  text-shadow: 2px 2px 4px okhsla(from var(--BG-PC-1) h s l / 0.5);
-  z-index: 10;
-}
-
-.score-display {
-  left: 20px;
-}
-
-.high-score-display {
-  right: 20px;
-}
-
-.player-canvas-container {
-  position: absolute;
-  width: 65px;
-  height: 65px;
-  left: 20px;
-  z-index: 5;
-}
-
-.player-canvas-container > div,
-.player-canvas-container canvas {
-  width: 100% !important;
-  height: 100% !important;
-  background-color: transparent !important;
-}
-
-.obstacle {
-  position: absolute;
-  width: 30px;
-  background-color: var(--AC-SC-1);
-  bottom: 0;
-  z-index: 5;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  box-shadow: 3px 0px 5px okhsla(from var(--TX-PC-1) h s l / 0.3);
-  border: 3px solid okhsla(from var(--AC-SC-1) h s l / 0.8);
-}
-
-.ground {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background-color: var(--BG-SC-1);
-  z-index: 1;
-}
-/* ==========================================================================
-   Unlocked Experience Section Styles
-   ========================================================================== */
 
 .experience-section {
   max-width: 900px;
@@ -141,13 +50,27 @@
 /* --- Job Entry & Video Styling --- */
 .job-entry {
   position: relative;
-  background-color: var(--BG-SC-1);
+  background-color: var(--COMP);
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2.5rem;
   border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+#XP-Scroll {
+  animation: autoShowAnimation both;
+  animation-timeline: view(70% 5%);
+}
+@keyframes autoShowAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(200px) scale(.3);
+  }to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  }
 
 /* --- Typography --- */
 .job-entry h3 {
@@ -190,6 +113,7 @@
 
 /* Smallest phones (280px and up) */
 @media (min-width: 280px) and (max-width: 349px) {
+
   /* Styles for ultra-small screens like Galaxy Fold */
   .xp-section {
     padding: 30px 15px;
@@ -201,11 +125,13 @@
   }
 
   .experience-history {
-    padding-left: 30px; /* Reduce padding for smaller screen */
+    padding-left: 30px;
+    /* Reduce padding for smaller screen */
   }
 
   .job-entry::before {
-    left: -39px; /* Adjust position for new padding */
+    left: -39px;
+    /* Adjust position for new padding */
     width: 12px;
     height: 12px;
   }
@@ -231,6 +157,7 @@
 
 /* Small phones (350px – 479px) */
 @media (min-width: 350px) and (max-width: 479px) {
+
   /* Styles for small devices like older iPhones */
   .xp-section {
     padding: 30px 20px;
@@ -255,6 +182,7 @@
 
 /* Medium phones (480px – 599px) */
 @media (min-width: 480px) and (max-width: 599px) {
+
   /* Styles for most mid-size Android and iPhones */
   .xp-section {
     padding: 35px 25px;
@@ -265,8 +193,10 @@
   }
 
 }
+
 /* Large phones (600px – 750px) */
 @media (min-width: 600px) and (max-width: 750px) {
+
   /* Styles for large phones and small phablets */
   .xp-section {
     padding: 40px 30px;
@@ -280,10 +210,12 @@
 
 /* Small tablets (768px – 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
+
   /* Portrait tablets and small landscape tablets */
   .xp-section {
     padding: 50px 40px;
-    max-width: 700px; /* Constrain max width a bit more */
+    max-width: 700px;
+    /* Constrain max width a bit more */
   }
 
   .xp-title {
@@ -309,6 +241,7 @@
 
 /* Medium tablets / small laptops (1024px – 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
+
   /* Landscape tablets, small laptops, Chromebooks */
   .xp-section {
     max-width: 800px;
@@ -322,9 +255,11 @@
 
 /* Large tablets / standard desktops (1280px – 1680px) */
 @media (min-width: 1280px) and (max-width: 1680px) {
+
   /* Standard desktop screens, large tablets */
   .xp-section {
-    max-width: 900px; /* Keeping default max width */
+    max-width: 900px;
+    /* Keeping default max width */
   }
 
   .xp-title {
@@ -335,9 +270,11 @@
 
 /* Ultra-Large Desktops (1681px and up) */
 @media (min-width: 1681px) {
+
   /* Styles for ultra-wide and 4K+ monitors */
   .xp-section {
-    max-width: 1100px; /* Allow content to stretch more */
+    max-width: 1100px;
+    /* Allow content to stretch more */
     padding: 60px 50px;
   }
 

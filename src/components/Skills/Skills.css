@@ -27,8 +27,7 @@
   top: 0;
   left: 0;
   z-index: 9999; /* Ensure it is above all content */
-  /* Use global variable for a clean dark/light background */
-  background-color: var(--BG-PC-1); 
+  background-color: var(--BG-SC-1); 
   
   /* Layout adjustments for Denser Grid (9x9) */
   block-size: 100vh; 
@@ -48,30 +47,19 @@
   transform-style: preserve-3d;
   font-weight: lighter;
   text-wrap: nowrap;
-  
-  /* NEW: Smaller font size for standard items */
   font-size: 3vmin; 
-  /* Use secondary text color for a subtle look */
-  color: var(--TX-SC-1); 
-
-  /* Standard Time-Based Animation */
+  color: var(--TX-PC-1); 
   animation: zoom-in 3.5s ease-in-out forwards; 
-  /* Calculate staggered delay using the --i variable from JSX */
   animation-delay: calc(var(--i) * 0.05s); 
   will-change: transform, opacity, filter;
   transition: color 0.3s ease;
 }
 
 .stuck-grid > .grid-item.special {
-  /* Center Item Styling */
   grid-row: 4 / span 3; /* Center row over 3 rows (4, 5, 6) */
   grid-column: 4 / span 3; /* Center column over 3 columns (4, 5, 6) */
-  
-  /* Ensure name is larger and primary text color */
   font-size: 5vmin; 
   color: var(--TX-PC-1); 
-
-  /* Give the key item a longer duration and immediate start */
   animation-duration: 4s; 
   animation-delay: 0s; 
   z-index: 10000; 
@@ -80,7 +68,8 @@
 .stuck-grid > .grid-item > b {
   font-size: 15vmin;
   font-weight: bold;
-  color: var(--TX-AC); /* Use the accent color for the main name */
+  color: goldenrod;
+  
 }
 
 /* ==========================================================================

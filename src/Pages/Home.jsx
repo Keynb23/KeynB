@@ -1,5 +1,7 @@
 // src/Pages/Home.jsx
 
+import Exp from '../Resume/XP/Exp.jsx';
+import Edu from '../Resume/Edu/Edu.jsx';
 import ToBtn from '../Buttons/ToBtn.jsx';
 import RecentProjects from '../components/highlights/RecentProjects.jsx'; 
 
@@ -39,6 +41,8 @@ const Home = () => {
         <div className="RPH-Wrapper">
             <RecentProjects />
         </div>
+        <Exp/>
+        <Edu/>
         </div>
       </div>
     </>

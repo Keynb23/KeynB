@@ -40,6 +40,8 @@
   margin-bottom: 2rem;
   overflow: hidden;
   border-radius: 4px;
+  /* Removed: No longer need absolute positioning for nav buttons */
+  position: relative; 
 }
 
 /* Carousel track (The Sliding Content) */
@@ -59,6 +61,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 0;
+  cursor: pointer;
 }
 
 /* --- CAROUSEL FIXES END HERE --- */
@@ -129,40 +132,12 @@
   transform: scale(1.1);
 }
 
-.RP-Nav-Button {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 10;
-  position: absolute;
-  top: 50%;
-  transition: background 0.3s;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.RP-Nav-Button:hover {
-  background: var(--AC-PC-1);
-}
-
-.RP-Prev {
-  left: 10px;
-}
-
-.RP-Next {
-  right: 10px;
-}
+/* ❌ Removed: .RP-Nav-Button, .RP-Prev, and .RP-Next styles */
 
 
 /* ==========================================================================
-   Media Queries
-   ========================================================================== */
+  Media Queries
+  ========================================================================== */
 
 /* Smallest phones (280px and up) */
 @media (min-width: 280px) and (max-width: 349px) {
@@ -195,23 +170,9 @@
     padding: 0.8rem 0.8rem 0.6rem;
   }
 
-  .RP-Nav-Button {
-    /* Reduced button size */
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-    font-size: 0.8rem;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  /* ❌ Removed .RP-Nav-Button media query overrides */
+  /* ❌ Removed .RP-Prev, .RP-Next media query overrides */
 
-  .RP-Prev {
-    left: 5px;
-  }
-
-  .RP-Next {
-    right: 5px;
-  }
 
   .RP-Indicators {
     margin-top: 1rem;
@@ -240,13 +201,7 @@
     padding: 1rem 1rem 0.75rem;
   }
 
-  .RP-Nav-Button {
-    width: 35px;
-    height: 35px;
-    font-size: 0.9rem;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  /* ❌ Removed .RP-Nav-Button media query overrides */
 
   .RP-Indicators {
     gap: 0.6rem;
@@ -269,19 +224,8 @@
     height: 280px;
   }
 
-  .RP-Nav-Button {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-
-  .RP-Prev {
-    left: 10px;
-  }
-
-  .RP-Next {
-    right: 10px;
-  }
+  /* ❌ Removed .RP-Nav-Button media query overrides */
+  /* ❌ Removed .RP-Prev, .RP-Next media query overrides */
 }
 
 /* Large phones (600px – 750px) */
@@ -296,11 +240,7 @@
     height: 350px;
   }
 
-  .RP-Nav-Button {
-    width: 45px;
-    height: 45px;
-    font-size: 1.1rem;
-  }
+  /* ❌ Removed .RP-Nav-Button media query overrides */
 }
 
 /* Small tablets (768px – 1023px) */
@@ -320,11 +260,7 @@
     height: 450px;
   }
 
-  .RP-Nav-Button {
-    width: 50px; /* Default size */
-    height: 50px;
-    font-size: 1.2rem;
-  }
+  /* ❌ Removed .RP-Nav-Button media query overrides */
   
   .RP-Overlay {
     padding: 1.5rem 1.5rem 1rem; /* Default padding */
@@ -347,11 +283,7 @@
     height: 550px;
   }
 
-  .RP-Nav-Button {
-    width: 55px;
-    height: 55px;
-    font-size: 1.3rem;
-  }
+  /* ❌ Removed .RP-Nav-Button media query overrides */
 }
 
 /* Large tablets / standard desktops (1280px – 1680px) */
@@ -372,11 +304,7 @@
     height: 650px;
   }
 
-  .RP-Nav-Button {
-    width: 60px;
-    height: 60px;
-    font-size: 1.4rem;
-  }
+  /* ❌ Removed .RP-Nav-Button media query overrides */
 }
 
 /* Ultra-Large Desktops (1681px and up) */

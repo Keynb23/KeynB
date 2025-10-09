@@ -1,31 +1,34 @@
-// App.jsx (Fully Updated)
+// App.jsx
 
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./Pages/Home";
-import Exp from "./Resume/XP/Exp";
-import Projects from "./Resume/Projects/Projects";
+import Exp from "./Resume/XP/Exp";       // <-- RESTORED IMPORT
+import Projects from "./Resume/Projects/Projects"; // <-- RESTORED IMPORT
+import EDU from "./Resume/Edu/Edu";       // <-- RESTORED IMPORT
 import Footer from "./components/Footer";
-import EDU from "./Resume/Edu/Edu";
 import { Login } from "./components/Login/Login";
 import { useEffect, useState, useRef } from "react"; 
 import { Decoys } from "./components/Decoys";
 import { BgIcons } from "./components/BG-Icons";
 
 const TOTAL_LOADING_TIME_MS = 30000;
+const DESIRED_VOLUME = 0.2; 
 
 function App() {
     // 1. State Management
     const [isLoading, setIsLoading] = useState(true);
-    const [isMuted, setIsMuted] = useState(true); // Starts TRUE (muted)
+    const [isMuted, setIsMuted] = useState(true); 
     const [isLoginVisible, setIsLoginVisible] = useState(false);
 
     // Refs to control the DOM elements
     const audioRef = useRef(null);
     const videoRef = useRef(null);
 
-    // 2. Loading Timer (Unchanged)
+    console.log("App component rendered. Current loading state:", isLoading);
+
+    // 2. Loading Timer & Initial Volume Setup
     useEffect(() => {
         console.log(`EFFECT: Setting ${TOTAL_LOADING_TIME_MS}ms timer to end loading.`);
         const timer = setTimeout(() => {
@@ -33,37 +36,52 @@ function App() {
             setIsLoading(false);
         }, TOTAL_LOADING_TIME_MS);
 
+        // Set volume on the MP3 audio element immediately on load
+        if (audioRef.current) {
+            audioRef.current.volume = DESIRED_VOLUME;
+            console.log(`EFFECT: Audio volume set to ${DESIRED_VOLUME * 100}%.`);
+        }
+        
         return () => {
             console.log("EFFECT CLEANUP: Clearing timer.");
             clearTimeout(timer);
         };
-    }, []);
+    }, []); 
 
-    // 3. Mute/Unmute Handler (TOGGLE LOGIC ADDED)
+    // 3. Mute/Unmute Handler
     const handleMuteToggle = () => {
-        // Toggle the mute state
         const newMuteState = !isMuted;
         setIsMuted(newMuteState); 
         
-        // Manually update the DOM elements
+        // Control Audio Element (MP3)
         if (audioRef.current) {
             audioRef.current.muted = newMuteState;
-            // If unmuting, attempt to play/sync again
-            if (!newMuteState) {
-                audioRef.current.play().catch(e => console.error("Audio playback error after unmute:", e));
+            if (!newMuteState) { 
+                audioRef.current.volume = DESIRED_VOLUME;
+                audioRef.current.play().catch(e => console.error("Audio playback error:", e));
             }
         }
-        if (videoRef.current) {
-            videoRef.current.muted = newMuteState;
-            // If unmuting, attempt to play/sync again
-            if (!newMuteState) {
-                videoRef.current.play().catch(e => console.error("Video playback error after unmute:", e));
-            }
+        
+        // Control Video Element (We attempt to ensure it plays, but its muted status is static in JSX)
+        if (videoRef.current && !newMuteState) {
+            videoRef.current.play().catch(e => console.error("Video playback error (still checking file):", e));
         }
-        console.log(`USER INTERACTION: Audio is now ${newMuteState ? 'MUTED' : 'UNMUTED'}.`);
+        
+        console.log(`USER INTERACTION: MP3 Audio is now ${newMuteState ? 'MUTED' : 'UNMUTED'}.`);
+    };
+
+    // 🛑 NEW: Skip Handler
+    const handleSkipIntro = () => {
+        // Stop all media playback
+        if (audioRef.current) audioRef.current.pause();
+        if (videoRef.current) videoRef.current.pause();
+
+        // Immediately switch to the main application
+        setIsLoading(false);
+        console.log("USER INTERACTION: Intro skipped. Transitioning to main site.");
     };
     
-    // ... (closeLoginModal and handleSecretClick functions remain the same)
+    // 4. Other Handlers
     const closeLoginModal = () => {
         console.log("LOGIN: Modal closed.");
         setIsLoginVisible(false);
@@ -81,40 +99,46 @@ function App() {
 
     // --- Conditional Render ---
     
-    // If we are loading, display the one-time loading screen
     if (isLoading) {
         console.log("RENDER: Rendering Loading Screen (Muted).");
         return (
             <div className="loading-screen-container">
-                {/* Audio source is fixed to MP3 */}
+                {/* Audio element */}
                 <audio 
                     ref={audioRef}
                     src="/introVid-Audio.mp3" 
                     autoPlay 
                     playsInline 
-                    muted={isMuted} // Controlled by state
+                    muted={isMuted} 
                 /> 
                 
-                {/*  VIDEO FIX ATTEMPT: Using <source> tag is standard for compatibility */}
+                {/* Video element (permanently muted) */}
                 <video
                     ref={videoRef}
                     className="blender-video-layer"
                     autoPlay
                     playsInline
-                    muted={isMuted} // Controlled by state
+                    muted={true} 
                 >
-                    {/*  Using <source> tags. This is often more reliable than 'src' attribute. */}
-                    {/*  PLEASE DOUBLE-CHECK THE PATH: /IntroVideo.mp4 MUST be correct. */}
                     <source src="/IntroVideo.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
                 
-                {/*  MUTE TOGGLE BUTTON: Now permanently visible during the loading screen */}
-                <div 
-                    className="unmute-overlay" 
-                    onClick={handleMuteToggle} // Toggle handler
-                >
-                    <button className="unmute-button">
+                {/* 🛑 Skip and Mute Controls Container */}
+                <div className="intro-controls-container">
+                    {/* 🛑 NEW: Skip Button */}
+                    <button 
+                        className="skip-button" 
+                        onClick={handleSkipIntro}
+                    >
+                        SKIP INTRO >>
+                    </button>
+
+                    {/* MUTE TOGGLE BUTTON */}
+                    <button 
+                        className="unmute-button"
+                        onClick={handleMuteToggle}
+                    >
                         {isMuted ? 'Click to Unmute 🔊' : 'Click to Mute 🔇'}
                     </button>
                 </div>
@@ -129,8 +153,6 @@ function App() {
             <Navbar />
             <BgIcons />
             <Decoys />
-
-            {/* ... (rest of the application JSX remains the same) ... */}
             
             <div
                 className="hidden-login-trigger"

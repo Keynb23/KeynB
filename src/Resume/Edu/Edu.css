@@ -3,8 +3,7 @@
    ========================================================================== */
 
 .education-container {
-  max-width: 900px;
-  margin: 40px auto;
+  margin: 2rem auto;
   padding: 2rem;
   text-align: center;
 }
@@ -25,20 +24,20 @@
 .education-card {
   display: flex;
   gap: 2rem;
-  background-color: var(--BG-SC-1);
+  background-color: var(--COMP);
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2.5rem;
   text-align: left;
   border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(150, 11, 162, 0.24) 0px 3px 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 
 .education-card:hover {
   transform: translateY(-5px);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 12px 30px;
+  box-shadow: rgba(115, 6, 162, 0.5) 0px 12px 30px;
 }
 
 .card-icon {
@@ -64,7 +63,7 @@
 .school-info {
   font-family: var(--font-ui);
   font-size: 1rem;
-  color: var(--TX-SC-1);
+  color: var(--TX-PC-1);
   margin-bottom: 1rem;
   font-weight: 600;
 }
@@ -91,7 +90,7 @@
 .skills-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: .5rem auto;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -99,8 +98,8 @@
 
 .skills-list li {
   font-family: var(--font-ui);
-  background-color: okhsla(from var(--AC-PC-1) h s l / 0.15);
-  color: var(--AC-PC-1);
+  background-color: var(--BG-PC-1);
+  color: var(--BG-SC-1);
   padding: 0.4rem 0.9rem;
   border-radius: 20px;
   font-size: 0.9rem;

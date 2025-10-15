@@ -10,11 +10,12 @@
 
 /* Admin Button Styles */
 .admin-add-project-btn {
-  background-color: var(--AC-SC-1);
-  color: var(--BG-PC-1);
+  background-color: var(--TX-AC);
+  color: var(--BG-SC-1);
   padding: 0.75rem 1.5rem;
   margin: 1rem 0 2rem 0;
   border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 700;

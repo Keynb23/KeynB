@@ -131,7 +131,7 @@ function App() {
                         className="skip-button" 
                         onClick={handleSkipIntro}
                     >
-                        SKIP INTRO >>
+                        SKIP INTRO
                     </button>
 
                     {/* MUTE TOGGLE BUTTON */}

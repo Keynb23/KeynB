@@ -78,7 +78,7 @@ export const Login = ({ onClose }) => {
             <h2>Admin Login</h2>
             {error && <div className="error-message">{error}</div>}
 
-            <div className="form-group">
+            <div className="li-form-group">
               <label htmlFor="username">Email</label>
               <input
                 type="email"
@@ -92,7 +92,7 @@ export const Login = ({ onClose }) => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="li-form-group">
               <label htmlFor="password">Password</label>
               <input
                 type="password"

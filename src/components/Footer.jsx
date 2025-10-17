@@ -120,6 +120,7 @@ const Footer = () => {
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
+                className="input-field-wrapper"
                 type="text"
                 id="name"
                 name="name"
@@ -132,6 +133,7 @@ const Footer = () => {
             <div className="form-group">
               <label htmlFor="phone">Phone</label>
               <input
+                className="input-field-wrapper"
                 type="tel"
                 id="phone"
                 name="phone"
@@ -143,6 +145,7 @@ const Footer = () => {
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
+                className="input-field-wrapper"
                 type="email"
                 id="email"
                 name="email"

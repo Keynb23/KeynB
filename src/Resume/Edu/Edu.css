@@ -30,7 +30,7 @@
   margin-bottom: 2.5rem;
   text-align: left;
   border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
-  box-shadow: rgba(150, 11, 162, 0.24) 0px 3px 8px;
+  box-shadow: rgba(149, 11, 162, 0.732) 0px 3px 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

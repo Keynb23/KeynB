@@ -19,7 +19,8 @@
   color-scheme: light;
 
   /* Crimson & Charcoal Theme */
-  --BG-PC-1: #dad2dc; 
+  --MainBG: #2a0436;
+  --BG-PC-1: #fbfafb; 
   --BG-SC-1: #090212; 
   --INVL: #15081ba1;
   --COMP: #0c0b0e;
@@ -34,12 +35,13 @@
 /* No change needed for dark theme, as this is a dark theme by default */
 [data-theme="dark"] {
   color-scheme: dark;
+  --MainBG: #f5ecde;
   --BG-PC-1: #440653;
-  --BG-SC-1: #dfdde0;
+  --BG-SC-1: #f8eafb;
   --INVD: #cf92f5bb;
   --INVL: var(--INVD);
-  --COMP: #e9e7ef;
-  --TX-PC-1: #1b0d24;
+  --COMP: #e0d6ff;
+  --TX-PC-1: #0e0712;
 }
 
 
@@ -64,7 +66,7 @@ html,
 
 body {
   font-family: var(--font-body);
-  background-color: var(--BG-SC-1);
+  background-color: var(--MainBG);
   color: var(--TX-PC-1);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;

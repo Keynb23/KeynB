@@ -31,6 +31,10 @@ const Home = () => {
                 science knowledge, with a current focus on Data Structures and
                 Algorithms.
               </p>
+
+              <p className="Pro-Sum-P">
+                (Haven't found a color scheme I like yet)
+              </p>
             </div>
           </div>
 

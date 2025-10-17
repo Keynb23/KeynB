@@ -1,19 +1,19 @@
 // App.jsx
-
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
-import Home from "./Pages/Home";
-import Exp from "./Resume/XP/Exp";       // <-- RESTORED IMPORT
-import Projects from "./Resume/Projects/Projects"; // <-- RESTORED IMPORT
-import EDU from "./Resume/Edu/Edu";       // <-- RESTORED IMPORT
-import Footer from "./components/Footer";
-import { Login } from "./components/Login/Login";
+import "./App.css"; // Retained .css extension
+import Navbar from "./components/Navbar/Navbar.jsx"; // Added .jsx
+import Home from "./Pages/Home.jsx"; // Added .jsx
+import Exp from "./Resume/XP/Exp.jsx";       // Added .jsx
+import Projects from "./Resume/Projects/Projects.jsx"; // Added .jsx
+import EDU from "./Resume/Edu/Edu.jsx";       // Added .jsx
+import Footer from "./components/Footer.jsx"; // Added .jsx
+import { Login } from "./components/Login/Login.jsx"; // Added .jsx
 import { useEffect, useState, useRef } from "react"; 
-import { Decoys } from "./components/Decoys";
-import { BgIcons } from "./components/BG-Icons";
+import { Decoys } from "./components/Decoys.jsx"; // Added .jsx
+import { BgIcons } from "./components/BG-Icons.jsx"; // Added .jsx
 
-const TOTAL_LOADING_TIME_MS = 30000;
+// The IntroVid.mp4 file now contains both video and audio.
+const TOTAL_LOADING_TIME_MS = 4000;
 const DESIRED_VOLUME = 0.2; 
 
 function App() {
@@ -22,13 +22,21 @@ function App() {
     const [isMuted, setIsMuted] = useState(true); 
     const [isLoginVisible, setIsLoginVisible] = useState(false);
 
-    // Refs to control the DOM elements
-    const audioRef = useRef(null);
+    // Ref to control the video element (which now contains the audio)
     const videoRef = useRef(null);
 
     console.log("App component rendered. Current loading state:", isLoading);
 
-    // 2. Loading Timer & Initial Volume Setup
+    // Handler to set the correct volume once the video is ready to play
+    const handleVideoLoadedData = () => {
+        // Only set the desired volume if the user hasn't toggled mute off.
+        if (videoRef.current && !isMuted) {
+             videoRef.current.volume = DESIRED_VOLUME;
+        }
+        console.log("VIDEO LOADED: Video metadata loaded. Volume set if unmuted.");
+    };
+
+    // 2. Loading Timer (No audio specific setup here anymore)
     useEffect(() => {
         console.log(`EFFECT: Setting ${TOTAL_LOADING_TIME_MS}ms timer to end loading.`);
         const timer = setTimeout(() => {
@@ -36,44 +44,34 @@ function App() {
             setIsLoading(false);
         }, TOTAL_LOADING_TIME_MS);
 
-        // Set volume on the MP3 audio element immediately on load
-        if (audioRef.current) {
-            audioRef.current.volume = DESIRED_VOLUME;
-            console.log(`EFFECT: Audio volume set to ${DESIRED_VOLUME * 100}%.`);
-        }
-        
         return () => {
             console.log("EFFECT CLEANUP: Clearing timer.");
             clearTimeout(timer);
         };
     }, []); 
 
-    // 3. Mute/Unmute Handler
+    // 3. Mute/Unmute Handler (Controls the video element)
     const handleMuteToggle = () => {
         const newMuteState = !isMuted;
         setIsMuted(newMuteState); 
         
-        // Control Audio Element (MP3)
-        if (audioRef.current) {
-            audioRef.current.muted = newMuteState;
+        // Control Video Element
+        if (videoRef.current) {
+            videoRef.current.muted = newMuteState; // Mute/unmute the video
+            
             if (!newMuteState) { 
-                audioRef.current.volume = DESIRED_VOLUME;
-                audioRef.current.play().catch(e => console.error("Audio playback error:", e));
+                // If unmuting, set the desired volume and attempt playback
+                videoRef.current.volume = DESIRED_VOLUME;
+                videoRef.current.play().catch(e => console.error("Video playback error:", e));
             }
         }
         
-        // Control Video Element (We attempt to ensure it plays, but its muted status is static in JSX)
-        if (videoRef.current && !newMuteState) {
-            videoRef.current.play().catch(e => console.error("Video playback error (still checking file):", e));
-        }
-        
-        console.log(`USER INTERACTION: MP3 Audio is now ${newMuteState ? 'MUTED' : 'UNMUTED'}.`);
+        console.log(`USER INTERACTION: Video audio is now ${newMuteState ? 'MUTED' : 'UNMUTED'}.`);
     };
 
-    // 🛑 NEW: Skip Handler
+    // Skip Handler
     const handleSkipIntro = () => {
-        // Stop all media playback
-        if (audioRef.current) audioRef.current.pause();
+        // Stop the video playback
         if (videoRef.current) videoRef.current.pause();
 
         // Immediately switch to the main application
@@ -103,30 +101,24 @@ function App() {
         console.log("RENDER: Rendering Loading Screen (Muted).");
         return (
             <div className="loading-screen-container">
-                {/* Audio element */}
-                <audio 
-                    ref={audioRef}
-                    src="/introVid-Audio.mp3" 
-                    autoPlay 
-                    playsInline 
-                    muted={isMuted} 
-                /> 
                 
-                {/* Video element (permanently muted) */}
+                {/* Video element (now contains audio) */}
                 <video
                     ref={videoRef}
                     className="blender-video-layer"
                     autoPlay
                     playsInline
-                    muted={true} 
+                    loop // Play until the timer expires or the user skips
+                    muted={isMuted} // Dynamically controlled by handleMuteToggle
+                    onLoadedData={handleVideoLoadedData} // Set volume once ready
                 >
-                    <source src="/IntroVideo.mp4" type="video/mp4" />
+                    <source src="/IntroVid.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
                 
-                {/* 🛑 Skip and Mute Controls Container */}
+                {/* Skip and Mute Controls Container */}
                 <div className="intro-controls-container">
-                    {/* 🛑 NEW: Skip Button */}
+                    {/* Skip Button */}
                     <button 
                         className="skip-button" 
                         onClick={handleSkipIntro}

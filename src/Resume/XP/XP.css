@@ -41,7 +41,7 @@
   top: 8px;
   width: 15px;
   height: 15px;
-  background-color: var(--AC-SC-1);
+  /* background-color: var(--AC-SC-1); */
   border: 3px solid var(--BG-SC-1);
   border-radius: 50%;
   z-index: 1;
@@ -83,7 +83,7 @@
 .job-entry h4 {
   font-family: var(--font-ui);
   font-size: 1rem;
-  color: var(--TX-SC-1);
+  color: var(--TX-PC-1);
   margin-bottom: 1.5rem;
   font-weight: 600;
 }

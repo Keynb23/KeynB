@@ -1,5 +1,4 @@
 /* Login.css */
-
 /* 1. Modal Overlay and Positioning */
 .modal-backdrop {
   margin-top: 10%;
@@ -14,12 +13,12 @@
   color: var(--TX-PC-1);
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 25px var(--AC-SC-1);
+  box-shadow: 0 4px 25px var(--AC-PC-1);
   /* width: 90%; */
   max-width: 600px;
   font-family: var(--font-ui);
   animation: fadeIn 0.3s ease-out;
-  border: 1px solid var(--AC-SC-1);
+  border: 5px solid var(--AC-PC-1);
 }
 
 @keyframes fadeIn {
@@ -45,7 +44,7 @@
   right: 10px;
   background: none;
   border: none;
-  color: var(--TX-SC-1);
+  color: var(--TX-PC-1);
   font-size: 1.5rem;
   cursor: pointer;
   line-height: 1;
@@ -54,13 +53,13 @@
 }
 
 .close-button:hover {
-  color: var(--AC-TC-1);
+  color: var(--AC-PC-1);
 }
 
 /* 2. Form and Input Styles */
 .login-form h2 {
   font-family: var(--font-header);
-  color: var(--BG-PC-1);
+  color: var(--TX-PC-1);
   margin-top: 0;
   margin-bottom: 25px;
   text-align: center;
@@ -83,7 +82,7 @@
 .form-input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--AC-SC-1);
+  border: 1px solid var(--AC-PC-1);
   border-radius: 6px;
   font-size: 1rem;
   background-color: var(--COMP);
@@ -103,8 +102,8 @@
 .login-button {
   width: 100%;
   padding: 12px;
-  background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -115,12 +114,12 @@
     background-color 0.3s,
     transform 0.1s,
     box-shadow 0.2s;
-  box-shadow: 0 3px 8px var(--AC-SC-1);
+  box-shadow: 0 3px 8px var(--AC-PC-1);
 }
 
 .login-button:hover {
-  background-color: var(--AC-TC-1);
-  box-shadow: 0 5px 12px var(--AC-SC-1);
+  background-color: var(--AC-PC-1);
+  box-shadow: 0 5px 12px var(--AC-PC-1);
 }
 
 .login-button:active {
@@ -128,13 +127,13 @@
 }
 
 .error-message {
-  color: var(--AC-TC-1);
+  color: var(--TX-PC-1);
   background-color: rgba(105, 26, 141, 0.1);
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 6px;
   text-align: center;
-  border: 1px solid var(--AC-TC-1);
+  border: 1px solid var(--AC-PC-1);
   font-weight: 500;
 }
 
@@ -146,7 +145,7 @@
 
 .logout-display h2 {
   font-family: var(--font-header);
-  color: var(--TX-AC);
+  color: var(--TX-PC-1);
   margin-bottom: 12px;
   font-size: 1.6rem;
 }
@@ -158,8 +157,8 @@
 }
 
 .logout-button {
-  background-color: var(--AC-TC-1);
-  color: var(--BG-PC-1);
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
   border: none;
   border-radius: 6px;
   padding: 12px 0;
@@ -173,7 +172,7 @@
 }
 
 .logout-button:hover {
-  background-color: #7b27d5; /* Purple accent on hover */
+  background-color: var(--INVL);
 }
 
 .logout-button:active {

@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react"; // HOOKS IMPORT
+// /src/Resume/Projects/ProjectModal.jsx
+import  { useState, useEffect, useMemo } from "react";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import { useAuth } from "../../hooks/useAuth.jsx";
 import { CloseBtn } from "../../Buttons/Modal-Btns.jsx";
+import './ProjectModal.css';
 
 const ProjectModal = ({ project, onClose, onProjectDeleted }) => {
   // STATE & CONTEXT HOOKS
@@ -25,9 +27,7 @@ const ProjectModal = ({ project, onClose, onProjectDeleted }) => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  // MEMOIZED MEDIA ARRAY
   const media = useMemo(() => {
-    // FIX: Handle the case where project is null on initial render safely inside the hook.
     if (!project) return [];
 
     return [

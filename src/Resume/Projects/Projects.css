@@ -2,23 +2,23 @@
    Project Page Container Styles
    ========================================================================== */
 .project-Container {
+  /* background: src('/ ' */
   padding: 2rem clamp(1rem, 5vw, 4rem);
   width: 100%;
   min-height: 100vh;
-  margin: 0 auto;
 }
 
 /* Admin Button Styles */
 .admin-add-project-btn {
-  background-color: var(--TX-AC);
-  color: var(--BG-SC-1);
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
   padding: 0.75rem 1.5rem;
   margin: 1rem 0 2rem 0;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
   border-radius: 8px;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   display: block;
@@ -49,7 +49,7 @@
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--TX-PC-1);
-  background-color: var(--BG-SC-1);
+  background-color: var(--AC-PC-1);
   padding: 0.6em 1.2em;
   border-radius: 20px;
   cursor: pointer;
@@ -58,22 +58,20 @@
 }
 
 .Project-Tab:hover {
-  background-color: var(--AC-SC-1);
-  color: var(--BG-PC-1);
+  background-color: none;
+  color: var(--TX-PC-1);
 }
 
 .Project-Tab.active {
-  background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
   border-color: var(--AC-SC-1);
 }
 
-/* ==========================================================================
-   Project Card Rows (Streaming Service Style)
-   ========================================================================== */
+/* Project Card Rows (Streaming Service Style) */
+
 .Project-Main-Content {
   padding-top: 1rem;
- 
 }
 
 /* Row container for the cards */
@@ -99,7 +97,6 @@
 .Project-Card {
   flex: 0 0 auto;
   width: 280px;
-  /* height: 350px; */
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -111,15 +108,16 @@
 }
 
 .Project-Card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   z-index: 10;
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); */
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .Project-Card-Image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
@@ -131,11 +129,16 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: var(--AC-PC-1);
+  background: var(--COMP);
   padding: 0.5rem 1rem;
   transform: translateY(100%);
   transition: transform 0.3s ease-in-out;
   opacity: 0;
+}
+
+.Project-Card-Content h3 {
+  text-align: center;
+  color: var(--TX-PC-1);
 }
 
 .Project-Card:hover .Project-Card-Content {
@@ -144,231 +147,11 @@
 }
 
 .Project-Card-Title {
-  color: #F6f6f6;
+  color: var(--TX-PC-1);
   font-size: 1.5rem;
   margin: 0;
 }
 
-/* ==========================================================================
-   Project Modal (Popup) Styles - NETFLIX DETAIL SCREEN
-   ========================================================================== */
-.Project-Model {
-  position: fixed;
-  /* Locks the modal to the viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  /* The Overlay Effect */
-  background-color: okhsla(from var(--BG-PC-1) h s l / 0.95);
-  backdrop-filter: blur(15px);
-  z-index: 2000;
-  /* CRUCIAL: Must be higher than all other page elements */
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  overflow-y: auto;
-  /* Allows the entire modal container to scroll if needed */
-}
-
-.modal-content.project-details-content {
-  background-color: var(--BG-SC-1);
-  border-radius: 16px;
-  padding: 0;
-  width: 95%;
-  max-width: 1200px;
-  max-height: 90vh;
-  /* Limits the modal height, forcing inner scroll */
-  min-height: 60vh;
-  display: flex;
-  flex-direction: row;
-  gap: 0;
-  position: relative;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
-  overflow: hidden;
-  animation: openModal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-@keyframes openModal {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.Pro-Model-Left {
-  /* Media Column */
-  flex: 2;
-  min-width: 60%;
-  height: 100%;
-  min-height: 60vh;
-  overflow: hidden;
-  position: relative;
-  background-color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-media {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.Pro-Model-Right {
-  /* Details Column */
-  flex: 1;
-  min-width: 400px;
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  /* CRUCIAL: This makes the right panel scrollable inside the modal */
-  overflow-y: auto;
-  max-height: 90vh;
-  /* Match modal's max-height */
-}
-
-.project-title-modal {
-  font-size: 2.5rem;
-  color: var(--AC-PC-1);
-  margin-bottom: 0.5rem;
-}
-
-.project-description-modal {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  color: var(--TX-SC-1);
-}
-
-.modal-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-}
-
-.modal-tag {
-  background-color: var(--BG-PC-1);
-  color: var(--TX-SC-1);
-  padding: 0.4em 0.8em;
-  border-radius: 16px;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-/* Modal Navigation and Actions */
-.modal-actions-area {
-  border-top: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
-  padding-top: 2rem;
-}
-
-.modal-links-wrapper {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.modal-link-btn {
-  flex: 1;
-  text-align: center;
-  padding: 0.8em 1em;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  transition: all 0.2s ease;
-  border: 2px solid transparent;
-}
-
-.modal-link-btn.live-site {
-  background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
-  border-color: var(--AC-PC-1);
-}
-
-.modal-link-btn.source-code {
-  background-color: transparent;
-  color: var(--AC-PC-1);
-  border-color: var(--AC-PC-1);
-}
-
-.modal-link-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Media Navigation Arrows */
-.media-nav {
-  position: absolute;
-  top: 50%;
-  background: rgba(0, 0, 0, 0.4);
-  color: white;
-  border: none;
-  padding: 1rem 0.5rem;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 10;
-  transition: background-color 0.2s;
-}
-
-.media-nav:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.media-prev {
-  left: 0;
-  border-radius: 0 8px 8px 0;
-}
-
-.media-next {
-  right: 0;
-  border-radius: 8px 0 0 8px;
-}
-
-.slideshow-instructions {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  z-index: 10;
-}
-
-/* Admin Delete Button */
-.admin-actions {
-  padding-top: 1rem;
-}
-
-.btn-delete {
-  background-color: #d9534f;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.2s;
-}
-
-.btn-delete:hover {
-  background-color: #c9302c;
-}
 
 /* ==========================================================================
    Media Queries
@@ -376,6 +159,7 @@
 
 /* Smallest phones (280px and up) */
 @media (min-width: 280px) and (max-width: 349px) {
+
   /* Styles for ultra-small screens like Galaxy Fold */
   .project-Container {
     padding: 1rem 0.5rem;
@@ -399,68 +183,22 @@
   }
 
   .Pro-Card-Row {
-    flex-direction: column; /* Force single column */
-    flex-wrap: nowrap; /* Prevent horizontal wrapping */
-    align-items: center; /* Center cards in the column */
-    gap: 1.5rem; /* Increase gap between stacked cards */
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .Project-Card {
-    width: 90%; /* Take up most of the screen width */
+    width: 90%;
     max-width: 300px;
-    aspect-ratio: 4 / 3; /* Taller card in column layout */
-  }
-
-  /* Modal Adjustments */
-  .modal-content.project-details-content {
-    min-height: 80vh;
-    max-height: 95vh;
-  }
-
-  .Pro-Model-Left {
-    min-height: 250px;
-  }
-
-  .Pro-Model-Right {
-    padding: 1.5rem;
-  }
-
-  .project-title-modal {
-    font-size: 1.6rem;
-  }
-
-  .project-description-modal {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .modal-tag {
-    font-size: 0.8rem;
-  }
-
-  .modal-links-wrapper {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .modal-link-btn {
-    font-size: 0.9rem;
-    padding: 0.7em 1em;
-  }
-
-  .media-nav {
-    font-size: 1.5rem;
-    padding: 0.8rem 0.4rem;
-  }
-
-  .slideshow-instructions {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
+    aspect-ratio: 4 / 3;
   }
 }
 
 /* Small phones (350px – 479px) */
 @media (min-width: 350px) and (max-width: 479px) {
+
   /* Styles for small devices like older iPhones */
   .project-Container {
     padding: 1.5rem 1rem;
@@ -476,7 +214,7 @@
   }
 
   .Pro-Card-Row {
-    flex-direction: column; /* Keep single column */
+    flex-direction: column;
     align-items: center;
     gap: 2rem;
   }
@@ -486,36 +224,11 @@
     max-width: 350px;
     aspect-ratio: 4 / 3;
   }
-
-  /* Modal Adjustments */
-  .Pro-Model-Left {
-    min-height: 280px;
-  }
-
-  .Pro-Model-Right {
-    padding: 1.8rem;
-  }
-
-  .project-title-modal {
-    font-size: 1.8rem;
-  }
-
-  .project-description-modal {
-    font-size: 1rem;
-  }
-
-  .modal-links-wrapper {
-    flex-direction: row;
-    /* Keep horizontal if space allows */
-  }
-
-  .modal-link-btn {
-    font-size: 1rem;
-  }
 }
 
 /* Medium phones (480px – 599px) */
 @media (min-width: 480px) and (max-width: 599px) {
+
   /* Styles for most mid-size Android and iPhones */
   .project-Container {
     padding: 2rem 1.5rem;
@@ -526,29 +239,24 @@
   }
 
   .Pro-Card-Row {
-    flex-direction: column; /* Still single column */
+    flex-direction: column;
+    /* Still single column */
     align-items: center;
     gap: 2rem;
   }
 
   .Project-Card {
-    width: 85%; /* Increase size */
+    width: 85%;
+    /* Increase size */
     max-width: 450px;
-    aspect-ratio: 16 / 9; /* Back to wide ratio */
-  }
-
-  /* Modal Adjustments */
-  .Pro-Model-Left {
-    min-height: 320px;
-  }
-
-  .project-title-modal {
-    font-size: 2rem;
+    aspect-ratio: 16 / 9;
+    /* Back to wide ratio */
   }
 }
 
 /* Large phones (600px – 750px) */
 @media (min-width: 600px) and (max-width: 750px) {
+
   /* Styles for large phones and small phablets */
   .Project-Tabs-Wrapper {
     gap: 1rem;
@@ -560,25 +268,19 @@
   }
 
   .Pro-Card-Row {
-    flex-direction: row; /* Allow horizontal row/wrapping */
-    justify-content: center; /* Center the rows */
+    flex-direction: row;
+    /* Allow horizontal row/wrapping */
+    justify-content: center;
+    /* Center the rows */
     gap: 1.5rem;
   }
 
   .Project-Card {
     /* Cards for a two-column layout */
-    width: calc(50% - 1rem); /* Roughly two columns with gap */
+    width: calc(50% - 1rem);
+    /* Roughly two columns with gap */
     max-width: 350px;
     aspect-ratio: 16 / 9;
-  }
-
-  /* Modal Adjustments */
-  .Pro-Model-Left {
-    min-height: 350px;
-  }
-
-  .project-title-modal {
-    font-size: 2.2rem;
   }
 }
 
@@ -599,79 +301,33 @@
     max-width: 320px;
   }
 
-  /* Modal Adjustments */
-  .modal-content.project-details-content {
-    flex-direction: column;
-    max-width: 800px;
-    max-height: 90vh;
-  }
-
-  .Pro-Model-Left {
-    min-height: 350px;
-    /* Resetting min-width/flex to avoid conflicts with column layout */
-    min-width: auto;
-    flex: none;
-  }
-
-  .Pro-Model-Right {
-    padding: 2.5rem;
-    min-width: auto;
-    max-height: auto;
-    flex: none;
-  }
-
-  .project-title-modal {
-    font-size: 2.3rem;
-  }
-
-  .project-description-modal {
-    font-size: 1.1rem;
-  }
-
-  .modal-link-btn {
-    padding: 1em 1em;
-  }
 }
 
 /* Medium tablets / small laptops (1024px – 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
+
   /* Landscape tablets, small laptops, Chromebooks */
   .project-Container {
     padding: 2rem clamp(3rem, 7vw, 6rem);
   }
 
   .Pro-Card-Row {
-    justify-content: flex-start; /* Spread from the left */
+    justify-content: flex-start;
+    /* Spread from the left */
     gap: 1.25rem;
   }
 
   .Project-Card {
     /* Target 4 columns */
     width: calc(25% - 1rem);
-    max-width: 280px; /* Base size */
-  }
-
-  /* Modal: Use the default desktop (flex-row) layout */
-  .modal-content.project-details-content {
-    max-width: 1000px;
-    min-height: 60vh;
-    max-height: 90vh;
-  }
-
-  .Pro-Model-Left {
-    min-width: 55%;
-    /* Tweak flex proportions */
-    min-height: 60vh;
-  }
-
-  .Pro-Model-Right {
-    min-width: 45%;
-    padding: 3rem;
+    max-width: 280px;
+    /* Base size */
   }
 }
 
 /* Large tablets / standard desktops (1280px – 1680px) */
 @media (min-width: 1280px) and (max-width: 1680px) {
+
   /* Standard desktop screens, large tablets */
   .project-Container {
     padding: 2rem clamp(4rem, 8vw, 8rem);
@@ -687,18 +343,11 @@
     width: calc(20% - 1.2rem);
     max-width: 320px;
   }
-
-  .project-title-modal {
-    font-size: 2.8rem;
-  }
-
-  .Pro-Model-Right {
-    padding: 3.5rem;
-  }
 }
 
 /* Ultra-Large Desktops (1681px and up) */
 @media (min-width: 1681px) {
+
   /* Styles for ultra-wide and 4K+ monitors */
   .project-Container {
     padding: 3rem clamp(6rem, 10vw, 12rem);
@@ -724,23 +373,5 @@
 
   .Project-Card-Title {
     font-size: 1.8rem;
-  }
-
-  /* Modal */
-  .modal-content.project-details-content {
-    max-width: 1400px;
-  }
-
-  .project-title-modal {
-    font-size: 3.2rem;
-  }
-
-  .project-description-modal {
-    font-size: 1.2rem;
-  }
-
-  .Pro-Model-Right {
-    padding: 4rem;
-    min-width: 500px;
   }
 }

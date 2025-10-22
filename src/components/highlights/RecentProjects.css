@@ -5,9 +5,9 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 90%;
+  width: 100%;
   height: 90%;
-  margin: 4rem 0 auto;
+  margin: 2rem 0 auto;
 }
 
 /* Title styling using global fonts and colors */
@@ -27,11 +27,10 @@
 .RP-Message {
   font-family: var(--font-body);
   font-size: 1.125rem;
-  color: var(--TX-SC-1);
+  color: var(--TX-PC-1);
   text-align: center;
   padding: 2rem;
 }
-
 
 /* Carousel container (The Viewport) */
 .RP-Carousel-Container {
@@ -41,8 +40,7 @@
   margin-bottom: 2rem;
   overflow: hidden;
   border-radius: 4px;
-  /* Removed: No longer need absolute positioning for nav buttons */
-  position: relative; 
+  position: relative;
 }
 
 /* Carousel track (The Sliding Content) */
@@ -65,15 +63,15 @@
   cursor: pointer;
 }
 
-/* --- CAROUSEL FIXES END HERE --- */
-
 /* Media wrapper for image and overlay */
 .RP-Media {
   position: relative;
   flex: 1;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--AC-SC-1), var(--AC-PC-1));
+  background: var(--AC-PC-1);
   width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 12px;
 }
 
 .RP-Image {
@@ -81,13 +79,9 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 12px;
 }
-
-/* .RP-Card:hover .RP-Image {
-  transform: scale(1.02);
-} */
 
 /* Overlay for text */
 .RP-Overlay {
@@ -106,7 +100,6 @@
   transform: translateY(0);
 }
 
-
 /* Indicators/dots */
 .RP-Indicators {
   display: flex;
@@ -119,7 +112,7 @@
   width: 10px;
   height: 10px;
   border-radius: 2px;
-  background: var(--TX-SC-1);
+  background: var(--COMP);
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -142,6 +135,7 @@
 
 /* Smallest phones (280px and up) */
 @media (min-width: 280px) and (max-width: 349px) {
+
   /* Styles for ultra-small screens like Galaxy Fold */
   .RP-Wrapper {
     width: 100%;
@@ -188,6 +182,7 @@
 
 /* Small phones (350px – 479px) */
 @media (min-width: 350px) and (max-width: 479px) {
+
   /* Styles for small devices like older iPhones */
   .RP-Title {
     font-size: 2rem;
@@ -211,6 +206,7 @@
 
 /* Medium phones (480px – 599px) */
 @media (min-width: 480px) and (max-width: 599px) {
+
   /* Styles for most mid-size Android and iPhones */
   .RP-Wrapper {
     width: 95%;
@@ -231,6 +227,7 @@
 
 /* Large phones (600px – 750px) */
 @media (min-width: 600px) and (max-width: 750px) {
+
   /* Styles for large phones and small phablets */
   .RP-Title {
     font-size: 2.4rem;
@@ -246,6 +243,7 @@
 
 /* Small tablets (768px – 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
+
   /* Portrait tablets and small landscape tablets */
   .RP-Wrapper {
     width: 85%;
@@ -262,14 +260,16 @@
   }
 
   /* ❌ Removed .RP-Nav-Button media query overrides */
-  
+
   .RP-Overlay {
-    padding: 1.5rem 1.5rem 1rem; /* Default padding */
+    padding: 1.5rem 1.5rem 1rem;
+    /* Default padding */
   }
 }
 
 /* Medium tablets / small laptops (1024px – 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
+
   /* Landscape tablets, small laptops, Chromebooks */
   .RP-Wrapper {
     width: 80%;
@@ -289,6 +289,7 @@
 
 /* Large tablets / standard desktops (1280px – 1680px) */
 @media (min-width: 1280px) and (max-width: 1680px) {
+
   /* Standard desktop screens, large tablets */
   .RP-Wrapper {
     width: 75%;
@@ -310,6 +311,7 @@
 
 /* Ultra-Large Desktops (1681px and up) */
 @media (min-width: 1681px) {
+
   /* Styles for ultra-wide and 4K+ monitors */
   .RP-Wrapper {
     width: 70%;

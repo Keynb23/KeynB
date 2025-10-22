@@ -4,7 +4,7 @@
 
 .theme-toggle-btn {
   background-color: transparent;
-  border: 2px solid var(--TX-SC-1);
+  border: 2px solid var(--AC-PC-1);
   color: var(--TX-PC-1);
   width: 48px;
   height: 48px;
@@ -19,14 +19,13 @@
 
 .theme-toggle-btn:hover,
 .theme-toggle-btn:focus {
-  background-color: var(--BG-SC-1);
-  border-color: var(--AC-PC-1);
-  color: var(--AC-PC-1);
+  background-color: var(--THEME2);
+  color: var(--THEME1);
   transform: scale(1.1) rotate(15deg);
 }
 
 .theme-toggle-btn:focus {
-  outline: 2px solid var(--AC-SC-1);
+  outline: 2px solid var(--AC-PC-1);
   outline-offset: 2px;
 }
 
@@ -45,8 +44,8 @@
    ========================================================================== */
 
 .to-btn {
-  background-color: var(--AC-TC-1);
-  color: #fff;
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
   border: 2px solid var(--AC-PC-1);
   font-size: 1.1rem;
   padding: 0.8em 2em;
@@ -58,7 +57,8 @@
 }
 
 .to-btn:hover {
-  background-color: var(--AC-PC-1);
+  background-color: var(--INVL);
+  color: var(--MainBG);
 }
 
 .to-btn:active {
@@ -94,8 +94,8 @@
 }
 
 .modal-close-btn:hover {
-  background-color: var(--AC-TC-1);
-  color: var(--BG-PC-1);
+  background-color: var(--AC-PC-1);
+  color: var(--TX-PC-1);
 }
 
 .modal-nav-btn {
@@ -120,7 +120,7 @@
 
 .modal-nav-btn:hover {
   background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
+  color: var(--TX-PC-1);
 }
 
 .prev-btn {

@@ -1,0 +1,475 @@
+/* Project Modal (Popup) Styles - NETFLIX DETAIL SCREEN */
+.Project-Model {
+  position: fixed;
+  top: 5%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--BG-PC-1);
+  backdrop-filter: blur(15px);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.modal-content.project-details-content {
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
+  border-radius: 16px;
+  padding: 0;
+  width: 95%;
+  max-width: 1200px;
+  max-height: 90vh;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: row; /* Default desktop layout */
+  gap: 0;
+  position: relative;
+  box-shadow: 0 0 40px var(--AC-PC-1);
+  overflow: hidden;
+  animation: openModal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes openModal {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.Pro-Model-Left {
+  /* Media Column */
+  flex: 2;
+  min-width: 60%;
+  height: 100%;
+  min-height: 60vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.modal-media {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+}
+
+.Pro-Model-Right {
+  flex: 1;
+  min-width: 400px; /* This is the problematic line for mobile */
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.project-title-modal {
+  font-size: 2.5rem;
+  color: var(--TX-PC-1);
+  margin-bottom: 0.5rem;
+}
+
+.project-description-modal {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: var(--TX-PC-1);
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.modal-tag {
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
+  border: 1px solid var(--AC-PC-1);
+  padding: 0.4em 0.8em;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Modal Navigation and Actions */
+.modal-actions-area {
+  border-top: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  padding: 1rem;
+}
+
+.modal-links-wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-link-btn {
+  flex: 1;
+  text-align: center;
+  padding: 0.8em 1em;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.modal-link-btn.live-site {
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
+  border-color: var(--AC-PC-1);
+}
+
+.modal-link-btn.source-code {
+  background-color: var(--COMP);
+  color: var(--TX-PC-1);
+  border-color: var(--AC-PC-1);
+}
+
+.modal-link-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Navigation Arrows */
+.media-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: none;
+  color: var(--COMP);
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, opacity 0.2s, transform 0.2s;
+}
+
+.media-nav:hover {
+  background-color: var(--BG-PC-1);
+  color: var(--COMP);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.media-prev {
+  left: 15px;
+}
+
+.media-next {
+  right: 15px;
+}
+
+/* Slideshow Instructions */
+.slideshow-instructions {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  z-index: 11;
+}
+
+/* Admin Delete Button */
+.admin-actions {
+  padding-top: 1rem;
+}
+
+.btn-delete {
+  background-color: #2e0302;
+  color: rgb(209, 209, 209);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #a90a05;
+}
+
+/* Media Queries (Project Modal) */
+@media (max-width: 1023px) {
+  .modal-content.project-details-content {
+    flex-direction: column; /* EXPLICITLY STACKING COLUMNS */
+    overflow-y: auto;
+    max-width: 95%; /* Ensure it doesn't get too wide on tablets */
+  }
+
+  .Pro-Model-Left {
+    flex: none;
+    min-width: unset;
+  }
+
+  .Pro-Model-Right {
+    min-width: unset;
+    flex: none;
+    max-height: unset;
+    overflow-y: visible;
+  }
+}
+
+/* Smallest phones (280px and up) */
+@media (min-width: 280px) and (max-width: 349px) {
+
+  .Pro-Model-Left {
+    min-height: 250px;
+  }
+
+  .Pro-Model-Right {
+    padding: 1.5rem;
+  }
+
+  .project-title-modal {
+    font-size: 1.6rem;
+  }
+
+  .project-description-modal {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-tag {
+    font-size: 0.8rem;
+  }
+
+  .modal-links-wrapper {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .modal-link-btn {
+    font-size: 0.9rem;
+    padding: 0.7em 1em;
+  }
+
+  /* Media Navigation: Adjust Size/Position Only */
+  .media-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    left: 5px;
+    right: 5px;
+    transform: translateY(-50%) !important; /* FIX: Force vertical center */
+    opacity: 1; /* FIX: Ensure visibility */
+    z-index: 100; /* FIX: Ensure it is above other elements */
+  }
+
+  .slideshow-instructions {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    bottom: 5px;
+  }
+}
+
+/* Small phones (350px – 479px) */
+@media (min-width: 350px) and (max-width: 479px) {
+
+  .Pro-Model-Left {
+    min-height: 280px;
+  }
+
+  .Pro-Model-Right {
+    padding: 1.8rem;
+  }
+
+  .project-title-modal {
+    font-size: 1.8rem;
+  }
+
+  .project-description-modal {
+    font-size: 1rem;
+  }
+
+  .modal-links-wrapper {
+    flex-direction: row;
+  }
+
+  .modal-link-btn {
+    font-size: 1rem;
+  }
+
+  /* Media Navigation: Adjust Size/Position Only */
+  .media-nav {
+    width: 38px;
+    height: 38px;
+    font-size: 1.4rem;
+    left: 8px;
+    right: 8px;
+    transform: translateY(-50%) !important; /* FIX: Force vertical center */
+    opacity: 1; /* FIX: Ensure visibility */
+    z-index: 100; /* FIX: Ensure it is above other elements */
+  }
+
+  .slideshow-instructions {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    bottom: 8px;
+  }
+}
+
+/* Medium phones (480px – 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+
+  .Pro-Model-Left {
+    min-height: 320px;
+  }
+
+  .project-title-modal {
+    font-size: 2rem;
+  }
+
+  /* Media Navigation: Adjust Size/Position Only */
+  .media-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    left: 10px;
+    right: 10px;
+    transform: translateY(-50%) !important; /* FIX: Force vertical center */
+    opacity: 1; /* FIX: Ensure visibility */
+    z-index: 100; /* FIX: Ensure it is above other elements */
+  }
+}
+
+/* Large phones (600px – 750px) */
+@media (min-width: 600px) and (max-width: 750px) {
+
+  .Pro-Model-Left {
+    min-height: 350px;
+  }
+
+  .project-title-modal {
+    font-size: 2.2rem;
+  }
+
+  /* Media Navigation: Explicitly ensure transform and visibility */
+  .media-nav {
+    transform: translateY(-50%) !important; /* FIX: Force vertical center */
+    opacity: 1; /* FIX: Ensure visibility */
+    z-index: 100; /* FIX: Ensure it is above other elements */
+  }
+}
+
+/* Small tablets (768px – 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  .modal-content.project-details-content {
+    max-width: 800px;
+  }
+
+  .Pro-Model-Left {
+    min-height: 400px;
+  }
+
+  .Pro-Model-Right {
+    padding: 2.5rem;
+  }
+
+  .project-title-modal {
+    font-size: 2.3rem;
+  }
+
+  .project-description-modal {
+    font-size: 1.1rem;
+  }
+
+  .modal-link-btn {
+    padding: 1em 1em;
+  }
+  
+  /* Media Navigation: Explicitly ensure transform and visibility */
+  .media-nav {
+    transform: translateY(-50%) !important; /* FIX: Force vertical center */
+    opacity: 1; /* FIX: Ensure visibility */
+    z-index: 100; /* FIX: Ensure it is above other elements */
+  }
+}
+
+/* Medium tablets / small laptops (1024px – 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+
+  /* DESKTOP/LAPTOP: RESTORE ROW LAYOUT */
+  .modal-content.project-details-content {
+    flex-direction: row; /* Switches back to row layout */
+    max-width: 1000px;
+    min-height: 60vh;
+    max-height: 90vh;
+  }
+
+  .Pro-Model-Left {
+    min-width: 55%;
+    min-height: 60vh;
+    flex: 2;
+  }
+
+  .Pro-Model-Right {
+    min-width: 45%;
+    padding: 3rem;
+    flex: 1;
+  }
+}
+
+/* Large tablets / standard desktops (1280px – 1680px) */
+@media (min-width: 1280px) and (max-width: 1680px) {
+
+  .project-title-modal {
+    font-size: 2.8rem;
+  }
+
+  .Pro-Model-Right {
+    padding: 3.5rem;
+  }
+}
+
+/* Ultra-Large Desktops (1681px and up) */
+@media (min-width: 1681px) {
+
+  .modal-content.project-details-content {
+    max-width: 1400px;
+  }
+
+  .project-title-modal {
+    font-size: 3.2rem;
+  }
+
+  .project-description-modal {
+    font-size: 1.2rem;
+  }
+
+  .Pro-Model-Right {
+    padding: 4rem;
+    min-width: 500px;
+  }
+}

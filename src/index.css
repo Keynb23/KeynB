@@ -19,29 +19,31 @@
   color-scheme: light;
 
   /* Crimson & Charcoal Theme */
-  --MainBG: #2a0436;
-  --BG-PC-1: #fbfafb; 
-  --BG-SC-1: #090212; 
-  --INVL: #15081ba1;
-  --COMP: #0c0b0e;
-  --TX-PC-1: #ede3f8; 
-  --TX-SC-1: #e4e4e4; 
-  --TX-AC: #8848d1; 
-  --AC-PC-1: #aa5edc; 
-  --AC-SC-1: #433896a5; 
-  --AC-TC-1: #691a8d; 
+  --MainBG: #000000;
+  --BG-PC-1: #ffffff; 
+  --BG-SC-1: #ffffff; 
+  --INVL: #ffffff;
+  --COMP: #1b1b1b;
+  --TX-PC-1: #ffffff; 
+  --AC-PC-1: #818181; 
+  --THEME1: rgb(95, 202, 255);
+  --THEME2: rgb(7, 0, 28);
+
 }
 
 /* No change needed for dark theme, as this is a dark theme by default */
 [data-theme="dark"] {
   color-scheme: dark;
   --MainBG: #f5ecde;
-  --BG-PC-1: #440653;
-  --BG-SC-1: #f8eafb;
-  --INVD: #cf92f5bb;
+  --BG-PC-1: #000000;
+  --BG-SC-1: #000000;
+  --INVD: #000000bb;
   --INVL: var(--INVD);
-  --COMP: #e0d6ff;
-  --TX-PC-1: #0e0712;
+  --COMP: #c8c8c8;
+  --TX-PC-1: #000000;
+  --AC-PC-1: #8b8b8b; 
+  --THEME1: rgb(255, 191, 0);
+  --THEME2: rgb(0, 170, 255);
 }
 
 

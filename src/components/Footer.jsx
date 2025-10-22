@@ -96,7 +96,6 @@ const Footer = () => {
   };
 
   return (
-    // We use 'contact-section' as the main wrapper for the footer
     <footer className="contact-section" id="contact">
       <div className="contact-container">
         {/* FORM WRAPPER */}
@@ -213,13 +212,14 @@ const Footer = () => {
               <LinkedInIcon />
             </a>
           </div>
+          {/* Separate div for the copyright text */}
+          <div className="footer-bottom">
+            <p className="copyright-text">
+              &copy; {new Date().getFullYear()} Key'n Brosdahl. All Rights
+              Reserved.
+            </p>
+          </div>
         </div>
-      </div>
-      {/* Separate div for the copyright text */}
-      <div className="footer-bottom">
-        <p className="copyright-text">
-          &copy; {new Date().getFullYear()} Key'n Brosdahl. All Rights Reserved.
-        </p>
       </div>
     </footer>
   );

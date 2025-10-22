@@ -1,7 +1,3 @@
-/* ==========================================================================
-   Navbar Styles (Modern & Sleek)
-   ========================================================================== */
-
 .navbar-header {
   background-color: var(--MainBG);
   border-bottom: 1px solid var(--INVL);
@@ -26,18 +22,16 @@
   font-family: var(--font-header);
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--BG-PC-1);
+  color: var(--TX-PC-1);
   letter-spacing: 0.05em;
   padding: 0;
 }
 
-/* ------------------------------------------------------------------------- */
 /* Navigation links container */
-/* ------------------------------------------------------------------------- */
 
 .nav-links {
   display: flex;
-  gap: 3rem;
+  gap: 5rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -47,9 +41,9 @@
 .nav-link {
   font-family: var(--font-ui);
   font-weight: 600;
-  font-size: 1.05rem;
-  color: var(--BG-PC-1);
-  opacity: .85;
+  font-size: 1.15rem;
+  color: var(--TX-PC-1);
+  opacity: .95;
   padding: 0.5rem 0;
   position: relative;
   transition: color 0.3s ease-in-out;
@@ -57,7 +51,6 @@
 
 .nav-link:hover {
   color: var(--AC-PC-1);
-  /* Use primary accent on hover */
 }
 
 /* Active link styling - Underline effect */
@@ -69,7 +62,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--AC-PC-1);
+  color: var(--AC-PC-1);
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-out;
@@ -78,7 +71,6 @@
 .nav-link.active::after,
 .nav-link:hover::after {
   transform: scaleX(1);
-  /* Full width on hover/active */
   transform-origin: bottom left;
 }
 
@@ -92,6 +84,8 @@
   align-items: center;
   z-index: 99;
 }
+
+
 
 /* ==========================================================================
    Responsive Styles for Mobile

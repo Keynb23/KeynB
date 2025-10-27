@@ -1,4 +1,3 @@
-/* Login.css */
 /* 1. Modal Overlay and Positioning */
 .modal-backdrop {
   margin-top: 10%;
@@ -9,16 +8,20 @@
 
 .login-container {
   position: relative;
+  /* Already uses theme variable */
   background-color: var(--COMP);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 25px var(--AC-PC-1);
+  /* Updated to use new Comic Box Shadow */
+  box-shadow: var(--Comic-S1);
   /* width: 90%; */
   max-width: 600px;
   font-family: var(--font-ui);
   animation: fadeIn 0.3s ease-out;
-  border: 5px solid var(--AC-PC-1);
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B2);
 }
 
 @keyframes fadeIn {
@@ -44,6 +47,7 @@
   right: 10px;
   background: none;
   border: none;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   font-size: 1.5rem;
   cursor: pointer;
@@ -53,18 +57,22 @@
 }
 
 .close-button:hover {
+  /* Already uses theme variable */
   color: var(--AC-PC-1);
 }
 
 /* 2. Form and Input Styles */
 .login-form h2 {
   font-family: var(--font-header);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-top: 0;
   margin-bottom: 25px;
   text-align: center;
   font-size: 1.8rem;
   letter-spacing: 0.5px;
+  /* Updated to use new Comic Text Shadow */
+  text-shadow: var(--Comic-T2);
 }
 
 .li-form-group {
@@ -75,6 +83,7 @@
   display: block;
   margin-bottom: 6px;
   font-size: 0.95rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   font-weight: 500;
 }
@@ -82,10 +91,13 @@
 .form-input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--AC-PC-1);
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
   border-radius: 6px;
   font-size: 1rem;
+  /* Already uses theme variable */
   background-color: var(--COMP);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   transition:
     border-color 0.3s,
@@ -93,18 +105,23 @@
 }
 
 .form-input:focus {
-  border-color: var(--AC-PC-1);
+  /* Updated to use new Comic Outline Border */
+  border: var(--Comic-BOutline);
   outline: none;
-  box-shadow: 0 0 6px var(--AC-PC-1);
+  /* Updated to use new Comic Glow Shadow */
+  box-shadow: var(--Comic-TGlow);
 }
 
 /* 3. Button and Error Styles */
 .login-button {
   width: 100%;
   padding: 12px;
+  /* Already uses theme variable */
   background-color: var(--COMP);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
-  border: none;
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
   border-radius: 6px;
   cursor: pointer;
   font-size: 1.1rem;
@@ -114,12 +131,15 @@
     background-color 0.3s,
     transform 0.1s,
     box-shadow 0.2s;
-  box-shadow: 0 3px 8px var(--AC-PC-1);
+  /* Updated to use new Comic Box Shadow */
+  box-shadow: var(--Comic-S2);
 }
 
 .login-button:hover {
+  /* Already uses theme variable */
   background-color: var(--AC-PC-1);
-  box-shadow: 0 5px 12px var(--AC-PC-1);
+  /* Updated to use new Comic Hover Shadow */
+  box-shadow: var(--Comic-SHover);
 }
 
 .login-button:active {
@@ -127,13 +147,16 @@
 }
 
 .error-message {
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
-  background-color: rgba(105, 26, 141, 0.1);
+  /* Updated to use theme-aware background */
+  background-color: var(--INVL);
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 6px;
   text-align: center;
-  border: 1px solid var(--AC-PC-1);
+  /* Updated to use new Comic Outline Border */
+  border: var(--Comic-BOutline);
   font-weight: 500;
 }
 
@@ -145,21 +168,28 @@
 
 .logout-display h2 {
   font-family: var(--font-header);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 12px;
   font-size: 1.6rem;
+  /* Updated to use new Comic Text Shadow */
+  text-shadow: var(--Comic-T2);
 }
 
 .logout-display p {
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 25px;
   font-size: 1rem;
 }
 
 .logout-button {
+  /* Already uses theme variable */
   background-color: var(--COMP);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
-  border: none;
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
   border-radius: 6px;
   padding: 12px 0;
   width: 100%;
@@ -169,10 +199,15 @@
   transition:
     background-color 0.3s,
     transform 0.1s;
+  /* Updated to use new Comic Box Shadow */
+  box-shadow: var(--Comic-S2);
 }
 
 .logout-button:hover {
+  /* Already uses theme variable */
   background-color: var(--INVL);
+  /* Updated to use new Comic Hover Shadow */
+  box-shadow: var(--Comic-SHover);
 }
 
 .logout-button:active {
@@ -296,7 +331,7 @@
 
 /* Large phones (600px – 750px) */
 @media (min-width: 600px) and (max-width: 750px) {
-  /* Styles for large phones and small phablets */
+  /* Styles for large phones and small phab-lets */
   .login-container {
     max-width: 400px; /* Default size */
   }

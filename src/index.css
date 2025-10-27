@@ -6,46 +6,94 @@
 /* ==========================================================================
    2. Root Variables and Color Scheme Setup
    ========================================================================== */
-
 :root {
   /* This sets LIGHT MODE as the default theme */
   color-scheme: light;
-
   /* Typography */
   --font-header: lucida, sans-serif;
   --font-body: "Source Sans Pro", sans-serif;
   --font-ui: "Poppins", sans-serif;
 
-  color-scheme: light;
+  /* === NEW COMIC BOOK PALETTE (LIGHT MODE) === */
+  /* This is a "dark-on-light" theme by default */
 
-  /* Crimson & Charcoal Theme */
-  --MainBG: #000000;
-  --BG-PC-1: #ffffff; 
-  --BG-SC-1: #ffffff; 
-  --INVL: #ffffff;
-  --COMP: #1b1b1b;
-  --TX-PC-1: #ffffff; 
-  --AC-PC-1: #818181; 
-  --THEME1: rgb(92, 16, 245);
-  --THEME2: rgb(33, 0, 132);
+  /* Dark Ink-Blue Background */
+  --MainBG: #22222a;
+  /* Off-White Paper for primary content */
+  --BG-PC-1: #f4f1de;
+  /* Off-White Paper for secondary content */
+  --BG-SC-1: #f4f1de;
+  /* Off-White Paper for inverted elements */
+  --INVL: #f4f1de;
+  /* Darker component color */
+  --COMP: #3a3a42;
+  /* Off-White Paper for text (on dark BGs) */
+  --TX-PC-1: #f4f1de;
+  /* Bright Yellow for accents */
+  --AC-PC-1: #ffcc00;
 
+  /* Primary Theme Colors */
+  /* Bright Comic Blue */
+  --THEME1: #007aff;
+  /* Bold Comic Red */
+  --THEME2: #ff3b30;
+
+  /* --- BOX SHADOWS --- */
+  --Comic-S1: 4px 4px 0 var(--THEME1), 8px 8px 0 var(--THEME2);
+  --Comic-S2: 3px 3px 0 var(--TX-PC-1), 6px 6px 0 var(--THEME2);
+  --Comic-SHover: 6px 6px 0 var(--THEME1), 10px 10px 0 var(--THEME2);
+
+  /* --- TEXT SHADOWS --- */
+  --Comic-T1: 3px 3px 0 var(--THEME2), 6px 6px 0 var(--THEME1);
+  --Comic-T2: 2px 2px 0 var(--THEME2), 4px 4px 0 var(--THEME1), 6px 6px 0 var(--COMP);
+  --Comic-TGlow: 0 0 5px var(--THEME1), 0 0 10px var(--THEME2), 2px 2px 0 var(--COMP);
+
+  /* --- BORDERS --- */
+  --Comic-B1: 3px solid var(--TX-PC-1);
+  --Comic-BOutline: 3px solid var(--THEME1);
+  --Comic-B2: 4px solid var(--THEME2);
+  --Comic-BDash: 3px dashed var(--TX-PC-1);
 }
 
-/* No change needed for dark theme, as this is a dark theme by default */
+/* === NEW COMIC BOOK PALETTE (DARK MODE) === */
+/* This is an "light-on-dark" theme */
 [data-theme="dark"] {
   color-scheme: dark;
-  --MainBG: #f5ecde;
-  --BG-PC-1: #000000;
-  --BG-SC-1: #000000;
-  --INVD: #000000bb;
-  --INVL: var(--INVD);
-  --COMP: #c8c8c8;
-  --TX-PC-1: #000000;
-  --AC-PC-1: #8b8b8b; 
-  --THEME1: rgb(255, 191, 0);
-  --THEME2: rgb(0, 170, 255);
-}
 
+  /* Off-White Paper Background */
+  --MainBG: #f4f1de;
+  /* Dark Ink-Blue for primary content */
+  --BG-PC-1: #22222a;
+  /* Dark Ink-Blue for secondary content */
+  --BG-SC-1: #22222a;
+  /* Dark overlay for inverted */
+  --INVD: #22222abb;
+  --INVL: var(--INVD);
+  /* Light gray component color */
+  --COMP: #e0e0e0;
+  /* Dark Ink-Blue for text (on light BGs) */
+  --TX-PC-1: #22222a;
+  /* Bright Yellow for accents */
+  --AC-PC-1: #ffcc00;
+
+  /* Primary Theme Colors (Swapped) */
+  /* Bold Comic Red */
+  --THEME1: #ff3b30;
+  /* Bright Comic Blue */
+  --THEME2: #007aff;
+
+  /* Shadows and Borders remain mapped */
+  --Comic-S1: 4px 4px 0 var(--THEME1), 8px 8px 0 var(--THEME2);
+  --Comic-S2: 3px 3px 0 var(--TX-PC-1), 6px 6px 0 var(--THEME2);
+  --Comic-SHover: 6px 6px 0 var(--THEME1), 10px 10px 0 var(--THEME2);
+  --Comic-T1: 3px 3px 0 var(--THEME2), 6px 6px 0 var(--THEME1);
+  --Comic-T2: 2px 2px 0 var(--THEME2), 4px 4px 0 var(--THEME1), 6px 6px 0 var(--COMP);
+  --Comic-TGlow: 0 0 5px var(--THEME1), 0 0 10px var(--THEME2), 2px 2px 0 var(--COMP);
+  --Comic-B1: 3px solid var(--TX-PC-1);
+  --Comic-BOutline: 3px solid var(--THEME1);
+  --Comic-B2: 4px solid var(--THEME2);
+  --Comic-BDash: 3px dashed var(--TX-PC-1);
+}
 
 /* ==========================================================================
    3. Global Styles & Resets
@@ -59,14 +107,27 @@
   padding: 0;
 }
 
-body,
-html,
-:root {
+/* Halftone dot overlay */
+body::before,
+html::before,
+:root::before {
   height: 100%;
   width: 100%;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle, var(--BG-PC-1) 1px, transparent 1px);
+  background-size: 5px 5px;
+  opacity: 0.2; /* Made texture more subtle */
+  z-index: -1;
+  pointer-events: none;
 }
 
 body {
+  position: relative;
   font-family: var(--font-body);
   background-color: var(--MainBG);
   color: var(--TX-PC-1);
@@ -93,6 +154,7 @@ h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 0.75rem;
+  text-shadow: var(--Comic-T2); /* Added comic text shadow */
 }
 
 p {
@@ -108,7 +170,7 @@ a {
 a:hover,
 a:focus {
   text-decoration: underline;
-  color: var(--AC-SC-1);
+  color: var(--THEME1); /* Fixed broken variable */
 }
 
 ul,
@@ -138,22 +200,26 @@ button {
   transition:
     background-color 0.2s ease-in-out,
     color 0.2s ease-in-out,
+    box-shadow 0.2s ease, /* Added transition */
     transform 0.1s ease;
 
   /* "Flipped" color scheme for pop */
   background-color: var(--AC-PC-1);
-  color: var(--BG-PC-1);
+  color: var(--MainBG); /* Fixed contrast (was --BG-PC-1) */
+  box-shadow: var(--Comic-S2); /* Added base shadow */
 }
 
 button:hover,
 button:focus {
-  background-color: var(--AC-SC-1);
-  border-color: var(--AC-SC-1);
+  background-color: var(--THEME1); /* Updated hover color */
+  border-color: var(--THEME1); /* Updated hover color */
+  color: var(--TX-PC-1); /* Added text color for contrast */
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px okhsla(from var(--AC-PC-1) h s l / 0.3);
+  box-shadow: var(--Comic-SHover); /* Updated to comic shadow */
 }
 
 button:active {
   transform: translateY(0);
-  box-shadow: none;
+  box-shadow: var(--Comic-S2); /* Reset to base shadow */
 }
+

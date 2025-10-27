@@ -16,8 +16,11 @@
 .xp-title {
   font-family: var(--font-header);
   font-size: 2.5rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 10px;
+  /* Updated to use new Comic Text Shadow */
+  text-shadow: var(--Comic-T1);
 }
 
 .experience-section {
@@ -31,7 +34,8 @@
 .experience-history {
   position: relative;
   padding-left: 40px;
-  border-left: 3px solid okhsla(from var(--AC-PC-1) h s l / 0.2);
+  /* Updated to use new Comic Outline Border */
+  border-left: var(--Comic-BOutline);
 }
 
 .job-entry::before {
@@ -42,7 +46,8 @@
   width: 15px;
   height: 15px;
   /* background-color: var(--AC-SC-1); */
-  border: 3px solid var(--BG-SC-1);
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
   border-radius: 50%;
   z-index: 1;
 }
@@ -50,19 +55,23 @@
 /* --- Job Entry & Video Styling --- */
 .job-entry {
   position: relative;
+  /* Already uses theme variable */
   background-color: var(--COMP);
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2.5rem;
-  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
-  box-shadow: var(--TX-PC-1) 2.4px 2.4px 3.2px;
-  
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
+  /* Updated to use new Comic Box Shadow */
+  box-shadow: var(--Comic-S2);
+
 }
 
 #XP-Scroll {
   animation: autoShowAnimation both;
   animation-timeline: view(70% 5%);
 }
+
 @keyframes autoShowAnimation {
   from {
     opacity: 0;
@@ -78,6 +87,7 @@
 .job-entry h3 {
   font-family: var(--font-header);
   font-size: 1.6rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 0.25rem;
 }
@@ -85,6 +95,7 @@
 .job-entry h4 {
   font-family: var(--font-ui);
   font-size: 1rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 1.5rem;
   font-weight: 600;
@@ -99,12 +110,14 @@
 .job-entry li {
   font-family: var(--font-body);
   font-size: 1rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 0.75rem;
   line-height: 1.7;
 }
 
 .job-entry li::marker {
+  /* Already uses theme variable */
   color: var(--AC-PC-1);
 }
 
@@ -193,7 +206,7 @@
 
 /* Large phones (600px – 750px) */
 @media (min-width: 600px) and (max-width: 750px) {
-  /* Styles for large phones and small phablets */
+  /* Styles for large phones and small phab-lets */
   .xp-section {
     padding: 40px 30px;
   }

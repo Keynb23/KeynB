@@ -9,10 +9,9 @@ import EDU from "./Resume/Edu/Edu";
 import Footer from "./components/Footer";
 import { Login } from "./components/Login/Login";
 import { useEffect, useState, useRef } from "react";
-import { Decoys } from "./components/Decoys";
 
 // The IntroVid.mp4 file now contains both video and audio.
-const TOTAL_LOADING_TIME_MS = 4000;
+const TOTAL_LOADING_TIME_MS = 5000;
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -94,7 +93,6 @@ function App() {
   return (
     <>
       <Navbar />
-      <Decoys />
 
       <div
         className="hidden-login-trigger"
@@ -106,6 +104,7 @@ function App() {
       {isLoginVisible && <Login onClose={closeLoginModal} />}
 
       <div className="app-container">
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />

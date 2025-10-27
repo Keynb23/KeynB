@@ -10,12 +10,16 @@
 
 /* Admin Button Styles */
 .admin-add-project-btn {
+  /* Already uses theme variable */
   background-color: var(--COMP);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   padding: 0.75rem 1.5rem;
   margin: 1rem 0 2rem 0;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
+  /* Updated to use new Comic Box Shadow */
+  box-shadow: var(--Comic-S2);
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 600;
@@ -26,9 +30,11 @@
 }
 
 .admin-add-project-btn:hover {
+  /* Already uses theme variable */
   background-color: var(--AC-PC-1);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Updated to use new Comic Hover Shadow */
+  box-shadow: var(--Comic-SHover);
 }
 
 /* ==========================================================================
@@ -41,31 +47,40 @@
   gap: 0.75rem;
   padding: 1rem 0;
   margin-bottom: 2rem;
-  border-bottom: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  /* Updated to use new Comic Border */
+  border-bottom: var(--Comic-B1);
 }
 
 .Project-Tab {
   font-family: var(--font-ui);
   font-weight: 600;
   font-size: 0.9rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
+  /* Already uses theme variable */
   background-color: var(--AC-PC-1);
   padding: 0.6em 1.2em;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  border: 1px solid transparent;
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
 }
 
 .Project-Tab:hover {
-  background-color: none;
+  /* Updated to use theme variable */
+  background-color: var(--COMP);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
 }
 
 .Project-Tab.active {
+  /* Already uses theme variable */
   background-color: var(--COMP);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
-  border-color: var(--AC-SC-1);
+  /* Updated to use new Comic Outline Border */
+  border: var(--Comic-BOutline);
 }
 
 /* Project Card Rows (Streaming Service Style) */
@@ -102,15 +117,18 @@
   cursor: pointer;
   aspect-ratio: 16 / 9;
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* Updated to use new Comic Box Shadow */
+  box-shadow: var(--Comic-S1);
   position: relative;
-  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
 }
 
 .Project-Card:hover {
   transform: scale(1.02);
   z-index: 10;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  /* Updated to use new Comic Hover Shadow */
+  box-shadow: var(--Comic-SHover);
 }
 
 .Project-Card-Image {
@@ -129,6 +147,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
+  /* Already uses theme variable */
   background: var(--COMP);
   padding: 0.5rem 1rem;
   transform: translateY(100%);
@@ -138,6 +157,7 @@
 
 .Project-Card-Content h3 {
   text-align: center;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
 }
 
@@ -147,6 +167,7 @@
 }
 
 .Project-Card-Title {
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   font-size: 1.5rem;
   margin: 0;
@@ -257,7 +278,7 @@
 /* Large phones (600px – 750px) */
 @media (min-width: 600px) and (max-width: 750px) {
 
-  /* Styles for large phones and small phablets */
+  /* Styles for large phones and small phab-lets */
   .Project-Tabs-Wrapper {
     gap: 1rem;
   }
@@ -346,7 +367,7 @@
 }
 
 /* Ultra-Large Desktops (1681px and up) */
-@media (min-width: 1681px) {
+@media (min-a-width: 1681px) {
 
   /* Styles for ultra-wide and 4K+ monitors */
   .project-Container {

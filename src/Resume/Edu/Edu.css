@@ -1,5 +1,4 @@
 /* Education Page Styles */
-
 .education-container {
   display: flex;
   flex-direction: column;
@@ -14,32 +13,40 @@
   font-family: var(--font-header);
   font-size: 2.8rem;
   font-weight: 700;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 3rem;
   text-align: center;
+  /* Updated to use new Comic Text Shadow */
+  text-shadow: var(--Comic-T1);
 }
 
-   /* Education Card Layout */
+/* Education Card Layout */
 
 .education-card {
   display: flex;
   gap: 2rem;
+  /* Already uses theme variable */
   background-color: var(--COMP);
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2.5rem;
   text-align: left;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  border: 1px solid okhsla(from var(--TX-PC-1) h s l / 0.1);
+  /* Updated to use new Comic Box Shadow */
+  box-shadow: var(--Comic-S1);
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .education-card:hover {
   transform: translateY(-5px);
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  /* Updated to use new Comic Hover Shadow */
+  box-shadow: var(--Comic-SHover);
 }
 
 .card-icon {
+  /* Already uses theme variable */
   color: var(--AC-PC-1);
   margin-top: 5px;
 }
@@ -53,6 +60,7 @@
 .degree-title {
   font-family: var(--font-header);
   font-size: 1.6rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 0.25rem;
 }
@@ -60,6 +68,7 @@
 .school-info {
   font-family: var(--font-ui);
   font-size: 1rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 1rem;
   font-weight: 600;
@@ -67,6 +76,7 @@
 
 .card-description {
   font-family: var(--font-body);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 1.5rem;
   line-height: 1.7;
@@ -75,6 +85,7 @@
 .skills-heading {
   font-family: var(--font-header);
   font-size: 1.1rem;
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 1rem;
   font-weight: 600;
@@ -93,13 +104,16 @@
 
 .skills-list li {
   font-family: var(--font-ui);
+  /* Already uses theme variable */
   background-color: var(--AC-PC-1);
+  /* Already uses theme variable */
   color: var(--TX-PC-1);
   padding: 0.4rem 0.9rem;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
-  border: 1px solid okhsla(from var(--AC-PC-1) h s l / 0.3);
+  /* Updated to use new Comic Outline Border */
+  border: var(--Comic-BOutline);
 }
 
 /* ==========================================================================
@@ -120,14 +134,16 @@
   }
 
   .education-card {
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column;
+    /* Stack content vertically */
     padding: 1.2rem;
     gap: 1rem;
     margin-bottom: 1.5rem;
   }
 
   .card-icon {
-    display: none; /* Hide icon on smallest screens for space */
+    display: none;
+    /* Hide icon on smallest screens for space */
   }
 
   .degree-title {
@@ -171,7 +187,8 @@
   }
 
   .education-card {
-    flex-direction: column; /* Keep stacked */
+    flex-direction: column;
+    /* Keep stacked */
     padding: 1.5rem;
     gap: 1.2rem;
   }
@@ -214,7 +231,8 @@
 
   .card-icon {
     display: block;
-    font-size: 1.5rem; /* Make icon visible and slightly larger */
+    font-size: 1.5rem;
+    /* Make icon visible and slightly larger */
     flex-shrink: 0;
   }
 
@@ -294,7 +312,8 @@
 @media (min-width: 1024px) and (max-width: 1279px) {
   /* Landscape tablets, small laptops, Chromebooks */
   .education-container {
-    max-width: 900px; /* Default max-width */
+    max-width: 900px;
+    /* Default max-width */
   }
 
   .education-title {

@@ -1,27 +1,27 @@
 .loading-screen-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    height: 100dvh;
-    z-index: 99999;
-    background-color: transparent;
-}
-.blender-video-layer {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 99999;
+  background-color: transparent;
 }
 
+.blender-video-layer {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 
 /* ==========================================================================
    MEDIA QUERIES
@@ -29,22 +29,25 @@
 
 /* Tablet and Smaller (max-width: 1023px) */
 @media (max-width: 1023px) {
-    /* 🛑 NEW: Change object-fit to contain for "zoom-out" effect */
-    .blender-video-layer {
-        object-fit: contain; 
-        min-width: 0; 
-        min-height: 0;
-        max-width: 100vw;
-        max-height: 100dvh;
-    }
+  /* 🛑 NEW: Change object-fit to contain for "zoom-out" effect */
+  .blender-video-layer {
+    object-fit: contain;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100vw;
+    max-height: 100dvh;
+  }
 }
 
 /* Small phones (max-width: 479px) */
 @media (max-width: 479px) {
-    /* Video scaling is inherited from the 1023px query, no change needed here */
-    
 }
-/* --------------------------------- */
+
+.app-container {
+  position: relative;
+  z-index: 1;
+}
+
 /* Home Styles */
 .Home-wrapper {
   display: flex;
@@ -54,10 +57,7 @@
   min-height: calc(100vh - 120px);
   /* Adjust based on your navbar height */
 }
-.app-container {
-  position: relative;
-  z-index: 1;
-}
+
 .Home-Content {
   display: flex;
   flex-direction: column;
@@ -68,17 +68,24 @@
 }
 
 .title h1 {
-  font-size: clamp(2.5rem, 10vw, 4.5rem);
-  color: var(--BG-PC-1);
+  /* Made font larger and bolder */
+  font-size: 10rem !important;
+  color: var(--THEME2);
+  /* Swapped to the larger text shadow */
+  text-shadow: var(--Comic-T1);
+  background: transparent;
   margin-bottom: 0.5rem;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .sub-title h3 {
-  font-size: clamp(1.5rem, 5vw, 2rem);
+  /* Made font larger */
+  font-size: clamp(1.75rem, 6vw, 2.5rem) !important;
   font-family: var(--font-ui);
   color: var(--TX-PC-1);
   margin-bottom: 2.5rem;
+  /* Added a text shadow */
+  text-shadow: var(--Comic-T2);
 }
 
 .aboutMe-wrapper {
@@ -87,28 +94,44 @@
   background-color: var(--COMP);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: VAR(--TX-PC-1) 0px 22px 70px 4px;
-  transition: background-color 0.3s ease;
+  box-shadow: var(--Comic-S1);
+  /* Added a border */
+  border: var(--Comic-BOutline);
+  /* Added shadow and transform to transition */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.aboutMe-wrapper:hover {
+  /* Added hover effect to make it pop */
+  transform: scale(1.02);
+  box-shadow: var(--Comic-SHover);
 }
 
 .pro-sum h4 {
-  font-size: 1.75rem;
+  /* Made font larger */
+  font-size: 2rem;
   font-weight: 500;
   color: var(--TX-PC-1);
-  border-bottom: 2px solid var(--AC-SC-1);
+  border-bottom: var(--Comic-B1);
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+  /* Added a text shadow */
+  text-shadow: var(--Comic-T2);
 }
 
 .Pro-Sum-P {
-  font-size: 1.1rem;
+  /* Made font larger and brighter */
+  font-size: 1.2rem;
   line-height: 1.7;
   color: var(--TX-PC-1);
-  filter: brightness(.8)
+  filter: brightness(1);
 }
 
 .home-nav-button {
-  margin-top: 5rem;
+  margin: 5rem 0 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,9 +146,10 @@
   align-items: center;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid var(--TX-PC-1);
+  /* Updated to use new Comic Border */
+  border: var(--Comic-B1);
   margin: 1rem;
-  padding: .75rem;
+  padding: 0.75rem;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -139,6 +163,7 @@
   height: 10px;
   border-radius: 50%;
   pointer-events: none;
+  /* This background color is controlled by --trail-color below */
   background: var(--trail-color);
   transform: translate(-50%, -50%);
   z-index: 9999;
@@ -147,7 +172,8 @@
 
 /* Light theme: trail is dark */
 :root {
-  --trail-color: var(--TX-AC);
+  /* Updated to use the new accent color variable */
+  --trail-color: var(--AC-PC-1);
 }
 
 .hidden-login-trigger {
@@ -157,69 +183,34 @@
   width: 5rem;
   height: 5rem;
   background-color: transparent;
-  border: 1px solid var(--TX-AC);
+  /* Updated to use new Comic Border */
+  border: none;
   border-radius: 50%;
   color: transparent;
   cursor: default;
   z-index: 100;
-  opacity: .25;
+  opacity: 0.25;
 }
 
 .decoys {
   position: fixed;
   display: flex;
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   background-color: transparent;
-  border: 1px solid var(--TX-AC);
+  border: var(--Comic-B1);
   border-radius: 50%;
   color: transparent;
   cursor: default;
-  opacity: .25;
+  opacity: 0.25;
   z-index: -999;
 }
-
-.bg-icon {
-  position: fixed;
-  opacity: 0.25;
-  filter: brightness(.75);
-  z-index: -10;
-  pointer-events: none;
-  animation: float 60s ease-in-out infinite;
-  will-change: transform;
-  transition: transform 8s linear, opacity 2s ease;
-}
-
-/* Floating, underwater-style motion */
-@keyframes float {
-  0% {
-    transform: translate(0, 0) scale(1) rotate(0deg);
-  }
-
-  25% {
-    transform: translate(-15px, -10px) scale(1.05) rotate(90deg);
-  }
-
-  50% {
-    transform: translate(10px, 15px) scale(0.95) rotate(180deg);
-  }
-
-  75% {
-    transform: translate(-10px, 10px) scale(1.02) rotate(270deg);
-  }
-
-  100% {
-    transform: translate(0, 0) scale(1) rotate(360deg);
-  }
-}
-
 /* ==========================================================================
    Media Queries
    ========================================================================== */
 
 /* Smallest phones (280px and up) */
 @media (min-width: 280px) and (max-width: 349px) {
-
   /* Styles for ultra-small screens like Galaxy Fold */
   .Home-wrapper {
     padding: 2rem 1rem;
@@ -267,7 +258,6 @@
 
 /* Small phones (350px – 479px) */
 @media (min-width: 350px) and (max-width: 479px) {
-
   /* Styles for small devices like older iPhones */
   .Home-wrapper {
     padding: 3rem 1.5rem;
@@ -307,7 +297,6 @@
 
 /* Medium phones (480px – 599px) */
 @media (min-width: 480px) and (max-width: 599px) {
-
   /* Styles for most mid-size Android and iPhones */
   .Home-wrapper {
     padding: 4rem 2rem;
@@ -340,7 +329,6 @@
 
 /* Large phones (600px – 750px) */
 @media (min-width: 600px) and (max-width: 750px) {
-
   /* Styles for large phones and small phablets */
   .aboutMe-wrapper {
     max-width: 650px;
@@ -366,7 +354,6 @@
 
 /* Small tablets (768px – 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
-
   /* Portrait tablets and small landscape tablets */
   .Home-wrapper {
     padding: 5rem 3rem;
@@ -402,7 +389,6 @@
 
 /* Medium tablets / small laptops (1024px – 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
-
   /* Landscape tablets, small laptops, Chromebooks */
   .Home-wrapper {
     padding: 6rem 4rem;
@@ -424,7 +410,6 @@
 
 /* Large tablets / standard desktops (1280px – 1680px) */
 @media (min-width: 1280px) and (max-width: 1680px) {
-
   /* Standard desktop screens, large tablets */
   .Home-wrapper {
     padding: 8rem 5rem;
@@ -456,7 +441,6 @@
 
 /* Ultra-Large Desktops (1681px and up) */
 @media (min-width: 1681px) {
-
   /* Styles for ultra-wide and 4K+ monitors */
   .Home-wrapper {
     padding: 10rem 8rem;

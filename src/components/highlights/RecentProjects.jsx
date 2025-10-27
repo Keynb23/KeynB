@@ -99,6 +99,7 @@ const RecentProjects = () => {
 
   return (
     <section className="RP-Wrapper">
+                  <div className="RPH-Background"></div> 
       <h2 className="RP-Title">Recent Projects</h2>
 
       <div className="RP-Carousel-Container">

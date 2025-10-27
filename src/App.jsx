@@ -10,12 +10,9 @@ import Footer from "./components/Footer";
 import { Login } from "./components/Login/Login";
 import { useEffect, useState, useRef } from "react";
 import { Decoys } from "./components/Decoys";
-import { BgIcons } from "./components/BG-Icons";
 
 // The IntroVid.mp4 file now contains both video and audio.
 const TOTAL_LOADING_TIME_MS = 4000;
-// DESIRED_VOLUME is now unused as the video is permanently muted.
-const DESIRED_VOLUME = 0.2;
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -97,7 +94,6 @@ function App() {
   return (
     <>
       <Navbar />
-      <BgIcons />
       <Decoys />
 
       <div

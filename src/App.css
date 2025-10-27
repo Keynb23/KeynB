@@ -87,9 +87,7 @@
   background-color: var(--COMP);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow:
-    rgba(144, 38, 236, 0.637) 0px 3px 6px,
-    rgba(22, 2, 35, 0.249) 0px 3px 6px;
+  box-shadow: VAR(--TX-PC-1) 0px 22px 70px 4px;
   transition: background-color 0.3s ease;
 }
 
@@ -123,6 +121,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--TX-PC-1);
+  margin: 1rem;
+  padding: .75rem;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 
 /* mouse trail */

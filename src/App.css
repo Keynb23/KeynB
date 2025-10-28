@@ -8,19 +8,26 @@
   transform: translate(-50%, -50%);
   object-fit: cover;
   object-position: center;
+  zoom: 1;
 }
+/* 
+.blender-video-layer {
+  width: 90%;
+} */
 
 /* Prevents Safari mobile overscroll issues */
 .loading-screen-container {
+  /* height: 100%; */
+  /* width: 100%; */
   position: fixed;
   inset: 0;
   z-index: 99999;
   background-color: black;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .phone-video { display: none;  }
-.desktop-video { display: block; }
+.desktop-video { display: block;}
 
 @media (max-width: 768px) {
   .phone-video { display: block; }

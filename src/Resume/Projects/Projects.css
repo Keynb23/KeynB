@@ -55,10 +55,8 @@
   font-family: var(--font-ui);
   font-weight: 600;
   font-size: 0.9rem;
-  /* Already uses theme variable */
   color: var(--TX-PC-1);
-  /* Already uses theme variable */
-  background-color: var(--AC-PC-1);
+  background-color: var(--THEME1);
   padding: 0.6em 1.2em;
   border-radius: 20px;
   cursor: pointer;

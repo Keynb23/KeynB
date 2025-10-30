@@ -119,7 +119,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/experience" element={<Exp />} />
-          <Route path="/education" Element={<EDU />} />
+          <Route path="/education" element={<EDU />} />
           <Route path="/contact" element={<Footer />} />
         </Routes>
       </div>

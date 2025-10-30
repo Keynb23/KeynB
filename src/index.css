@@ -16,26 +16,15 @@
 
   /* === NEW COMIC BOOK PALETTE (LIGHT MODE) === */
   /* This is a "dark-on-light" theme by default */
-
-  /* Dark Ink-Blue Background */
   --MainBG: #22222a;
-  /* Off-White Paper for primary content */
   --BG-PC-1: #f4f1de;
-  /* Off-White Paper for secondary content */
   --BG-SC-1: #f4f1de;
-  /* Off-White Paper for inverted elements */
   --INVL: #f4f1de;
-  /* Darker component color */
   --COMP: #3a3a42;
-  /* Off-White Paper for text (on dark BGs) */
   --TX-PC-1: #f4f1de;
-  /* Bright Yellow for accents */
   --AC-PC-1: #ffcc00;
 
-  /* Primary Theme Colors */
-  /* Bright Comic Blue */
   --THEME1: #007aff;
-  /* Bold Comic Red */
   --THEME2: #ff3b30;
 
   /* --- BOX SHADOWS --- */

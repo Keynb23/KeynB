@@ -71,8 +71,6 @@ const Home = () => {
 
           {/* Recent Projects Highlights */}
           <div className="RPH-Wrapper">
-            {/* Background layer receives the pattern and animation */}
-            {/* Content component sits on top, undistorted */}
             <RecentProjects />
           </div>
           <Exp />

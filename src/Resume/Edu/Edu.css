@@ -104,9 +104,7 @@
 
 .skills-list li {
   font-family: var(--font-ui);
-  /* Already uses theme variable */
-  background-color: var(--AC-PC-1);
-  /* Already uses theme variable */
+  background-color: var(--THEME2);
   color: var(--TX-PC-1);
   padding: 0.4rem 0.9rem;
   border-radius: 20px;

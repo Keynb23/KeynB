@@ -1,11 +1,12 @@
+/* ========================================================================== */
 /* Project Modal (Popup) Styles - NETFLIX DETAIL SCREEN */
+/* ========================================================================== */
 .Project-Model {
-  position: fixed;
-  top: 5%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  /* Already uses theme variable */
   background-color: var(--BG-PC-1);
   backdrop-filter: blur(15px);
   z-index: 2000;
@@ -17,9 +18,7 @@
 }
 
 .modal-content.project-details-content {
-  /* Already uses theme variable */
   background-color: var(--COMP);
-  /* Already uses theme variable */
   color: var(--TX-PC-1);
   border-radius: 16px;
   padding: 0;
@@ -29,12 +28,9 @@
   min-height: 60vh;
   display: flex;
   flex-direction: row;
-  /* Default desktop layout */
   gap: 0;
   position: relative;
-  /* Updated to use new Comic Box Shadow */
   box-shadow: var(--Comic-S1);
-  /* Updated to use new Comic Border */
   border: var(--Comic-B2);
   overflow: hidden;
   animation: openModal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -52,8 +48,10 @@
   }
 }
 
+/* ========================================================================== */
+/* Media Column (Left) Styles */
+/* ========================================================================== */
 .Pro-Model-Left {
-  /* Media Column */
   flex: 2;
   min-width: 60%;
   height: 100%;
@@ -76,10 +74,12 @@
   border-radius: 12px;
 }
 
+/* ========================================================================== */
+/* Details Column (Right) Styles */
+/* ========================================================================== */
 .Pro-Model-Right {
   flex: 1;
   min-width: 400px;
-  /* This is the problematic line for mobile */
   padding: 3rem;
   display: flex;
   flex-direction: column;
@@ -90,10 +90,8 @@
 
 .project-title-modal {
   font-size: 2.5rem;
-  /* Already uses theme variable */
   color: var(--TX-PC-1);
   margin-bottom: 0.5rem;
-  /* Updated to use new Comic Text Shadow */
   text-shadow: var(--Comic-T1);
 }
 
@@ -101,7 +99,6 @@
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 2rem;
-  /* Already uses theme variable */
   color: var(--TX-PC-1);
 }
 
@@ -113,11 +110,8 @@
 }
 
 .modal-tag {
-  /* Already uses theme variable */
   background-color: var(--COMP);
-  /* Already uses theme variable */
   color: var(--TX-PC-1);
-  /* Updated to use new Comic Border */
   border: var(--Comic-B1);
   padding: 0.4em 0.8em;
   border-radius: 12px;
@@ -125,9 +119,10 @@
   font-weight: 500;
 }
 
+/* ========================================================================== */
 /* Modal Navigation and Actions */
+/* ========================================================================== */
 .modal-actions-area {
-  /* Updated to use new Comic Border */
   border-top: var(--Comic-B1);
   padding: 1rem;
 }
@@ -150,30 +145,25 @@
 }
 
 .modal-link-btn.live-site {
-  /* Already uses theme variable */
   background-color: var(--COMP);
-  /* Already uses theme variable */
   color: var(--TX-PC-1);
-  /* Updated to use new Comic Border */
   border: var(--Comic-BOutline);
 }
 
 .modal-link-btn.source-code {
-  /* Already uses theme variable */
   background-color: var(--COMP);
-  /* Already uses theme variable */
   color: var(--TX-PC-1);
-  /* Updated to use new Comic Border */
   border: var(--Comic-BOutline);
 }
 
 .modal-link-btn:hover {
   transform: translateY(-2px);
-  /* Updated to use new Comic Hover Shadow */
   box-shadow: var(--Comic-SHover);
 }
 
+/* ========================================================================== */
 /* Media Navigation Arrows */
+/* ========================================================================== */
 .media-nav {
   position: absolute;
   top: 50%;
@@ -182,7 +172,6 @@
   height: 44px;
   border-radius: 50%;
   background: none;
-  /* Already uses theme variable */
   color: var(--COMP);
   border: none;
   font-size: 1.6rem;
@@ -195,9 +184,7 @@
 }
 
 .media-nav:hover {
-  /* Already uses theme variable */
   background-color: var(--BG-PC-1);
-  /* Already uses theme variable */
   color: var(--COMP);
   transform: translateY(-50%) scale(1.05);
 }
@@ -210,15 +197,15 @@
   right: 15px;
 }
 
+/* ========================================================================== */
 /* Slideshow Instructions */
+/* ========================================================================== */
 .slideshow-instructions {
   position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  /* Updated to use theme-aware overlay color */
   background-color: var(--INVL);
-  /* Updated to use theme-aware contrast text */
   color: var(--COMP);
   padding: 0.3rem 0.8rem;
   border-radius: 6px;
@@ -227,15 +214,15 @@
   z-index: 11;
 }
 
+/* ========================================================================== */
 /* Admin Delete Button */
+/* ========================================================================== */
 .admin-actions {
   padding-top: 1rem;
 }
-
 .btn-delete {
   background-color: #2e0302;
   color: rgb(209, 209, 209);
-  /* Updated to use new Comic Border */
   border: var(--Comic-B1);
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -243,83 +230,78 @@
   font-weight: 500;
   transition: background-color 0.2s;
 }
-
 .btn-delete:hover {
   background-color: #a90a05;
 }
 
+/* ========================================================================== */
 /* Media Queries (Project Modal) */
+/* ========================================================================== */
+
+/* --- Base Mobile Styles (Tablets and below) --- */
 @media (max-width: 1023px) {
+  .Project-Model {
+    align-items: flex-start; /* FIX: Align modal to top */
+    padding: 2rem 1rem; /* FIX: Add top/bottom padding for scrolling */
+  }
   .modal-content.project-details-content {
     flex-direction: column;
-    /* EXPLICITLY STACKING COLUMNS */
-    overflow-y: auto;
+    overflow-y: visible; /* FIX: Let content grow */
     max-width: 95%;
-    /* Ensure it doesn't get too wide on tablets */
+    min-height: unset;
+    max-height: none; /* FIX: Let content grow */
   }
-
   .Pro-Model-Left {
     flex: none;
     min-width: unset;
+    min-height: 250px;
+    height: auto;
   }
-
   .Pro-Model-Right {
     min-width: unset;
     flex: none;
     max-height: unset;
-    overflow-y: visible;
+    overflow-y: visible; /* FIX: Let content grow */
+  }
+  .media-nav {
+    opacity: 1; /* Show nav arrows by default on mobile */
+    z-index: 100;
   }
 }
 
-/* Smallest phones (280px and up) */
+/* --- Smallest phones (280px – 349px) --- */
 @media (min-width: 280px) and (max-width: 349px) {
-
   .Pro-Model-Left {
     min-height: 250px;
   }
-
   .Pro-Model-Right {
     padding: 1.5rem;
   }
-
   .project-title-modal {
     font-size: 1.6rem;
   }
-
   .project-description-modal {
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
   }
-
   .modal-tag {
     font-size: 0.8rem;
   }
-
   .modal-links-wrapper {
     flex-direction: column;
     gap: 0.8rem;
   }
-
   .modal-link-btn {
     font-size: 0.9rem;
     padding: 0.7em 1em;
   }
-
-  /* Media Navigation: Adjust Size/Position Only */
   .media-nav {
     width: 32px;
     height: 32px;
     font-size: 1.2rem;
     left: 5px;
     right: 5px;
-    transform: translateY(-50%) !important;
-    /* FIX: Force vertical center */
-    opacity: 1;
-    /* FIX: Ensure visibility */
-    z-index: 100;
-    /* FIX: Ensure it is above other elements */
   }
-
   .slideshow-instructions {
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
@@ -327,48 +309,33 @@
   }
 }
 
-/* Small phones (350px – 479px) */
+/* --- Small phones (350px – 479px) --- */
 @media (min-width: 350px) and (max-width: 479px) {
-
   .Pro-Model-Left {
     min-height: 280px;
   }
-
   .Pro-Model-Right {
     padding: 1.8rem;
   }
-
   .project-title-modal {
     font-size: 1.8rem;
   }
-
   .project-description-modal {
     font-size: 1rem;
   }
-
   .modal-links-wrapper {
     flex-direction: row;
   }
-
   .modal-link-btn {
     font-size: 1rem;
   }
-
-  /* Media Navigation: Adjust Size/Position Only */
   .media-nav {
     width: 38px;
     height: 38px;
     font-size: 1.4rem;
     left: 8px;
     right: 8px;
-    transform: translateY(-50%) !important;
-    /* FIX: Force vertical center */
-    opacity: 1;
-    /* FIX: Ensure visibility */
-    z-index: 100;
-    /* FIX: Ensure it is above other elements */
   }
-
   .slideshow-instructions {
     font-size: 0.8rem;
     padding: 0.3rem 0.8rem;
@@ -376,145 +343,101 @@
   }
 }
 
-/* Medium phones (480px – 599px) */
+/* --- Medium phones (480px – 599px) --- */
 @media (min-width: 480px) and (max-width: 599px) {
-
   .Pro-Model-Left {
     min-height: 320px;
   }
-
   .project-title-modal {
     font-size: 2rem;
   }
-
-  /* Media Navigation: Adjust Size/Position Only */
   .media-nav {
     width: 40px;
     height: 40px;
     font-size: 1.5rem;
     left: 10px;
     right: 10px;
-    transform: translateY(-50%) !important;
-    /* FIX: Force vertical center */
-    opacity: 1;
-    /* FIX: Ensure visibility */
-    z-index: 100;
-    /* FIX: Ensure it is above other elements */
   }
 }
 
-/* Large phones (600px – 750px) */
+/* --- Large phones (600px – 750px) --- */
 @media (min-width: 600px) and (max-width: 750px) {
-
   .Pro-Model-Left {
     min-height: 350px;
   }
-
   .project-title-modal {
     font-size: 2.2rem;
   }
-
-  /* Media Navigation: Explicitly ensure transform and visibility */
-  .media-nav {
-    transform: translateY(-50%) !important;
-    /* FIX: Force vertical center */
-    opacity: 1;
-    /* FIX: Ensure visibility */
-    z-index: 100;
-    /* FIX: Ensure it is above other elements */
-  }
 }
 
-/* Small tablets (768px – 1023px) */
+/* --- Small tablets (768px – 1023px) --- */
 @media (min-width: 768px) and (max-width: 1023px) {
-
   .modal-content.project-details-content {
     max-width: 800px;
   }
-
   .Pro-Model-Left {
     min-height: 400px;
   }
-
   .Pro-Model-Right {
     padding: 2.5rem;
   }
-
   .project-title-modal {
     font-size: 2.3rem;
   }
-
   .project-description-modal {
     font-size: 1.1rem;
   }
-
   .modal-link-btn {
     padding: 1em 1em;
   }
-
-  /* Media Navigation: Explicitly ensure transform and visibility */
-  .media-nav {
-    transform: translateY(-50%) !important;
-    /* FIX: Force vertical center */
-    opacity: 1;
-    /* FIX: Ensure visibility */
-    z-index: 100;
-    /* FIX: Ensure it is above other elements */
-  }
 }
 
-/* Medium tablets / small laptops (1024px – 1279px) */
-@media (min-width: 1024px) and (max-width: 1279px) {
+/* ========================================================================== */
+/* Desktop Media Queries */
+/* ========================================================================== */
 
-  /* DESKTOP/LAPTOP: RESTORE ROW LAYOUT */
+/* --- Medium tablets / small laptops (1024px – 1279px) --- */
+@media (min-width: 1024px) and (max-width: 1279px) {
   .modal-content.project-details-content {
-    flex-direction: row;
-    /* Switches back to row layout */
+    flex-direction: row; /* Revert to row */
     max-width: 1000px;
     min-height: 60vh;
-    max-height: 90vh;
+    max-height: 90vh; /* Restore max-height */
   }
-
   .Pro-Model-Left {
     min-width: 55%;
-    min-height: 60vh;
+    min-height: 60vh; /* Restore min-height */
     flex: 2;
   }
-
   .Pro-Model-Right {
     min-width: 45%;
     padding: 3rem;
     flex: 1;
+    overflow-y: auto; /* Restore scrolling */
   }
 }
 
-/* Large tablets / standard desktops (1280px – 1680px) */
+/* --- Large tablets / standard desktops (1280px – 1680px) --- */
 @media (min-width: 1280px) and (max-width: 1680px) {
-
   .project-title-modal {
     font-size: 2.8rem;
   }
-
   .Pro-Model-Right {
     padding: 3.5rem;
   }
 }
 
-/* Ultra-Large Desktops (1681px and up) */
+/* --- Ultra-Large Desktops (1681px and up) --- */
 @media (min-width: 1681px) {
-
   .modal-content.project-details-content {
     max-width: 1400px;
   }
-
   .project-title-modal {
     font-size: 3.2rem;
   }
-
   .project-description-modal {
     font-size: 1.2rem;
   }
-
   .Pro-Model-Right {
     padding: 4rem;
     min-width: 500px;

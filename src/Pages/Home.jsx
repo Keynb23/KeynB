@@ -40,7 +40,7 @@ const Home = () => {
           </div>
           <div className="aboutMe-wrapper">
             <div className="pro-sum">
-              <h4>Profesional Summary</h4>
+              <h4>Professional Summary</h4>
               <p className="Pro-Sum-P">
                 I am a developer and digital artist specializing in creating
                 high-performance, interactive experiences across multiple

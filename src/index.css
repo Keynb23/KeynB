@@ -22,7 +22,7 @@
   --INVL: #f4f1de;
   --COMP: #3a3a42;
   --TX-PC-1: #f4f1de;
-  --AC-PC-1: #ffcc00;
+  --AC-PC-1: rgb(255, 213, 0);
 
   --THEME1: #007aff;
   --THEME2: #ff3b30;
@@ -33,8 +33,8 @@
   --Comic-SHover: 6px 6px 0 var(--THEME1), 10px 10px 0 var(--THEME2);
 
   /* --- TEXT SHADOWS --- */
-  --Comic-T1: 3px 3px 0 var(--THEME2), 6px 6px 0 var(--THEME1);
-  --Comic-T2: 2px 2px 0 var(--THEME2), 4px 4px 0 var(--THEME1), 6px 6px 0 var(--COMP);
+  --Comic-T1: 3px 3px 0 var(--THEME2), 4px 4px 0 var(--THEME1);
+  --Comic-T2: 2px 2px 0 var(--THEME2), 3px 3px 0 var(--THEME1), 4px 4px 0 var(--COMP);
   --Comic-TGlow: 0 0 5px var(--THEME1), 0 0 10px var(--THEME2), 2px 2px 0 var(--COMP);
 
   /* --- BORDERS --- */
@@ -51,18 +51,12 @@
 
   /* Off-White Paper Background */
   --MainBG: #f4f1de;
-  /* Dark Ink-Blue for primary content */
   --BG-PC-1: #22222a;
-  /* Dark Ink-Blue for secondary content */
   --BG-SC-1: #22222a;
-  /* Dark overlay for inverted */
   --INVD: #22222abb;
   --INVL: var(--INVD);
-  /* Light gray component color */
   --COMP: #e0e0e0;
-  /* Dark Ink-Blue for text (on light BGs) */
   --TX-PC-1: #22222a;
-  /* Bright Yellow for accents */
   --AC-PC-1: #ffcc00;
 
   /* Primary Theme Colors (Swapped) */

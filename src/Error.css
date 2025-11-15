@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css?family=Gilda+Display');
+
+.Error-Glitch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+    width: 100%;
+    /* Fixes it relative to viewport */
+    transform: translate(-50%, -50%);
+    -webkit-animation: noise-3 1s linear infinite;
+    animation: noise-3 1s linear infinite;
+    color: var(--text-color);
+    background-color: var(--bg-color, transparent);
+    /* Optional: add background */
+    z-index: 9999;
+    /* Ensures it stays on top */
+}
+
+/* Noise animations remain unchanged */
+@-webkit-keyframes noise-1 {
+
+    0%,
+    20%,
+    40%,
+    60%,
+    70%,
+    90% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .1;
+    }
+
+    50% {
+        opacity: .5;
+        left: -6px;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .6;
+        left: 2px;
+    }
+}
+
+@keyframes noise-1 {
+
+    0%,
+    20%,
+    40%,
+    60%,
+    70%,
+    90% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .1;
+    }
+
+    50% {
+        opacity: .5;
+        left: -6px;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .6;
+        left: 2px;
+    }
+}
+
+@-webkit-keyframes noise-2 {
+
+    0%,
+    20%,
+    40%,
+    60%,
+    70%,
+    90% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .1;
+    }
+
+    50% {
+        opacity: .5;
+        left: 6px;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .6;
+        left: -2px;
+    }
+}
+
+@keyframes noise-2 {
+
+    0%,
+    20%,
+    40%,
+    60%,
+    70%,
+    90% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .1;
+    }
+
+    50% {
+        opacity: .5;
+        left: 6px;
+    }
+
+    80% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .6;
+        left: -2px;
+    }
+}
+
+@-webkit-keyframes noise-3 {
+
+    0%,
+    3%,
+    5%,
+    42%,
+    44%,
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    4.3% {
+        opacity: 1;
+        transform: scaleY(4);
+    }
+
+    43% {
+        opacity: 1;
+        transform: scaleX(10) rotate(60deg);
+    }
+}
+
+@keyframes noise-3 {
+
+    0%,
+    3%,
+    5%,
+    42%,
+    44%,
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    4.3% {
+        opacity: 1;
+        transform: scaleY(4);
+    }
+
+    43% {
+        opacity: 1;
+        transform: scaleX(10) rotate(60deg);
+    }
+}

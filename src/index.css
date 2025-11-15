@@ -13,9 +13,7 @@
   --font-header: lucida, sans-serif;
   --font-body: "Source Sans Pro", sans-serif;
   --font-ui: "Poppins", sans-serif;
-
   /* === NEW COMIC BOOK PALETTE (LIGHT MODE) === */
-  /* This is a "dark-on-light" theme by default */
   --MainBG: #22222a;
   --BG-PC-1: #f4f1de;
   --BG-SC-1: #f4f1de;
@@ -23,32 +21,25 @@
   --COMP: #3a3a42;
   --TX-PC-1: #f4f1de;
   --AC-PC-1: rgb(255, 213, 0);
-
   --THEME1: #007aff;
   --THEME2: #ff3b30;
-
   /* --- BOX SHADOWS --- */
   --Comic-S1: 4px 4px 0 var(--THEME1), 8px 8px 0 var(--THEME2);
   --Comic-S2: 3px 3px 0 var(--TX-PC-1), 6px 6px 0 var(--THEME2);
   --Comic-SHover: 6px 6px 0 var(--THEME1), 10px 10px 0 var(--THEME2);
-
   /* --- TEXT SHADOWS --- */
   --Comic-T1: 3px 3px 0 var(--THEME2), 4px 4px 0 var(--THEME1);
   --Comic-T2: 2px 2px 0 var(--THEME2), 3px 3px 0 var(--THEME1), 4px 4px 0 var(--COMP);
   --Comic-TGlow: 0 0 5px var(--THEME1), 0 0 10px var(--THEME2), 2px 2px 0 var(--COMP);
-
   /* --- BORDERS --- */
   --Comic-B1: 3px solid var(--TX-PC-1);
   --Comic-BOutline: 3px solid var(--THEME1);
   --Comic-B2: 4px solid var(--THEME2);
   --Comic-BDash: 3px dashed var(--TX-PC-1);
 }
-
 /* === NEW COMIC BOOK PALETTE (DARK MODE) === */
-/* This is an "light-on-dark" theme */
 [data-theme="dark"] {
   color-scheme: dark;
-
   /* Off-White Paper Background */
   --MainBG: #f4f1de;
   --BG-PC-1: #22222a;
@@ -58,13 +49,11 @@
   --COMP: #e0e0e0;
   --TX-PC-1: #22222a;
   --AC-PC-1: #ffcc00;
-
   /* Primary Theme Colors (Swapped) */
   /* Bold Comic Red */
   --THEME1: #ff3b30;
   /* Bright Comic Blue */
   --THEME2: #007aff;
-
   /* Shadows and Borders remain mapped */
   --Comic-S1: 4px 4px 0 var(--THEME1), 8px 8px 0 var(--THEME2);
   --Comic-S2: 3px 3px 0 var(--TX-PC-1), 6px 6px 0 var(--THEME2);

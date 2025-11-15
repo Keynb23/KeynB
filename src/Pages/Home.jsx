@@ -7,6 +7,56 @@ import ToBtn from "../Buttons/ToBtn.jsx";
 import RecentProjects from "../components/highlights/RecentProjects.jsx";
 
 const Home = () => {
+    useEffect(() => {
+    const title = document.querySelector(".title h1");
+
+    let active = false;
+    let timer = null;
+
+    function randomDelay(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function startWiggleLoop() {
+      if (active) return;
+      active = true;
+
+      function loop() {
+        if (!active) return;
+
+        // Add wiggle animation
+        title.classList.add("wiggle");
+
+        // Remove it after animation finishes
+        setTimeout(() => {
+          title.classList.remove("wiggle");
+        }, 200);
+
+        // Random delay before next wiggle
+        const nextDelay = randomDelay(800, 9000); 
+        timer = setTimeout(loop, nextDelay);
+      }
+
+      // First wiggle happens after 1.2 seconds
+      timer = setTimeout(loop, 13400);
+    }
+
+    function stopWiggleLoop() {
+      active = false;
+      clearTimeout(timer);
+      title.classList.remove("wiggle");
+    }
+
+    title.addEventListener("mouseenter", startWiggleLoop);
+    title.addEventListener("mouseleave", stopWiggleLoop);
+
+    return () => {
+      title.removeEventListener("mouseenter", startWiggleLoop);
+      title.removeEventListener("mouseleave", stopWiggleLoop);
+      clearTimeout(timer);
+    };
+  }, []);
+
   useEffect(() => {
     const wrapper = document.querySelector(".RPH-Wrapper");
 

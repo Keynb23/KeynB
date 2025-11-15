@@ -55,21 +55,123 @@
   justify-content: center;
 }
 
-.title h1 {
-  /* Set a responsive default size. The !important ensures it overrides standard rules,
-     while media queries below will override this with even larger, specific sizes. */
-  font-size: 10rem !important;
-  color: var(--THEME2);
-  /* Swapped to the larger text shadow */
-  text-shadow: var(--Comic-T1);
-  background: transparent;
-  margin-bottom: 0.5rem;
-  font-weight: 800;
-  /* Allow text to wrap on smaller screens, as requested */
-  white-space: normal;
-  line-height: 1;
-  /* Tighten line height for comic book look */
+   /* RANDOM GLITCH PULSE (using your color palette) */
+
+@keyframes random-glitch {
+  0%   { transform: none; }
+  2%   { transform: skewX(15deg) translateX(-3px); }
+  3%   { transform: skewX(-25deg) translateX(3px); }
+  5%   { transform: skewX(55deg) translateX(-2px); }
+  6%   { transform: skewX(-90deg) translateX(2px); }
+  7%   { transform: skewX(25deg) translateX(-1px); }
+  8%   { transform: none; }
+  100% { transform: none; }
 }
+
+   /* WIGGLE EFFECT (your imported example, cleaned) */
+
+@keyframes wiggle {
+  0% { transform: skewX(24deg); } 
+  10% { transform: skewX(-8deg); }
+  20% { transform: skewX(55deg); }
+  30% { transform: skewX(-90deg); }
+  40% { transform: skewX(29deg); }
+  50% { transform: skewX(-90deg); }
+  60% { transform: skewX(3deg); }
+  70% { transform: skewX(-2deg); }
+  80% { transform: skewX(1deg); }
+  90% { transform: skewX(10deg); }
+  100% { transform: skewX(0deg); }
+}
+
+.wiggle {
+  animation: wiggle 0.65s ease;
+}
+
+   /* COMBINED GLITCH + RANDOMNESS + WIGGLE (for your .title h1) */
+
+.title h1 {
+  position: relative;
+  font-family: var(--font-ui);
+  color: var(--THEME2);
+  text-shadow: var(--Comic-T1);
+  transition: 0.2s ease;
+  
+  /* 🔥 RANDOM automatic glitch pulses */
+  animation: random-glitch 4s infinite steps(1);
+  animation-delay: calc((var(--rand) * 1s)); /* offset per element */
+}
+
+/* Create a CSS variable that gets a random value per page load */
+:root {
+  --rand: calc((random(10) / 10)); /* random 0–1 value */
+}
+
+/* Hover glitch (your original updated version) */
+.title h1:hover {
+  animation: wiggle 0.3s ease both, random-glitch 0.4s infinite;
+  color: rgba(255, 213, 0, 0.25);
+  text-shadow: 
+    0.05em 0 0 var(--THEME2),
+    -0.025em -0.05em 0 var(--THEME1),
+    0.025em 0.05em 0 var(--AC-PC-1);
+}
+
+/* Duplicate layers */
+.title h1::before,
+.title h1::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+/* Top slice */
+.title h1:hover::before {
+  animation: glitch 650ms infinite, wiggle 0.3s ease;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-0.025em, -0.0125em);
+}
+
+/* Bottom slice */
+.title h1:hover::after {
+  animation: glitch 375ms infinite, wiggle 0.3s ease;
+  clip-path: polygon(0 65%, 100% 20%, 100% 100%, 0 70%);
+  transform: translate(0.0125em, 0.025em);
+}
+
+/* Your palette-integrated glitch keyframes */
+@keyframes glitch {
+  0% {
+    color: rgba(255, 62, 48, 0.2);
+    text-shadow:
+      0.05em 0 0 var(--THEME2),
+      -0.025em -0.05em 0 var(--THEME1),
+      0.025em 0.05em 0 var(--AC-PC-1);
+  }
+  15% {
+    color: var(--AC-PC-1);
+    text-shadow:
+      -0.05em -0.025em 0 var(--THEME2),
+      0.025em -0.025em 0 var(--THEME1),
+      -0.05em -0.05em 0 var(--AC-PC-1);
+  }
+  50% {
+    text-shadow:
+      0.025em 0.05em 0 var(--THEME2),
+      -0.025em 0.05em 0 var(--THEME1),
+      0 -0.05em 0 var(--AC-PC-1);
+  }
+  99% {
+    color: var(--THEME1);
+    text-shadow:
+      0.025em 0.05em 0 var(--THEME2),
+      -0.025em 0.05em 0 var(--THEME1),
+      0 -0.05em 0 var(--AC-PC-1);
+  }
+}
+
 
 .sub-title h3 {
   /* Made font larger */
